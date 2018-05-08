@@ -1,31 +1,37 @@
 package yonky.yiqi;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import yonky.yiqi.widget.MyViewPager;
 
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.viewpager)
-    ViewPager mViewPager;
+    MyViewPager mViewPager;
     @BindView(R.id.tab_layout)
     TabLayout mTabLayout;
 
-    private List<View> mViewList;
 
+    private String[] mTitles;
+    private List<View> mViewList;
+    int[] drawables = new int[]{R.drawable.tab_home_selector,R.drawable.tab_market_selector,R.drawable.tab_style_selector,
+            R.drawable.tab_list_selector,R.drawable.tab_me_selector};
 
 //    待删除
     private View view1,view2,view3,view4,view5;
@@ -37,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mViewList = new ArrayList<>();
+        mTitles = new String[]{"首页","逛市场","搜款式","采购单","我的"};
 
         LayoutInflater inflater = getLayoutInflater();
         view1 =inflater.inflate(R.layout.layout1,null);
@@ -50,23 +57,7 @@ public class MainActivity extends AppCompatActivity {
         mViewList.add(view4);
         mViewList.add(view5);
 
-
-        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                mViewPager.setCurrentItem(tab.getPosition(),false);
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+        setTabs(mTabLayout,getLayoutInflater(),drawables,mTitles);
 
         PagerAdapter pagerAdapter = new PagerAdapter() {
             @Override
@@ -92,6 +83,28 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         mViewPager.setAdapter(pagerAdapter);
+        mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
     }
+
+
+    private void setTabs(TabLayout tabLayout,LayoutInflater inflater,int[] icons,String[] titles){
+        for(int i =0;i<titles.length;i++){
+            View view =inflater.inflate(R.layout.tab_item,null);
+            TabLayout.Tab tab =tabLayout.newTab();
+            tab.setCustomView(view);
+
+            TextView title = view.findViewById(R.id.tv_tab);
+            title.setText(titles[i]);
+
+            ImageView icon=view.findViewById(R.id.iv_tab);
+            icon.setImageResource(icons[i]);
+
+            tabLayout.addTab(tab);
+
+        }
+
+
+    }
+
 }
