@@ -18,7 +18,7 @@ public class DataManager {
     public DataManager(Context context){
         mRetrofitService=RetrofitHelper.getInstance(context).getServer();
     }
-    public Call<MainPageBean> getMainPage(String platform, String zdid , String tag, String isDebug){
+    public Observable<MainPageBean> getMainPage(String platform, String zdid , String tag, String isDebug){
         return mRetrofitService.getMainPageData(platform,zdid,tag,isDebug);
     }
 

@@ -3,9 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/YiQi.iml" filepath="$PROJECT_DIR$/YiQi.iml" />
-      <module fileurl="file://D:\android\20170114\YiQi\YiQi.iml" filepath="D:\android\20170114\YiQi\YiQi.iml" />
+      <module fileurl="file://D:/android/20170114/YiQi/YiQi.iml" filepath="D:/android/20170114/YiQi/YiQi.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\android\20170114\YiQi\app\app.iml" filepath="D:\android\20170114\YiQi\app\app.iml" />
+      <module fileurl="file://D:/android/20170114/YiQi/app/app.iml" filepath="D:/android/20170114/YiQi/app/app.iml" />
     </modules>
   </component>
 </project>

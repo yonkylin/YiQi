@@ -14,10 +14,10 @@ import yonky.yiqi.bean.MainPageBean;
 
 public interface RetrofitService {
 //    http://api2.17zwd.com/rest/popularize/get_home_data?from=android&zdid=48&tag=A&debug=false
-    public static final String HOST = "http://api2.17zwd.com/rest/";
+    public static final String HOST = "http://api2.17zwd.com/";
 
     @GET("rest/popularize/get_home_data")
-    Call<MainPageBean> getMainPageData(@Query("from")String platform,
+    Observable<MainPageBean> getMainPageData(@Query("from")String platform,
                                        @Query("zdid")String zdid,
                                        @Query("tag")String tag,
                                        @Query("debug")String isDebug);

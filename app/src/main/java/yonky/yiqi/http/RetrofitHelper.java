@@ -32,8 +32,8 @@ public class RetrofitHelper {
     private void init(){
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(RetrofitService.HOST)
-//                .client(client)
-//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(client)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
