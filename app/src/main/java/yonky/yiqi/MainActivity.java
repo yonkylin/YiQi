@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,14 +19,21 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import yonky.yiqi.base.contract.MainContract;
+import yonky.yiqi.bean.MainPageBean;
+import yonky.yiqi.p.MainPresenter;
 import yonky.yiqi.widget.MyViewPager;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainContract.View{
     @BindView(R.id.viewpager)
     MyViewPager mViewPager;
     @BindView(R.id.tab_layout)
     TabLayout mTabLayout;
+    @BindView(R.id.button)
+    Button bt;
+
+
 
 
     private String[] mTitles;
@@ -35,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
 //    待删除
     private View view1,view2,view3,view4,view5;
+    private TextView tv;
+    MainContract.Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        mPresenter = new MainPresenter(this);
         mViewList = new ArrayList<>();
         mTitles = new String[]{"首页","逛市场","搜款式","采购单","我的"};
 
@@ -51,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         view3 =inflater.inflate(R.layout.layout3,null);
         view4=inflater.inflate(R.layout.layout4,null);
         view5 =inflater.inflate(R.layout.layout5,null);
+        tv = view1.findViewById(R.id.tv);
         mViewList.add(view1);
         mViewList.add(view2);
         mViewList.add(view3);
@@ -85,6 +97,17 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
+        mPresenter.attachView(this);
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.loadDatas();
+            }
+        });
+
+
+        tv.setText(mPresenter.toString());
+
     }
 
 
@@ -107,4 +130,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void showResult(List<MainPageBean.PopularizeItemsListGetResponseBean.AreaABean> areaABeanList, int type) {
+        tv.setText(areaABeanList.get(0).getTitle());
+    }
 }
