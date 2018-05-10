@@ -16,6 +16,7 @@ import yonky.yiqi.bean.AreaBean;
 import yonky.yiqi.bean.MainPageBean;
 import yonky.yiqi.m.DataManager;
 
+
 /**
  * Created by Administrator on 2018/5/9.
  */
@@ -26,6 +27,7 @@ public class MainPresenter implements MainContract.Presenter {
     MainContract.View view;
     Context mContext;
     DataManager mDataManager;
+    String type;
 
     Observable<MainPageBean> observable;
 
@@ -47,8 +49,9 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
-    public void loadDatas() {
-      Observable<MainPageBean> topObservable=  mDataManager.getMainPage("android","48","A","false");
+    public void loadDatas(String tag) {
+        type= tag;
+      Observable<MainPageBean> topObservable=  mDataManager.getMainPage("android","48",tag,"false");
             topObservable.subscribeOn(Schedulers.io())
                     .map(new Function<MainPageBean,List<AreaBean>>() {
                         @Override
@@ -60,8 +63,8 @@ public class MainPresenter implements MainContract.Presenter {
                     .subscribe(new Consumer<List<AreaBean>>() {
                         @Override
                         public void accept(List<AreaBean> areaBeans) throws Exception {
-                            view.showResult(areaBeans, 0);
-                            Log.d(TAG,areaBeans.get(0).getTitle());
+                            view.showResult(areaBeans, type);
+                            Log.d(TAG,areaBeans.get(0).getImg_url());
                         }
 
                     }, new Consumer<Throwable>() {

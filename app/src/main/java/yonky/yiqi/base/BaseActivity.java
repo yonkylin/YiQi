@@ -23,7 +23,7 @@ public abstract class BaseActivity extends AppCompatActivity  {
         mUnbinder = ButterKnife.bind(this);
         mContext = this;
         App.getInstance().addActivity(this);
-
+        initEventAndData();
     }
 
     @Override
@@ -33,5 +33,6 @@ public abstract class BaseActivity extends AppCompatActivity  {
         mUnbinder.unbind();
     }
 
-    public abstract int getLayout();
+    protected abstract int getLayout();
+    protected abstract void initEventAndData();
 }

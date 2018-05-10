@@ -5,6 +5,6 @@ package yonky.yiqi.base;
  */
 
 public interface BaseView {
-    void initView();
+//    void initView();
 
 }

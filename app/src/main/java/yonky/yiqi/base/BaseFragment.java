@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public abstract class BaseFragment extends Fragment {
+
     protected View mView;
     protected Unbinder mUnbinder;
     protected Context mContext;
@@ -37,6 +38,7 @@ public abstract class BaseFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mUnbinder = ButterKnife.bind(this,view);
+        initEventAndData();
     }
 
     @Override
@@ -46,4 +48,5 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected  abstract int getLayoutId();
+    protected abstract void initEventAndData();
 }

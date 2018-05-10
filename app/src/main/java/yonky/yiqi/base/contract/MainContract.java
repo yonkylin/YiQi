@@ -13,11 +13,11 @@ import yonky.yiqi.bean.MainPageBean;
 
 public interface MainContract {
     interface View extends BaseView{
-        void showResult(List<AreaBean> areaABeanList, int type);
+        void showResult(List<AreaBean> areaABeanList, String tag);
     }
     interface Presenter extends BasePresenter<View>{
         void checkPermission();
-        void loadDatas();
+        void loadDatas(String tag);
 
     }
 }

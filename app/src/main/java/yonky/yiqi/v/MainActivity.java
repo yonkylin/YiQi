@@ -31,7 +31,7 @@ import yonky.yiqi.v.adapter.ViewPagerAdaper;
 import yonky.yiqi.widget.MyViewPager;
 
 
-public class MainActivity extends BaseActivity implements MainContract.View{
+public class MainActivity extends BaseActivity{
     @BindView(R.id.viewpager)
     MyViewPager mViewPager;
     @BindView(R.id.tab_layout)
@@ -48,12 +48,10 @@ public class MainActivity extends BaseActivity implements MainContract.View{
             R.drawable.tab_list_selector,R.drawable.tab_me_selector};
 
 
-    MainContract.Presenter mPresenter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initView();
+        initEventAndData();
 
 
         setTabs(mTabLayout,getLayoutInflater(),drawables,mTitles);
@@ -63,8 +61,8 @@ public class MainActivity extends BaseActivity implements MainContract.View{
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
-        mPresenter.attachView(this);
-        mPresenter.loadDatas();
+//        mPresenter.attachView(this);
+//        mPresenter.loadDatas();
 
     }
 
@@ -90,10 +88,9 @@ public class MainActivity extends BaseActivity implements MainContract.View{
         }
     }
 
-
     @Override
-    public void initView() {
-        mPresenter = new MainPresenter(this);
+    protected void initEventAndData() {
+//        mPresenter = new MainPresenter(this);
         mViewList = new ArrayList<>();
         mTitles = new String[]{"首页","逛市场","搜款式","采购单","我的"};
 
@@ -101,9 +98,9 @@ public class MainActivity extends BaseActivity implements MainContract.View{
         fragments = new ArrayList<>();
         MainFragment mainFragment = new MainFragment();
         FragmentTest mainFragment2 = new FragmentTest();
-        MainFragment mainFragment3 = new MainFragment();
-        MainFragment mainFragment4 = new MainFragment();
-        MainFragment mainFragment5 = new MainFragment();
+        FragmentTest mainFragment3 = new FragmentTest();
+        FragmentTest mainFragment4 = new FragmentTest();
+        FragmentTest mainFragment5 = new FragmentTest();
         fragments.add(mainFragment);
         fragments.add(mainFragment2);
         fragments.add(mainFragment3);
@@ -111,8 +108,10 @@ public class MainActivity extends BaseActivity implements MainContract.View{
         fragments.add(mainFragment5);
     }
 
-    @Override
-    public void showResult(List<AreaBean> areaABeanList, int type) {
-        bt.setText(areaABeanList.get(0).getTitle());
-    }
+
+
+//    @Override
+//    public void showResult(List<AreaBean> areaABeanList, int type) {
+//        bt.setText(areaABeanList.get(0).getTitle());
+//    }
 }
