@@ -1,14 +1,10 @@
 package yonky.yiqi.v;
 
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+
 
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
@@ -39,9 +35,13 @@ public class MainFragment extends BaseFragment implements MainContract.View{
     }
 
     @Override
-    public void showResult(List<AreaBean> areaABeanList, String type) {
-        if("A".equals(type)&& Adapter_linear.getBannerList().isEmpty() ){
-            Adapter_linear.setBannerList(areaABeanList);
+    public void showResult(List<AreaBean> areaBeanList, String type) {
+        Log.d(TAG,areaBeanList.get(0).getTitle());
+        if("A".equals(type)&& Adapter_linear.getBannerList()==null){
+            Adapter_linear.setBannerList(areaBeanList);
+            Adapter_linear.notifyDataSetChanged();
+        }else if("B1".equals(type)&& Adapter_linear.getSingleList()==null ){
+            Adapter_linear.setSingleList(areaBeanList);
             Adapter_linear.notifyDataSetChanged();
         }
 
@@ -52,19 +52,27 @@ public class MainFragment extends BaseFragment implements MainContract.View{
         mPresenter = new MainPresenter(mContext);
         mPresenter.attachView(this);
         mPresenter.loadDatas("A");
+        mPresenter.loadDatas("B");
 
         listItem = new ArrayList<>();
         VirtualLayoutManager layoutManager = new VirtualLayoutManager(mContext);
+           GridLayoutManager layoutManagers = new GridLayoutManager(mContext,6, LinearLayoutManager.VERTICAL,false);
+//        layoutManagers.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup(){
+//            @Override
+//            public int getSpanSize(int position) {
+//                return 2;
+//            }
+//        });
         recyclerView.setLayoutManager(layoutManager );
-
         RecyclerView.RecycledViewPool viewPool  =new RecyclerView.RecycledViewPool();
+
         recyclerView.setRecycledViewPool(viewPool);
         viewPool.setMaxRecycledViews(0,4);
 
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
         linearLayoutHelper.setItemCount(1);
 
-        Adapter_linear=new MainAdapter(mContext,linearLayoutHelper,3,listItem);
+        Adapter_linear=new MainAdapter(mContext,linearLayoutHelper,4);
 
         recyclerView.setAdapter(Adapter_linear);
 

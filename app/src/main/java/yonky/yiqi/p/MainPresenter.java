@@ -27,7 +27,7 @@ public class MainPresenter implements MainContract.Presenter {
     MainContract.View view;
     Context mContext;
     DataManager mDataManager;
-    String type;
+//    String type;
 
     Observable<MainPageBean> observable;
 
@@ -50,21 +50,27 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void loadDatas(String tag) {
-        type= tag;
+       String type= tag;
       Observable<MainPageBean> topObservable=  mDataManager.getMainPage("android","48",tag,"false");
             topObservable.subscribeOn(Schedulers.io())
-                    .map(new Function<MainPageBean,List<AreaBean>>() {
+                    .map(new Function<MainPageBean,MainPageBean.PopularizeItemsListGetResponseBean>() {
                         @Override
-                        public List<AreaBean> apply(MainPageBean mainPageBean) throws Exception {
-                            return mainPageBean.getPopularize_items_list_get_response().getAreaA();
+                        public MainPageBean.PopularizeItemsListGetResponseBean apply(MainPageBean mainPageBean) throws Exception {
+                            return mainPageBean.getPopularize_items_list_get_response();
                         }
                     })
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Consumer<List<AreaBean>>() {
+                    .subscribe(new Consumer<MainPageBean.PopularizeItemsListGetResponseBean>() {
                         @Override
-                        public void accept(List<AreaBean> areaBeans) throws Exception {
-                            view.showResult(areaBeans, type);
-                            Log.d(TAG,areaBeans.get(0).getImg_url());
+                        public void accept(MainPageBean.PopularizeItemsListGetResponseBean popularItem) throws Exception {
+                            if(popularItem.getAreaA()!=null){
+                                view.showResult(popularItem.getAreaA(), "A");
+                            }else if(popularItem.getAreaB1()!=null){
+                                view.showResult(popularItem.getAreaB1(), "B1");
+                            }else if(popularItem.getAreaB2()!=null){
+                                view.showResult(popularItem.getAreaB1(), "B2");
+                            }
+
                         }
 
                     }, new Consumer<Throwable>() {

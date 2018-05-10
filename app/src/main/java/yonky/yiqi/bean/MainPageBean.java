@@ -45,6 +45,9 @@ public class MainPageBean {
 
     public static class PopularizeItemsListGetResponseBean {
         private List<AreaBean> AreaA;
+        private List<AreaBean> AreaB1;
+        private List<AreaBean> AreaB2;
+        private String type;
 
         public List<AreaBean> getAreaA() {
             return AreaA;
@@ -54,7 +57,29 @@ public class MainPageBean {
             this.AreaA = AreaA;
         }
 
+        public List<AreaBean> getAreaB1() {
+            return AreaB1;
+        }
 
+        public void setAreaB1(List<AreaBean> areaB1) {
+            AreaB1 = areaB1;
+        }
+
+        public List<AreaBean> getAreaB2() {
+            return AreaB2;
+        }
+
+        public void setAreaB2(List<AreaBean> areaB2) {
+            AreaB2 = areaB2;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
     }
 
 }
