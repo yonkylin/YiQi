@@ -20,6 +20,9 @@ import yonky.yiqi.bean.AreaBean;
 import yonky.yiqi.p.MainPresenter;
 import yonky.yiqi.v.adapter.MainAdapter;
 
+import static yonky.yiqi.v.adapter.MainAdapter.TYPE_THREE;
+import static yonky.yiqi.v.adapter.MainAdapter.TYPE_TWO;
+
 public class MainFragment extends BaseFragment implements MainContract.View{
     private static final String TAG = MainFragment.class.getSimpleName();
     @BindView(R.id.rv_main)
@@ -28,7 +31,8 @@ public class MainFragment extends BaseFragment implements MainContract.View{
 
     List<AreaBean> listItem;
 
-    MainAdapter Adapter_linear;
+//    MainAdapter Adapter_linear;
+    MainAdapter mainAdapter;
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_main;
@@ -36,45 +40,69 @@ public class MainFragment extends BaseFragment implements MainContract.View{
 
     @Override
     public void showResult(List<AreaBean> areaBeanList, String type) {
-        Log.d(TAG,areaBeanList.get(0).getTitle());
-        if("A".equals(type)&& Adapter_linear.getBannerList()==null){
-            Adapter_linear.setBannerList(areaBeanList);
-            Adapter_linear.notifyDataSetChanged();
-        }else if("B1".equals(type)&& Adapter_linear.getSingleList()==null ){
-            Adapter_linear.setSingleList(areaBeanList);
-            Adapter_linear.notifyDataSetChanged();
+
+        if("A".equals(type)&& mainAdapter.getBannerList()==null){
+            mainAdapter.setBannerList(areaBeanList);
+            mainAdapter.notifyDataSetChanged();
+        }else if("B1".equals(type)&& mainAdapter.getB1List()==null ){
+            mainAdapter.setB1List(areaBeanList);
+            mainAdapter.notifyDataSetChanged();
+        }else if("B2".equals(type)&&mainAdapter.getB2List()==null){
+            mainAdapter.setB2List(areaBeanList);
+            mainAdapter.notifyDataSetChanged();
+            for(int i = 0;i<areaBeanList.size();i++){
+                Log.d(TAG,areaBeanList.get(i).getTitle());
+            }
+        }else if("C1".equals(type)&& mainAdapter.getC1List()==null ){
+            mainAdapter.setC1List(areaBeanList);
+            mainAdapter.notifyDataSetChanged();
+        }else if("C2".equals(type)&&mainAdapter.getC2List()==null){
+            mainAdapter.setC2List(areaBeanList);
+            mainAdapter.notifyDataSetChanged();
         }
 
     }
 
     @Override
     protected void initEventAndData() {
+        mainAdapter = new MainAdapter(mContext);
+
         mPresenter = new MainPresenter(mContext);
         mPresenter.attachView(this);
-        mPresenter.loadDatas("A");
-        mPresenter.loadDatas("B");
 
         listItem = new ArrayList<>();
-        VirtualLayoutManager layoutManager = new VirtualLayoutManager(mContext);
-           GridLayoutManager layoutManagers = new GridLayoutManager(mContext,6, LinearLayoutManager.VERTICAL,false);
-//        layoutManagers.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup(){
-//            @Override
-//            public int getSpanSize(int position) {
-//                return 2;
-//            }
-//        });
+//        VirtualLayoutManager layoutManager = new VirtualLayoutManager(mContext);
+           GridLayoutManager layoutManager = new GridLayoutManager(mContext,6, LinearLayoutManager.VERTICAL,false);
+        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup(){
+            @Override
+            public int getSpanSize(int position) {
+                switch(mainAdapter.getItemViewType(position)){
+                    case TYPE_TWO:
+                        return 3;
+                    case TYPE_THREE:
+                        return 2;
+
+                        default:
+                            return 6;
+                }
+
+            }
+        });
         recyclerView.setLayoutManager(layoutManager );
-        RecyclerView.RecycledViewPool viewPool  =new RecyclerView.RecycledViewPool();
 
-        recyclerView.setRecycledViewPool(viewPool);
-        viewPool.setMaxRecycledViews(0,4);
+//        RecyclerView.RecycledViewPool viewPool  =new RecyclerView.RecycledViewPool();
+//        recyclerView.setRecycledViewPool(viewPool);
+//        viewPool.setMaxRecycledViews(0,4);
+//        LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
+//        linearLayoutHelper.setItemCount(1);
 
-        LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
-        linearLayoutHelper.setItemCount(1);
+//        Adapter_linear=new MainAdapter(mContext,linearLayoutHelper,4);
 
-        Adapter_linear=new MainAdapter(mContext,linearLayoutHelper,4);
+        recyclerView.setAdapter(mainAdapter);
 
-        recyclerView.setAdapter(Adapter_linear);
+        mPresenter.loadDatas("A");
+        mPresenter.loadDatas("B");
+        mPresenter.loadDatas("C");
 
     }
 }

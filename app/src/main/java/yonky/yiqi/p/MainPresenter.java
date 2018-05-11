@@ -59,18 +59,26 @@ public class MainPresenter implements MainContract.Presenter {
                             return mainPageBean.getPopularize_items_list_get_response();
                         }
                     })
+
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Consumer<MainPageBean.PopularizeItemsListGetResponseBean>() {
                         @Override
                         public void accept(MainPageBean.PopularizeItemsListGetResponseBean popularItem) throws Exception {
                             if(popularItem.getAreaA()!=null){
+                                Log.d(TAG,"a is not null........");
                                 view.showResult(popularItem.getAreaA(), "A");
-                            }else if(popularItem.getAreaB1()!=null){
-                                view.showResult(popularItem.getAreaB1(), "B1");
-                            }else if(popularItem.getAreaB2()!=null){
-                                view.showResult(popularItem.getAreaB1(), "B2");
-                            }
 
+                            }else if(popularItem.getAreaB1()!=null){
+
+                                view.showResult(popularItem.getAreaB1(), "B1");
+                                view.showResult(popularItem.getAreaB2(), "B2");
+                            }else if(popularItem.getAreaC1()!=null){
+                                Log.d(TAG,"C1 is not null........"+popularItem.getAreaC1().size());
+                                Log.d(TAG,"C2 is not null........"+popularItem.getAreaC2().size());
+                                Log.d(TAG,"C1 is not null........"+popularItem.getAreaC1().get(0).getTitle());
+                                view.showResult(popularItem.getAreaC1(), "C1");
+                                view.showResult(popularItem.getAreaC2(), "C2");
+                            }
                         }
 
                     }, new Consumer<Throwable>() {
@@ -89,4 +97,7 @@ public class MainPresenter implements MainContract.Presenter {
     public void checkPermission() {
 
     }
+
+
+
 }

@@ -47,6 +47,10 @@ public class MainPageBean {
         private List<AreaBean> AreaA;
         private List<AreaBean> AreaB1;
         private List<AreaBean> AreaB2;
+        private List<AreaBean> AreaC1;
+        private List<AreaBean> AreaC2;
+        private List<AreaBean> AreaD;
+
         private String type;
 
         public List<AreaBean> getAreaA() {
@@ -73,12 +77,36 @@ public class MainPageBean {
             AreaB2 = areaB2;
         }
 
+        public List<AreaBean> getAreaC1() {
+            return AreaC1;
+        }
+
+        public void setAreaC1(List<AreaBean> areaC1) {
+            AreaC1 = areaC1;
+        }
+
+        public List<AreaBean> getAreaC2() {
+            return AreaC2;
+        }
+
+        public void setAreaC2(List<AreaBean> areaC2) {
+            AreaC2 = areaC2;
+        }
+
         public String getType() {
             return type;
         }
 
         public void setType(String type) {
             this.type = type;
+        }
+
+        public List<AreaBean> getAreaD() {
+            return AreaD;
+        }
+
+        public void setAreaD(List<AreaBean> areaD) {
+            AreaD = areaD;
         }
     }
 
