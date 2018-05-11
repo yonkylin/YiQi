@@ -78,7 +78,12 @@ public class MainPresenter implements MainContract.Presenter {
                                 Log.d(TAG,"C1 is not null........"+popularItem.getAreaC1().get(0).getTitle());
                                 view.showResult(popularItem.getAreaC1(), "C1");
                                 view.showResult(popularItem.getAreaC2(), "C2");
+                            }else if(popularItem.getAreaD()!=null){
+                                view.showResult(popularItem.getAreaD(), "D");
+                            }else if(popularItem.getAreaE()!=null){
+                                view.showE(popularItem.getAreaE());
                             }
+
                         }
 
                     }, new Consumer<Throwable>() {

@@ -17,6 +17,7 @@ import yonky.yiqi.R;
 import yonky.yiqi.bean.AreaBean;
 import yonky.yiqi.util.MyUtil;
 
+import static yonky.yiqi.v.adapter.MainAdapter.TYPE_ITEM_MRXK;
 import static yonky.yiqi.v.adapter.MainAdapter.TYPE_ITEM_MY;
 import static yonky.yiqi.v.adapter.MainAdapter.TYPE_ITEM_TJBB;
 
@@ -28,6 +29,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     private static final String TAG=ItemAdapter.class.getSimpleName();
 
     private List<AreaBean> b2List;
+    private List<AreaBean> dList;
     private Context mContext;
     private int type;
     private int[] drawables;
@@ -59,6 +61,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 holder.iv.setLayoutParams(layoutParams);
 
                 Glide.with(mContext).load(b2List.get(position).getImg_url()).into(holder.iv);
+                break;
+            case TYPE_ITEM_MRXK:
+                layoutParams.width=MyUtil.dp2px(mContext,200);
+                layoutParams.height= MyUtil.dp2px(mContext,250);
+                holder.iv.setLayoutParams(layoutParams);
+
+                Glide.with(mContext).load(dList.get(position).getImg_url()).into(holder.iv);
         }
 
 
@@ -72,6 +81,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 return drawables.length;
             case TYPE_ITEM_TJBB:
                 return b2List.size();
+            case TYPE_ITEM_MRXK:
+                return dList.size();
                 default:
                     return 0;
         }
@@ -100,5 +111,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     public void setB2List(List<AreaBean> b2List) {
         this.b2List = b2List;
+    }
+
+    public List<AreaBean> getDList() {
+        return dList;
+    }
+
+    public void setDList(List<AreaBean> dList) {
+        this.dList = dList;
     }
 }

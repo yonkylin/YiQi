@@ -17,9 +17,12 @@ import yonky.yiqi.R;
 import yonky.yiqi.base.BaseFragment;
 import yonky.yiqi.base.contract.MainContract;
 import yonky.yiqi.bean.AreaBean;
+import yonky.yiqi.bean.AreaEBean;
+import yonky.yiqi.bean.MainPageBean;
 import yonky.yiqi.p.MainPresenter;
 import yonky.yiqi.v.adapter.MainAdapter;
 
+import static yonky.yiqi.v.adapter.MainAdapter.TYPE_SINGLE;
 import static yonky.yiqi.v.adapter.MainAdapter.TYPE_THREE;
 import static yonky.yiqi.v.adapter.MainAdapter.TYPE_TWO;
 
@@ -59,8 +62,15 @@ public class MainFragment extends BaseFragment implements MainContract.View{
         }else if("C2".equals(type)&&mainAdapter.getC2List()==null){
             mainAdapter.setC2List(areaBeanList);
             mainAdapter.notifyDataSetChanged();
+        }else if("D".equals(type)&&mainAdapter.getDList()==null){
+            mainAdapter.setDList(areaBeanList);
+            mainAdapter.notifyDataSetChanged();
         }
 
+    }
+    @Override
+    public void showE(List<AreaEBean> listE){
+        mainAdapter.seteList(listE);
     }
 
     @Override
@@ -76,13 +86,19 @@ public class MainFragment extends BaseFragment implements MainContract.View{
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup(){
             @Override
             public int getSpanSize(int position) {
+
+
                 switch(mainAdapter.getItemViewType(position)){
                     case TYPE_TWO:
                         return 3;
                     case TYPE_THREE:
                         return 2;
 
+
                         default:
+                            if(position>15 &&position!=20 &&position!=25 &&position!=30 &&position!=35){
+                                return 3;
+                            }
                             return 6;
                 }
 
@@ -103,6 +119,8 @@ public class MainFragment extends BaseFragment implements MainContract.View{
         mPresenter.loadDatas("A");
         mPresenter.loadDatas("B");
         mPresenter.loadDatas("C");
+        mPresenter.loadDatas("D");
+        mPresenter.loadDatas("E");
 
     }
 }

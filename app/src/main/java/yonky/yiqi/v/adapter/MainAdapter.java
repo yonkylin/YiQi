@@ -24,6 +24,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import yonky.yiqi.R;
 import yonky.yiqi.bean.AreaBean;
+import yonky.yiqi.bean.AreaEBean;
+import yonky.yiqi.bean.MainPageBean;
 import yonky.yiqi.util.GlideImageLoader;
 import yonky.yiqi.util.MyUtil;
 
@@ -52,6 +54,10 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<AreaBean>b2List;
     private List<AreaBean>c1List;
     private List<AreaBean>c2List;
+    private List<AreaBean>dList;
+
+    private List<AreaEBean>eList;
+
     private String[] titles;
 
 
@@ -82,6 +88,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 return TYPE_BANNER;
             case 1:
             case 4:
+            case 14:
                 return TYPE_MY;
             case 2:
             case 5:
@@ -89,6 +96,11 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 return TYPE_TITLE;
             case 3:
             case 6:
+            case 15:
+            case 20:
+            case 25:
+            case 30:
+            case 35:
                 return TYPE_SINGLE;
             case 7:
             case 8:
@@ -96,25 +108,16 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case 10:
             case 11:
             case 12:
-
                 return TYPE_THREE;
+                default:
+                    return TYPE_TWO;
 
         }
-//        if(position==0){
-//            return TYPE_BANNER;
-//        }else if(position ==1 || position==4){
-//            return TYPE_MY;
-//        }else if(position==2){
-//            return TYPE_TITLE;
-//        }else if(position ==3){
-//            return TYPE_SINGLE;
-//        }
-        return super.getItemViewType(position);
     }
 
     @Override
     public int getItemCount() {
-        return 14;
+        return 40;
     }
 
 
@@ -131,6 +134,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case TYPE_SINGLE:
             case TYPE_THREE:
                 return new SingleViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_single_image,parent,false));
+            case TYPE_TWO:
+                return new TwoViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_vertical,parent,false));
                 default:
                     return null;
         }
@@ -156,8 +161,12 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }else if(b2List!=null && position==4){
                     ((MyViewHolder) holder).itemAdapter.setB2List(b2List);
                     ((MyViewHolder) holder).itemAdapter.setType(TYPE_ITEM_TJBB);
-            }
+            }else if(dList!=null && position==14){
+                ((MyViewHolder) holder).itemAdapter.setDList(dList);
+                ((MyViewHolder) holder).itemAdapter.setType(TYPE_ITEM_MRXK);
 
+            }
+            ((MyViewHolder) holder).itemAdapter.notifyDataSetChanged();
         }else if(holder instanceof TitleViewHolder){
             switch(position){
                 case 2:
@@ -180,15 +189,41 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((SingleViewHolder) holder).iv.setLayoutParams(layoutParams);
             if(b1List!=null &&position==3){
                 Glide.with(mContext).load(b1List.get(0).getImg_url()).into(((SingleViewHolder) holder).iv);
-            }
-            if(c1List!=null&&position==6){
+            }else if(c1List!=null&&position==6){
                 Glide.with(mContext).load(c1List.get(0).getImg_url()).into(((SingleViewHolder) holder).iv);
-            }
-            if(c2List!=null && position>=7 &&position<=12){
+            }else if(c2List!=null && position>=7 &&position<=12){
                 layoutParams.height=MyUtil.dp2px(mContext,140);
                 Glide.with(mContext).load(c2List.get(position-7).getImg_url()).into(((SingleViewHolder) holder).iv);
+            }else if(eList!=null&&position>14){
+              /* 对应位置为
+               15 20 25 30 35
+                    -15
+                0  5  10 15 20
+                        对5取整
+                0  1  2  3  4
+  */
+               int i = (position-15)/5;
+               AreaBean areaBean =eList.get(i).getM_Item1().get(0);
+                 Glide.with(mContext).load(areaBean.getImg_url()).into(((SingleViewHolder) holder).iv);
             }
 
+        }else if(holder instanceof TwoViewHolder && position>14){
+
+           /* 两列类型的位置为    转为elist对应的位置
+            16 17 18 19               1  2  3  4                             0
+            21 22 23 24               6  7  8  9                             1
+            26 27 28 29       -15得   11 12 13 14      对5取整               2
+            31 32 33 34               16 17 18 19                            3
+            36 37 38 39               21 22 23 24                            4
+          */
+           if(eList!=null){
+              int i=(position-15)/5;
+              int j=(position-15)%5 -1;
+              AreaBean areaBean = eList.get(i).getM_Item2().get(j);
+              Glide.with(mContext).load(areaBean.getImg_url()).into(((TwoViewHolder) holder).iv);
+              ((TwoViewHolder) holder).title.setText(areaBean.getTitle());
+              ((TwoViewHolder) holder).price.setText(String.valueOf(areaBean.getPrice()));
+          }
         }
     }
 
@@ -243,6 +278,20 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    class TwoViewHolder extends RecyclerView.ViewHolder{
+        @BindView(R.id.iv_img)
+        ImageView iv;
+        @BindView(R.id.tv_title)
+        TextView title;
+        @BindView(R.id.tv_price)
+        TextView price;
+
+        public TwoViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this,itemView);
+        }
+    }
+
 
     public void setBannerList(List<AreaBean> bannerList) {
         this.bannerList = bannerList;
@@ -281,5 +330,21 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public void setC2List(List<AreaBean> c2List) {
         this.c2List = c2List;
+    }
+
+    public List<AreaBean> getDList() {
+        return dList;
+    }
+
+    public void setDList(List<AreaBean> dList) {
+        this.dList = dList;
+    }
+
+    public List<AreaEBean> geteList() {
+        return eList;
+    }
+
+    public void seteList(List<AreaEBean> eList) {
+        this.eList = eList;
     }
 }
