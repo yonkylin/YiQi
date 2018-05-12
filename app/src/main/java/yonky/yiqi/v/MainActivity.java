@@ -1,17 +1,10 @@
 package yonky.yiqi.v;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,13 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import yonky.yiqi.R;
 import yonky.yiqi.base.BaseActivity;
-import yonky.yiqi.base.contract.MainContract;
-import yonky.yiqi.bean.AreaBean;
-import yonky.yiqi.bean.MainPageBean;
-import yonky.yiqi.p.MainPresenter;
 import yonky.yiqi.v.adapter.ViewPagerAdaper;
 import yonky.yiqi.widget.MyViewPager;
 
@@ -97,7 +85,7 @@ public class MainActivity extends BaseActivity{
 
         fragments = new ArrayList<>();
         MainFragment mainFragment = new MainFragment();
-        FragmentTest mainFragment2 = new FragmentTest();
+        MarketFragment mainFragment2 = new MarketFragment();
         FragmentTest mainFragment3 = new FragmentTest();
         FragmentTest mainFragment4 = new FragmentTest();
         FragmentTest mainFragment5 = new FragmentTest();

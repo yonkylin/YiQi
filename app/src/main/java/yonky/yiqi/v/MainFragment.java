@@ -30,15 +30,57 @@ public class MainFragment extends BaseFragment implements MainContract.View{
     private static final String TAG = MainFragment.class.getSimpleName();
     @BindView(R.id.rv_main)
     RecyclerView recyclerView;
-    MainContract.Presenter mPresenter;
+    MainAdapter mainAdapter;
 
     List<AreaBean> listItem;
 
-//    MainAdapter Adapter_linear;
-    MainAdapter mainAdapter;
+    MainPresenter mPresenter;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_main;
+    }
+
+    @Override
+    protected void initEventAndData() {
+        mainAdapter = new MainAdapter(mContext);
+
+        mPresenter =new MainPresenter(mContext);
+        mPresenter.attachView(this);
+
+        listItem = new ArrayList<>();
+//        VirtualLayoutManager layoutManager = new VirtualLayoutManager(mContext);
+           GridLayoutManager layoutManager = new GridLayoutManager(mContext,6, LinearLayoutManager.VERTICAL,false);
+        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup(){
+            @Override
+            public int getSpanSize(int position) {
+
+
+                switch(mainAdapter.getItemViewType(position)){
+                    case TYPE_TWO:
+                        return 3;
+                    case TYPE_THREE:
+                        return 2;
+
+
+                        default:
+                            if(position>15 &&position!=20 &&position!=25 &&position!=30 &&position!=35){
+                                return 3;
+                            }
+                            return 6;
+                }
+
+            }
+        });
+        recyclerView.setLayoutManager(layoutManager );
+        recyclerView.setAdapter(mainAdapter);
+
+        mPresenter.loadDatas("A");
+        mPresenter.loadDatas("B");
+        mPresenter.loadDatas("C");
+        mPresenter.loadDatas("D");
+        mPresenter.loadDatas("E");
+
     }
 
     @Override
@@ -73,54 +115,12 @@ public class MainFragment extends BaseFragment implements MainContract.View{
         mainAdapter.seteList(listE);
     }
 
+
     @Override
-    protected void initEventAndData() {
-        mainAdapter = new MainAdapter(mContext);
-
-        mPresenter = new MainPresenter(mContext);
-        mPresenter.attachView(this);
-
-        listItem = new ArrayList<>();
-//        VirtualLayoutManager layoutManager = new VirtualLayoutManager(mContext);
-           GridLayoutManager layoutManager = new GridLayoutManager(mContext,6, LinearLayoutManager.VERTICAL,false);
-        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup(){
-            @Override
-            public int getSpanSize(int position) {
-
-
-                switch(mainAdapter.getItemViewType(position)){
-                    case TYPE_TWO:
-                        return 3;
-                    case TYPE_THREE:
-                        return 2;
-
-
-                        default:
-                            if(position>15 &&position!=20 &&position!=25 &&position!=30 &&position!=35){
-                                return 3;
-                            }
-                            return 6;
-                }
-
-            }
-        });
-        recyclerView.setLayoutManager(layoutManager );
-
-//        RecyclerView.RecycledViewPool viewPool  =new RecyclerView.RecycledViewPool();
-//        recyclerView.setRecycledViewPool(viewPool);
-//        viewPool.setMaxRecycledViews(0,4);
-//        LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
-//        linearLayoutHelper.setItemCount(1);
-
-//        Adapter_linear=new MainAdapter(mContext,linearLayoutHelper,4);
-
-        recyclerView.setAdapter(mainAdapter);
-
-        mPresenter.loadDatas("A");
-        mPresenter.loadDatas("B");
-        mPresenter.loadDatas("C");
-        mPresenter.loadDatas("D");
-        mPresenter.loadDatas("E");
-
+    public void onDestroyView() {
+        if(mPresenter!=null){
+            mPresenter.detachView();
+        }
+        super.onDestroyView();
     }
 }

@@ -3,18 +3,16 @@ package yonky.yiqi.v.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-
 import java.util.List;
 
 import yonky.yiqi.R;
 import yonky.yiqi.bean.AreaBean;
+import yonky.yiqi.util.GlideUtil;
 import yonky.yiqi.util.MyUtil;
 
 import static yonky.yiqi.v.adapter.MainAdapter.TYPE_ITEM_MRXK;
@@ -60,14 +58,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 layoutParams.height= MyUtil.dp2px(mContext,220);
                 holder.iv.setLayoutParams(layoutParams);
 
-                Glide.with(mContext).load(b2List.get(position).getImg_url()).into(holder.iv);
+                GlideUtil.loadImage(b2List.get(position).getImg_url(),holder.iv);
                 break;
             case TYPE_ITEM_MRXK:
                 layoutParams.width=MyUtil.dp2px(mContext,200);
                 layoutParams.height= MyUtil.dp2px(mContext,250);
                 holder.iv.setLayoutParams(layoutParams);
 
-                Glide.with(mContext).load(dList.get(position).getImg_url()).into(holder.iv);
+                GlideUtil.loadImage(dList.get(position).getImg_url(),holder.iv);
         }
 
 

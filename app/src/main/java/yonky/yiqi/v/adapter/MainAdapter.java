@@ -11,13 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.alibaba.android.vlayout.DelegateAdapter;
-import com.alibaba.android.vlayout.LayoutHelper;
-import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -25,8 +21,7 @@ import butterknife.ButterKnife;
 import yonky.yiqi.R;
 import yonky.yiqi.bean.AreaBean;
 import yonky.yiqi.bean.AreaEBean;
-import yonky.yiqi.bean.MainPageBean;
-import yonky.yiqi.util.GlideImageLoader;
+import yonky.yiqi.util.GlideUtil;
 import yonky.yiqi.util.MyUtil;
 
 /**
@@ -151,7 +146,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 for(int i=0;i<bannerList.size();i++){
                     images.add(bannerList.get(i).getImg_url());
                 }
-                ((BannerViewHolder) holder).banner.setImages(images).setImageLoader(new GlideImageLoader()).start();
+                ((BannerViewHolder) holder).banner.setImages(images).setImageLoader(new GlideUtil()).start();
 
 
         }else if(holder instanceof MyViewHolder) {
@@ -180,20 +175,19 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     break;
                     default:
             }
-
+// 单张图的
         }else if(holder instanceof SingleViewHolder ){
-//            ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,MyUtil.dp2px(mContext,140));
             ViewGroup.LayoutParams layoutParams =((SingleViewHolder) holder).iv.getLayoutParams();
             layoutParams.width=ViewGroup.LayoutParams.MATCH_PARENT;
             layoutParams.height=MyUtil.dp2px(mContext,140);
             ((SingleViewHolder) holder).iv.setLayoutParams(layoutParams);
             if(b1List!=null &&position==3){
-                Glide.with(mContext).load(b1List.get(0).getImg_url()).into(((SingleViewHolder) holder).iv);
+                GlideUtil.loadImage(b1List.get(0).getImg_url(),((SingleViewHolder) holder).iv);
             }else if(c1List!=null&&position==6){
-                Glide.with(mContext).load(c1List.get(0).getImg_url()).into(((SingleViewHolder) holder).iv);
+                GlideUtil.loadImage(c1List.get(0).getImg_url(),((SingleViewHolder) holder).iv);
             }else if(c2List!=null && position>=7 &&position<=12){
                 layoutParams.height=MyUtil.dp2px(mContext,140);
-                Glide.with(mContext).load(c2List.get(position-7).getImg_url()).into(((SingleViewHolder) holder).iv);
+                GlideUtil.loadImage(c2List.get(position-7).getImg_url(),((SingleViewHolder) holder).iv);
             }else if(eList!=null&&position>14){
               /* 对应位置为
                15 20 25 30 35
@@ -204,9 +198,9 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
   */
                int i = (position-15)/5;
                AreaBean areaBean =eList.get(i).getM_Item1().get(0);
-                 Glide.with(mContext).load(areaBean.getImg_url()).into(((SingleViewHolder) holder).iv);
+                GlideUtil.loadImage(areaBean.getImg_url(),((SingleViewHolder) holder).iv);
             }
-
+//两栏有文字的
         }else if(holder instanceof TwoViewHolder && position>14){
 
            /* 两列类型的位置为    转为elist对应的位置
@@ -220,9 +214,9 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
               int i=(position-15)/5;
               int j=(position-15)%5 -1;
               AreaBean areaBean = eList.get(i).getM_Item2().get(j);
-              Glide.with(mContext).load(areaBean.getImg_url()).into(((TwoViewHolder) holder).iv);
+            GlideUtil.loadImage(areaBean.getImg_url(),((TwoViewHolder) holder).iv);
               ((TwoViewHolder) holder).title.setText(areaBean.getTitle());
-              ((TwoViewHolder) holder).price.setText(String.valueOf(areaBean.getPrice()));
+              ((TwoViewHolder) holder).price.setText(mContext.getResources().getString(R.string.price,areaBean.getPrice()));
           }
         }
     }

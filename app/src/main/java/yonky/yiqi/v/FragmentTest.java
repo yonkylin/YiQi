@@ -14,4 +14,5 @@ public class FragmentTest extends BaseFragment {
     protected void initEventAndData() {
 
     }
+
 }
