@@ -13,10 +13,9 @@ import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 import yonky.yiqi.base.contract.MarketContract;
-import yonky.yiqi.bean.ItemsBean;
+import yonky.yiqi.bean.ShopBean;
 import yonky.yiqi.bean.MarketBean;
 import yonky.yiqi.m.DataManager;
-import yonky.yiqi.v.adapter.MarketAdapter;
 
 /**
  * Created by Administrator on 2018/5/12.
@@ -52,18 +51,18 @@ public class MarketPresenter implements MarketContract.Presenter {
                         return marketBean.getStatus_code()==200;
                     }
                 })
-                .map(new Function<MarketBean, List<ItemsBean>>() {
+                .map(new Function<MarketBean, List<ShopBean>>() {
                     @Override
-                    public List<ItemsBean> apply(MarketBean marketBean) throws Exception {
+                    public List<ShopBean> apply(MarketBean marketBean) throws Exception {
 
                        return marketBean.getShop_items_list_get_response().getItems();
 
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<ItemsBean>>() {
+                .subscribe(new Consumer<List<ShopBean>>() {
                     @Override
-                    public void accept(List<ItemsBean> beanList) throws Exception {
+                    public void accept(List<ShopBean> beanList) throws Exception {
                         mView.showResult(beanList);
                     }
                 }, new Consumer<Throwable>() {

@@ -14,8 +14,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import yonky.yiqi.R;
-import yonky.yiqi.bean.ItemsBean;
-import yonky.yiqi.bean.MarketBean;
+import yonky.yiqi.bean.ShopBean;
 import yonky.yiqi.util.GlideUtil;
 
 /**
@@ -24,9 +23,9 @@ import yonky.yiqi.util.GlideUtil;
 
 public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.MarketHolder> {
     private Context mContext;
-    private List<ItemsBean> mBeanList;
+    private List<ShopBean> mBeanList;
 
-    public MarketAdapter(Context mContext, List<ItemsBean> beanList){
+    public MarketAdapter(Context mContext, List<ShopBean> beanList){
         this.mContext = mContext;
         this.mBeanList = beanList;
     }
@@ -44,7 +43,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.MarketHold
     @Override
     public void onBindViewHolder(@NonNull MarketHolder holder, int position) {
         if(mBeanList!=null){
-            ItemsBean item = mBeanList.get(position);
+            ShopBean item = mBeanList.get(position);
             GlideUtil.loadImage(item.getSerller_head_original(),holder.shopImg);
             holder.discount.setText(item.getDiscount());
             holder.shopName.setText(item.getShop_name());
@@ -76,11 +75,11 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.MarketHold
         }
     }
 
-    public List<ItemsBean> getBeanList() {
+    public List<ShopBean> getBeanList() {
         return mBeanList;
     }
 
-    public void setBeanList(List<ItemsBean> beanList) {
+    public void setBeanList(List<ShopBean> beanList) {
         mBeanList = beanList;
     }
 }

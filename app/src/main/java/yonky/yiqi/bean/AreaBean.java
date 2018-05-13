@@ -31,7 +31,7 @@ public class AreaBean {
     private int goods_id;
     private int shop_id;
     private String title;
-    private int price;
+    private float price;
     private String url;
     private String img_url;
     private String img_url2;
@@ -119,11 +119,11 @@ public class AreaBean {
         this.title = title;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 

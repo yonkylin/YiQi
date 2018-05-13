@@ -49,7 +49,7 @@ public class MarketBean {
          */
 
         private int total;
-        private List<ItemsBean> items;
+        private List<ShopBean> items;
 
         public int getTotal() {
             return total;
@@ -59,11 +59,11 @@ public class MarketBean {
             this.total = total;
         }
 
-        public List<ItemsBean> getItems() {
+        public List<ShopBean> getItems() {
             return items;
         }
 
-        public void setItems(List<ItemsBean> items) {
+        public void setItems(List<ShopBean> items) {
             this.items = items;
         }
 

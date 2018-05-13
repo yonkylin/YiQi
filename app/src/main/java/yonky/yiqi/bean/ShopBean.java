@@ -4,7 +4,7 @@ package yonky.yiqi.bean;
  * Created by Administrator on 2018/5/12.
  */
 
-public class ItemsBean {
+public class ShopBean {
 
         /**
          * site_id : 48

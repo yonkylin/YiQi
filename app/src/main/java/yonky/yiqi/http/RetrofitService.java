@@ -39,7 +39,20 @@ public interface RetrofitService {
 
 // 搜款式
 //    http://api2.17zwd.com/rest/goods/search?price1=0.0&psize=10&size=&seller_cid=&orderby=mr&color=&keyword=&pindex=1&from=android&price2=9999.0&dtype=sks&zdid=48
-    @GET("/rest/goods/search/")
-    Observable<StyleBean> getStyleData(String price1,String psize,String size,String seller_cid,String orderby,
-                                       String color ,String keyword,String pindex,String from,String price2,String dtype,String zdid);
-}
+
+
+
+    @GET("/rest/goods/search")
+    Observable<StyleBean> getStyleData(@Query("price1") String price1,
+                                       @Query("psize") String psize,
+                                       @Query("size")String size,
+                                        @Query("seller_cid") String seller_cid,
+                                        @Query("orderby") String orderby,
+                                        @Query("color")  String color ,
+                                        @Query("keyword") String keyword,
+                                        @Query("pindex") String pindex,
+                                        @Query("from") String from,
+                                        @Query("price2") String price2,
+                                        @Query("dtype") String dtype,
+                                        @Query("zdid") String zdid);
+                                    }

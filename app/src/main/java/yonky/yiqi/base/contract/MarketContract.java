@@ -4,7 +4,7 @@ import java.util.List;
 
 import yonky.yiqi.base.BasePresenter;
 import yonky.yiqi.base.BaseView;
-import yonky.yiqi.bean.ItemsBean;
+import yonky.yiqi.bean.ShopBean;
 
 /**
  * Created by Administrator on 2018/5/12.
@@ -12,7 +12,7 @@ import yonky.yiqi.bean.ItemsBean;
 
 public interface MarketContract {
     interface View extends BaseView{
-       void showResult(List<ItemsBean> listBeans);
+       void showResult(List<ShopBean> listBeans);
     }
     interface Presenter extends BasePresenter<View>{
         void loadData();

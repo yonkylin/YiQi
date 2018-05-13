@@ -33,5 +33,8 @@ public class DataManager {
     //    http://api2.17zwd.com/rest/goods/search?price1=0.0&psize=10&size=&seller_cid=&orderby=mr&color=&keyword=&pindex=1&from=android&price2=9999.0&dtype=sks&zdid=48
 //搜款式
 
-
+    public  Observable<StyleBean> getStyleData(String price1,String psize,String size,String seller_cid,String orderby,
+                                               String color ,String keyword,String pindex,String from,String price2,String dtype,String zdid){
+        return mRetrofitService.getStyleData(price1,psize,size,seller_cid,orderby,color,keyword,pindex,from,price2,dtype,zdid);
+    }
 }
