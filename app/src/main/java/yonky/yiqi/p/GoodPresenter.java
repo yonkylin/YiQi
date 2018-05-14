@@ -43,8 +43,8 @@ public class GoodPresenter implements GoodContract.Presenter {
 
     @Override
     public void load(GoodFilterBean filter) {
-        Observable<StyleBean> observable =mDataManager.getStyleData(filter.getPrice1(),filter.getPsize(),filter.getSize(),filter.getSeller_cid(),filter.getOrderby(),
-                filter.getColor(),filter.getKeyword(),filter.getKeyword(),filter.getFrom(),filter.getPrice2(),filter.getDtype(),filter.getZdid());
+        Observable<StyleBean> observable =mDataManager.getStyleData(filter.getShop_id(),filter.getSize(),filter.getSeller_cid(),filter.getPindex(),filter.getFrom(),filter.getPrice2(),
+                filter.getDtype(),filter.getZdid(), filter.getPrice1(),filter.getPsize(),filter.getOrderby(),filter.getColor() ,filter.getSpm(),filter.getKeyword());
         observable.subscribeOn(Schedulers.io())
                 .filter(new Predicate<StyleBean>() {
                     @Override

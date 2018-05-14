@@ -16,6 +16,8 @@ public class GoodFilterBean {
     private  String price2="9999.0";
     private  String dtype="sks";
     private   String zdid="48";
+    private String spm="";
+    private String shop_id ="";
 
 
 
@@ -113,5 +115,21 @@ public class GoodFilterBean {
 
     public void setZdid(String zdid) {
         this.zdid = zdid;
+    }
+
+    public String getSpm() {
+        return spm;
+    }
+
+    public void setSpm(String spm) {
+        this.spm = spm;
+    }
+
+    public String getShop_id() {
+        return shop_id;
+    }
+
+    public void setShop_id(String shop_id) {
+        this.shop_id = shop_id;
     }
 }

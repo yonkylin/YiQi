@@ -1,6 +1,8 @@
 package yonky.yiqi.bean;
 
-public class AreaBean {
+import java.io.Serializable;
+
+public class AreaBean implements Serializable{
 
     /**
      * site_id : 48
@@ -20,6 +22,8 @@ public class AreaBean {
      * spm : c5jEjVMzAhHFy5%2btBPM%2baMQqPYc7jeY%2f6NJ1FG6YAMQ%3d
      * seconds : 5
      */
+
+    private static final long serialVersionUID = 12345678910111213L;
 
     private int site_id;
     private int ad_id;

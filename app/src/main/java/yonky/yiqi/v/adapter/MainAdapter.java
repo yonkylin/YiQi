@@ -1,6 +1,8 @@
 package yonky.yiqi.v.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +26,7 @@ import yonky.yiqi.bean.AreaBean;
 import yonky.yiqi.bean.AreaEBean;
 import yonky.yiqi.util.GlideUtil;
 import yonky.yiqi.util.MyUtil;
+import yonky.yiqi.v.GoodsActivity;
 
 /**
  * Created by Administrator on 2018/5/10.
@@ -362,7 +365,9 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         @Override
         public void onClick(View v) {
-
+            Intent intent = new Intent(mContext, GoodsActivity.class);
+            intent.putExtra("areabean",bean);
+            mContext.startActivity(intent);
         }
 
     }

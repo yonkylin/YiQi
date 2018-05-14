@@ -8,19 +8,20 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_height="230dp"
         android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways">
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true">
+                android:layout_height="match_parent">
+                <!--android:fitsSystemWindows="true"-->
+
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -29,11 +30,11 @@
                 <include layout="@layout/shop"/>
 
             </FrameLayout>
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/view_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_collapseMode="pin"/>
+            <!--<android.support.v7.widget.Toolbar-->
+                <!--android:id="@+id/view_toolbar"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:layout_collapseMode="pin"/>-->
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
     <android.support.v4.widget.NestedScrollView
@@ -41,35 +42,18 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_goods"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+<android.support.v7.widget.RecyclerView android:id="@+id/rv_goods"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     />
     </android.support.v4.widget.NestedScrollView>
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:layout_weight="1"/>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:layout_weight="1"/>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:layout_weight="1"/>
-    </LinearLayout>
+         android:layout_gravity="bottom"
+        android:divider="@drawable/vertical_divider"
+        />
 
 
 </android.support.design.widget.CoordinatorLayout>
