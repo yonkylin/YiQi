@@ -6,9 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 
-import com.alibaba.android.vlayout.VirtualLayoutManager;
-import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +15,9 @@ import yonky.yiqi.base.BaseFragment;
 import yonky.yiqi.base.contract.MainContract;
 import yonky.yiqi.bean.AreaBean;
 import yonky.yiqi.bean.AreaEBean;
-import yonky.yiqi.bean.MainPageBean;
 import yonky.yiqi.p.MainPresenter;
 import yonky.yiqi.v.adapter.MainAdapter;
 
-import static yonky.yiqi.v.adapter.MainAdapter.TYPE_SINGLE;
 import static yonky.yiqi.v.adapter.MainAdapter.TYPE_THREE;
 import static yonky.yiqi.v.adapter.MainAdapter.TYPE_TWO;
 
@@ -114,6 +109,8 @@ public class MainFragment extends BaseFragment implements MainContract.View{
     public void showE(List<AreaEBean> listE){
         mainAdapter.seteList(listE);
     }
+
+
 
 
     @Override

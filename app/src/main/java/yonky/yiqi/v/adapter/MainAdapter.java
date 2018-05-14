@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,11 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static final int TYPE_ITEM_MRXK=0X12;    //嵌套recyclerview 每日新款
 
 
+    public static final int TYPE_GOODS =0X20;    //打开店铺详情
+    public static final int TYPE_GOOD_DETAIL =0X21;    //打开商品详情
+
+
+
     private  List<AreaBean>bannerList;
     private List<AreaBean>b1List;
     private List<AreaBean>b2List;
@@ -54,6 +60,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<AreaEBean>eList;
 
     private String[] titles;
+    private MyClickListener mMyClickListener;
+
 
 
     private Context mContext;
@@ -110,6 +118,45 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+/*    public AreaBean getAreaBean(int position){
+        AreaBean bean = new AreaBean();
+        if(position==3&&b1List!=null) {
+            bean = b1List.get(0);
+
+        }else if(position==6&&c1List!=null){
+                    bean =c1List.get(0);
+
+        }else if(position>=7 && position<=12&&c2List!=null){
+            bean =c2List.get(position-7);
+
+        }else if(position>=15 && position%5==0&&eList!=null){
+             对应位置为
+       15 20 25 30 35
+            -15
+        0  5  10 15 20
+                对5取整
+        0  1  2  3  4
+*//*
+
+            int i = (position-15)/5;
+            bean =eList.get(i).getM_Item1().get(0);
+        }else if(position>=15 && position%5!=0&&eList!=null){
+
+    两列类型的位置为    转为elist对应的位置
+    16 17 18 19               1  2  3  4                             0
+    21 22 23 24               6  7  8  9                             1
+    26 27 28 29       -15得   11 12 13 14      对5取整               2
+    31 32 33 34               16 17 18 19                            3
+    36 37 38 39               21 22 23 24                            4
+
+            int i=(position-15)/5;
+            int j=(position-15)%5 -1;
+            bean = eList.get(i).getM_Item2().get(j);
+        }
+
+        return bean;
+    }*/
+
     @Override
     public int getItemCount() {
         return 40;
@@ -139,6 +186,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+         AreaBean bean = new AreaBean();
         ArrayList<String>images = new ArrayList<>();
         Log.d("yonky","onBindViewHoder");
 
@@ -147,6 +195,15 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     images.add(bannerList.get(i).getImg_url());
                 }
                 ((BannerViewHolder) holder).banner.setImages(images).setImageLoader(new GlideUtil()).start();
+            ((BannerViewHolder) holder).banner.setOnBannerListener(new OnBannerListener() {
+                AreaBean bannerBean;
+                @Override
+                public void OnBannerClick(int position) {
+                    bannerBean = bannerList.get(position);
+
+
+                }
+            });
 
 
         }else if(holder instanceof MyViewHolder) {
@@ -177,17 +234,22 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
 // 单张图的
         }else if(holder instanceof SingleViewHolder ){
+
             ViewGroup.LayoutParams layoutParams =((SingleViewHolder) holder).iv.getLayoutParams();
             layoutParams.width=ViewGroup.LayoutParams.MATCH_PARENT;
             layoutParams.height=MyUtil.dp2px(mContext,140);
             ((SingleViewHolder) holder).iv.setLayoutParams(layoutParams);
             if(b1List!=null &&position==3){
-                GlideUtil.loadImage(b1List.get(0).getImg_url(),((SingleViewHolder) holder).iv);
+                bean =b1List.get(0);
+                GlideUtil.loadImage(bean.getImg_url(),((SingleViewHolder) holder).iv);
+
             }else if(c1List!=null&&position==6){
-                GlideUtil.loadImage(c1List.get(0).getImg_url(),((SingleViewHolder) holder).iv);
+                bean=c1List.get(0);
+                GlideUtil.loadImage(bean.getImg_url(),((SingleViewHolder) holder).iv);
             }else if(c2List!=null && position>=7 &&position<=12){
+                bean = c2List.get(position-7);
                 layoutParams.height=MyUtil.dp2px(mContext,140);
-                GlideUtil.loadImage(c2List.get(position-7).getImg_url(),((SingleViewHolder) holder).iv);
+                GlideUtil.loadImage(bean.getImg_url(),((SingleViewHolder) holder).iv);
             }else if(eList!=null&&position>14){
               /* 对应位置为
                15 20 25 30 35
@@ -197,11 +259,13 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 0  1  2  3  4
   */
                int i = (position-15)/5;
-               AreaBean areaBean =eList.get(i).getM_Item1().get(0);
-                GlideUtil.loadImage(areaBean.getImg_url(),((SingleViewHolder) holder).iv);
+                bean =eList.get(i).getM_Item1().get(0);
+                GlideUtil.loadImage(bean.getImg_url(),((SingleViewHolder) holder).iv);
             }
+            holder.itemView.setOnClickListener(new MyClickListener(bean, TYPE_GOODS));
+
 //两栏有文字的
-        }else if(holder instanceof TwoViewHolder && position>14){
+        } else if(holder instanceof TwoViewHolder && position>14){
 
            /* 两列类型的位置为    转为elist对应的位置
             16 17 18 19               1  2  3  4                             0
@@ -213,10 +277,10 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
            if(eList!=null){
               int i=(position-15)/5;
               int j=(position-15)%5 -1;
-              AreaBean areaBean = eList.get(i).getM_Item2().get(j);
-            GlideUtil.loadImage(areaBean.getImg_url(),((TwoViewHolder) holder).iv);
-              ((TwoViewHolder) holder).title.setText(areaBean.getTitle());
-              ((TwoViewHolder) holder).price.setText(mContext.getResources().getString(R.string.price,areaBean.getPrice()));
+               bean = eList.get(i).getM_Item2().get(j);
+            GlideUtil.loadImage(bean.getImg_url(),((TwoViewHolder) holder).iv);
+              ((TwoViewHolder) holder).title.setText(bean.getTitle());
+              ((TwoViewHolder) holder).price.setText(mContext.getResources().getString(R.string.price,bean.getPrice()));
           }
         }
     }
@@ -259,6 +323,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public TitleViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+
         }
     }
 
@@ -284,6 +349,22 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super(itemView);
             ButterKnife.bind(this,itemView);
         }
+    }
+
+    private class MyClickListener implements View.OnClickListener{
+        AreaBean bean;
+        int type;
+
+        public MyClickListener(AreaBean bean, int type) {
+            this.bean = bean;
+            this.type = type;
+        }
+
+        @Override
+        public void onClick(View v) {
+
+        }
+
     }
 
 
@@ -341,4 +422,6 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void seteList(List<AreaEBean> eList) {
         this.eList = eList;
     }
+
+
 }

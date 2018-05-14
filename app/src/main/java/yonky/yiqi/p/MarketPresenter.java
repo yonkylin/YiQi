@@ -15,6 +15,7 @@ import io.reactivex.schedulers.Schedulers;
 import yonky.yiqi.base.contract.MarketContract;
 import yonky.yiqi.bean.ShopBean;
 import yonky.yiqi.bean.MarketBean;
+import yonky.yiqi.bean.ShopFilterBean;
 import yonky.yiqi.m.DataManager;
 
 /**
@@ -41,9 +42,10 @@ public class MarketPresenter implements MarketContract.Presenter {
 //    http://api2.17zwd.com/rest/shop/search_shops/?psize=10&orderby=mr&keyword=&bq=&service=&pindex=1&from=android&zdid=48  逛市场
 
     @Override
-    public void loadData() {
+    public void loadData(ShopFilterBean filter) {
 
-        Observable<MarketBean> observable = mDataManager.getSearchData("10","mr","","","","1","android","48");
+        Observable<MarketBean> observable = mDataManager.getSearchData(filter.getPsize(),filter.getOrderby(),filter.getKeyword(),
+                filter.getBq(),filter.getService(),filter.getPindex(),filter.getFrom(),filter.getZdid());
         observable.subscribeOn(Schedulers.io())
                 .filter(new Predicate<MarketBean>() {
                     @Override

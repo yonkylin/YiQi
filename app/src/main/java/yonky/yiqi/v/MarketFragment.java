@@ -12,6 +12,7 @@ import yonky.yiqi.R;
 import yonky.yiqi.base.BaseFragment;
 import yonky.yiqi.base.contract.MarketContract;
 import yonky.yiqi.bean.ShopBean;
+import yonky.yiqi.bean.ShopFilterBean;
 import yonky.yiqi.p.MarketPresenter;
 import yonky.yiqi.v.adapter.MarketAdapter;
 
@@ -24,6 +25,7 @@ public class MarketFragment extends BaseFragment implements MarketContract.View{
     RecyclerView recyclerView;
     MarketAdapter mMarketAdapter;
     List<ShopBean> shopBean;
+    ShopFilterBean shopFilter;
 
     MarketPresenter mPresenter;
 
@@ -38,11 +40,13 @@ public class MarketFragment extends BaseFragment implements MarketContract.View{
         mPresenter.attachView(this);
 
         shopBean = new ArrayList<>();
+        shopFilter= new ShopFilterBean();
+
         mMarketAdapter = new MarketAdapter(mContext, shopBean);
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(mMarketAdapter);
-        mPresenter.loadData();
+        mPresenter.loadData(shopFilter);
     }
 
     @Override
