@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 import yonky.yiqi.R;
 import yonky.yiqi.bean.AreaBean;
 import yonky.yiqi.bean.AreaEBean;
+import yonky.yiqi.listener.MyClickListener;
 import yonky.yiqi.util.GlideUtil;
 import yonky.yiqi.util.MyUtil;
 import yonky.yiqi.v.GoodsActivity;
@@ -203,7 +204,9 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 @Override
                 public void OnBannerClick(int position) {
                     bannerBean = bannerList.get(position);
-
+                    Intent intent = new Intent(mContext,GoodsActivity.class);
+                    intent.putExtra("areabean",bannerBean);
+                    mContext.startActivity(intent);
 
                 }
             });
@@ -265,7 +268,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 bean =eList.get(i).getM_Item1().get(0);
                 GlideUtil.loadImage(bean.getImg_url(),((SingleViewHolder) holder).iv);
             }
-            holder.itemView.setOnClickListener(new MyClickListener(bean, TYPE_GOODS));
+            holder.itemView.setOnClickListener(new MyClickListener(mContext,bean, TYPE_GOODS));
 
 //两栏有文字的
         } else if(holder instanceof TwoViewHolder && position>14){
@@ -284,6 +287,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             GlideUtil.loadImage(bean.getImg_url(),((TwoViewHolder) holder).iv);
               ((TwoViewHolder) holder).title.setText(bean.getTitle());
               ((TwoViewHolder) holder).price.setText(mContext.getResources().getString(R.string.price,bean.getPrice()));
+              holder.itemView.setOnClickListener(new MyClickListener(mContext,bean,TYPE_GOOD_DETAIL));
           }
         }
     }
@@ -354,23 +358,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    private class MyClickListener implements View.OnClickListener{
-        AreaBean bean;
-        int type;
 
-        public MyClickListener(AreaBean bean, int type) {
-            this.bean = bean;
-            this.type = type;
-        }
-
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(mContext, GoodsActivity.class);
-            intent.putExtra("areabean",bean);
-            mContext.startActivity(intent);
-        }
-
-    }
 
 
     public void setBannerList(List<AreaBean> bannerList) {

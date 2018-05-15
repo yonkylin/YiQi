@@ -12,9 +12,11 @@ import java.util.List;
 
 import yonky.yiqi.R;
 import yonky.yiqi.bean.AreaBean;
+import yonky.yiqi.listener.MyClickListener;
 import yonky.yiqi.util.GlideUtil;
 import yonky.yiqi.util.MyUtil;
 
+import static yonky.yiqi.v.adapter.MainAdapter.TYPE_GOODS;
 import static yonky.yiqi.v.adapter.MainAdapter.TYPE_ITEM_MRXK;
 import static yonky.yiqi.v.adapter.MainAdapter.TYPE_ITEM_MY;
 import static yonky.yiqi.v.adapter.MainAdapter.TYPE_ITEM_TJBB;
@@ -59,6 +61,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 holder.iv.setLayoutParams(layoutParams);
 
                 GlideUtil.loadImage(b2List.get(position).getImg_url(),holder.iv);
+                holder.itemView.setOnClickListener(new MyClickListener(mContext,b2List.get(position),TYPE_GOODS));
                 break;
             case TYPE_ITEM_MRXK:
                 layoutParams.width=MyUtil.dp2px(mContext,200);
@@ -66,6 +69,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 holder.iv.setLayoutParams(layoutParams);
 
                 GlideUtil.loadImage(dList.get(position).getImg_url(),holder.iv);
+                holder.itemView.setOnClickListener(new MyClickListener(mContext,dList.get(position),TYPE_GOODS));
         }
 
 

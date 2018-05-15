@@ -8,6 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 import yonky.yiqi.bean.MainPageBean;
 import yonky.yiqi.bean.MarketBean;
+import yonky.yiqi.bean.ShopPage;
 import yonky.yiqi.bean.StyleBean;
 
 /**
@@ -88,4 +89,30 @@ public interface RetrofitService {
                                        @Query("color")  String color ,
                                        @Query("spm")String spm,
                                        @Query("keyword") String keyword);
+//获取店铺详情
+//    http://api2.17zwd.com/rest/shop/get_shop?shop_id=26974&from=android&user_id=-1&zdid=48&spm=c5jEjVMzAhEqMknXPYkPU9EOVa4gg6EKJId8KFy3%2BVE%3D
+    @GET("/rest/shop/get_shop")
+    Observable<ShopPage> getShop(@Query("shop_id")String shop_id,
+                                 @Query("from")String from,
+                                 @Query("user_id")String user_id,
+                                 @Query("zdid")String zdid,
+                                 @Query("spm")String spm
+                                   );
+
+//    http://api2.17zwd.com/rest/goods/get_item?goods_id=106373882&from=android&user_id=-1&zdid=48&spm=c5jEjVMzAhEqMknXPYkPU9EOVa4gg6EKJId8KFy3%2BVE%3D
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+

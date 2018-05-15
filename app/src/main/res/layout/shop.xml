@@ -41,7 +41,7 @@
     <Button
         android:id="@+id/bt_concern"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/concern_background"
         android:text="＋ 关注"

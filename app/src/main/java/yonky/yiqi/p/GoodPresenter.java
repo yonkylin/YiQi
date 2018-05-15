@@ -13,6 +13,10 @@ import io.reactivex.schedulers.Schedulers;
 import yonky.yiqi.base.contract.GoodContract;
 import yonky.yiqi.bean.GoodBean;
 import yonky.yiqi.bean.GoodFilterBean;
+import yonky.yiqi.bean.MarketBean;
+import yonky.yiqi.bean.ShopBean;
+import yonky.yiqi.bean.ShopFilterBean;
+import yonky.yiqi.bean.ShopPage;
 import yonky.yiqi.bean.StyleBean;
 import yonky.yiqi.m.DataManager;
 
@@ -42,7 +46,7 @@ public class GoodPresenter implements GoodContract.Presenter {
     }
 
     @Override
-    public void load(GoodFilterBean filter) {
+    public void loadGoods(GoodFilterBean filter) {
         Observable<StyleBean> observable =mDataManager.getStyleData(filter.getShop_id(),filter.getSize(),filter.getSeller_cid(),filter.getPindex(),filter.getFrom(),filter.getPrice2(),
                 filter.getDtype(),filter.getZdid(), filter.getPrice1(),filter.getPsize(),filter.getOrderby(),filter.getColor() ,filter.getSpm(),filter.getKeyword());
         observable.subscribeOn(Schedulers.io())
@@ -72,5 +76,35 @@ public class GoodPresenter implements GoodContract.Presenter {
                 });
     }
 
+    //获取店铺详情
+//    http://api2.17zwd.com/rest/shop/get_shop?shop_id=26974&from=android&user_id=-1&zdid=48&spm=c5jEjVMzAhEqMknXPYkPU9EOVa4gg6EKJId8KFy3%2BVE%3D
 
+    @Override
+    public void loadShop(ShopFilterBean filter) {
+        Observable<ShopPage> observable =mDataManager.getShopData(filter.getShop_id(),filter.getFrom(),filter.getUser_id(),filter.getZdid(),filter.getSpm());
+        observable.subscribeOn(Schedulers.io())
+                .filter(new Predicate<ShopPage>() {
+                    @Override
+                    public boolean test(ShopPage shopPageBean) throws Exception {
+                        return shopPageBean.getStatus_code()==200;
+                    }
+                })
+                .map(new Function<ShopPage, ShopBean>() {
+                    @Override
+                    public ShopBean apply(ShopPage shopPageBean) throws Exception {
+                        return shopPageBean.getShop_item_get_response().getItem();
+                    }
+                }).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ShopBean>() {
+                    @Override
+                    public void accept(ShopBean shopBean) throws Exception {
+                        view.showShop(shopBean);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        throwable.printStackTrace();
+                    }
+                });
+    }
 }

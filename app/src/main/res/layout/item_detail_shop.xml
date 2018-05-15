@@ -9,10 +9,12 @@
 
     <ImageView
         android:id="@+id/iv_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/default_icon"/>
@@ -34,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:background="@drawable/corner_background_blue"
+        android:background="@drawable/corner_background_red"
         android:padding="5dp"
         android:text="TextView"
         android:textColor="@android:color/background_light"
@@ -67,17 +69,17 @@
         app:layout_constraintStart_toEndOf="@+id/iv_img"
         app:layout_constraintTop_toBottomOf="@+id/tv_position"/>
 
-    <TextView
-        android:id="@+id/tv_service"
+    <Button
+        android:id="@+id/bt_go_shop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        android:textColor="@color/gray"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv_img"
-        app:layout_constraintTop_toBottomOf="@+id/tv_major"/>
+        android:layout_marginRight="16dp"
+        android:background="@drawable/corner_white"
+        android:text="进店逛逛"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_img"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+
 </android.support.constraint.ConstraintLayout>

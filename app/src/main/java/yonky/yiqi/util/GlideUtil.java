@@ -31,6 +31,13 @@ public class GlideUtil extends ImageLoader {
                 .apply(options)
                 .into(imageView);
     }
-
-
+    public static void loadRoundImage(Object path,ImageView imageView){
+        RequestOptions option1 = new RequestOptions().
+                circleCrop()
+                .placeholder(R.drawable.default_icon);
+        Glide.with(App.getInstance())
+                .load(path)
+                .apply(option1)
+                .into(imageView);
+    }
 }

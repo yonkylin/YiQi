@@ -13,7 +13,7 @@ public class FragmentTest extends BaseFragment {
     @Override
     protected int getLayoutId() {
 
-        return R.layout.login_info;
+        return R.layout.fragment_login;
     }
 
     @Override

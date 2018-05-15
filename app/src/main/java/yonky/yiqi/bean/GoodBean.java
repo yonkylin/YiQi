@@ -68,8 +68,8 @@ public class GoodBean {
     private Object tb_imgs;
     private int quantity;
     private Object attributes;
-    private Object sku_attributes;
-    private Object skus;
+    private Sku_attributes sku_attributes;
+    private Skus skus;
     private String spm;
     private String wap_url;
 
@@ -297,19 +297,19 @@ public class GoodBean {
         this.attributes = attributes;
     }
 
-    public Object getSku_attributes() {
+    public Sku_attributes getSku_attributes() {
         return sku_attributes;
     }
 
-    public void setSku_attributes(Object sku_attributes) {
+    public void setSku_attributes(Sku_attributes sku_attributes) {
         this.sku_attributes = sku_attributes;
     }
 
-    public Object getSkus() {
+    public Skus getSkus() {
         return skus;
     }
 
-    public void setSkus(Object skus) {
+    public void setSkus(Skus skus) {
         this.skus = skus;
     }
 
@@ -328,4 +328,92 @@ public class GoodBean {
     public void setWap_url(String wap_url) {
         this.wap_url = wap_url;
     }
+
+
+     class Sku_attributes{
+        String colors;
+        String sizes;
+
+         public String getColors() {
+             return colors;
+         }
+
+         public void setColors(String colors) {
+             this.colors = colors;
+         }
+
+         public String getSizes() {
+             return sizes;
+         }
+
+         public void setSizes(String sizes) {
+             this.sizes = sizes;
+         }
+     }
+
+     class Skus{
+        String price;
+        String price2;
+        String properties;
+        String properties_name;
+        String num;
+        String sku_id;
+        String img_url;
+
+         public String getPrice() {
+             return price;
+         }
+
+         public void setPrice(String price) {
+             this.price = price;
+         }
+
+         public String getPrice2() {
+             return price2;
+         }
+
+         public void setPrice2(String price2) {
+             this.price2 = price2;
+         }
+
+         public String getProperties() {
+             return properties;
+         }
+
+         public void setProperties(String properties) {
+             this.properties = properties;
+         }
+
+         public String getProperties_name() {
+             return properties_name;
+         }
+
+         public void setProperties_name(String properties_name) {
+             this.properties_name = properties_name;
+         }
+
+         public String getNum() {
+             return num;
+         }
+
+         public void setNum(String num) {
+             this.num = num;
+         }
+
+         public String getSku_id() {
+             return sku_id;
+         }
+
+         public void setSku_id(String sku_id) {
+             this.sku_id = sku_id;
+         }
+
+         public String getImg_url() {
+             return img_url;
+         }
+
+         public void setImg_url(String img_url) {
+             this.img_url = img_url;
+         }
+     }
 }

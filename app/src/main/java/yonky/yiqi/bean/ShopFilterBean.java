@@ -1,7 +1,11 @@
 package yonky.yiqi.bean;
 
 public class ShopFilterBean {
-    //    http://api2.17zwd.com/rest/shop/search_shops/?psize=10&orderby=mr&keyword=&bq=&service=&pindex=1&from=android&zdid=48  逛市场
+    // 逛市场
+    //    http://api2.17zwd.com/rest/shop/search_shops/?psize=10&orderby=mr&keyword=&bq=&service=&pindex=1&from=android&zdid=48
+    //获取店铺详情
+//    http://api2.17zwd.com/rest/shop/get_shop?shop_id=26974&from=android&user_id=-1&zdid=48&spm=c5jEjVMzAhEqMknXPYkPU9EOVa4gg6EKJId8KFy3%2BVE%3D
+
     private  String psize="10";
     private  String orderby="mr";
     private  String keyword="";
@@ -10,6 +14,9 @@ public class ShopFilterBean {
     private   String pindex="1";
     private   String from="android";
     private   String zdid="48";
+    private String shop_id="";
+    private String spm="";
+    private String user_id="-1";
 
     public String getPsize() {
         return psize;
@@ -73,5 +80,29 @@ public class ShopFilterBean {
 
     public void setZdid(String zdid) {
         this.zdid = zdid;
+    }
+
+    public String getShop_id() {
+        return shop_id;
+    }
+
+    public void setShop_id(String shop_id) {
+        this.shop_id = shop_id;
+    }
+
+    public String getSpm() {
+        return spm;
+    }
+
+    public void setSpm(String spm) {
+        this.spm = spm;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 }

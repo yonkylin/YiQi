@@ -1,23 +1,33 @@
 package yonky.yiqi.v;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.MultiTransformation;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import jp.wasabeef.glide.transformations.BlurTransformation;
+import jp.wasabeef.glide.transformations.ColorFilterTransformation;
+import jp.wasabeef.glide.transformations.MaskTransformation;
 import yonky.yiqi.R;
 import yonky.yiqi.base.BaseActivity;
 import yonky.yiqi.base.contract.GoodContract;
 import yonky.yiqi.bean.AreaBean;
 import yonky.yiqi.bean.GoodBean;
 import yonky.yiqi.bean.GoodFilterBean;
+import yonky.yiqi.bean.ShopBean;
+import yonky.yiqi.bean.ShopFilterBean;
 import yonky.yiqi.p.GoodPresenter;
+import yonky.yiqi.util.GlideUtil;
 import yonky.yiqi.v.adapter.StyleAdapter;
 
 /**
@@ -28,9 +38,20 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
     public static final String TAG=GoodsActivity.class.getSimpleName();
     @BindView(R.id.rv_goods)
     RecyclerView mRecyclerView;
+    @BindView(R.id.iv_shop)
+    ImageView mShopBackground;
+    @BindView(R.id.iv_avatar)
+    ImageView mAvatar;
+    @BindView(R.id.tv_shop_name)
+    TextView mShopName;
+    @BindView(R.id.tv_position)
+    TextView mPosition;
+
+
     StyleAdapter mAdapter;
     List<GoodBean> mGoodList;
-    GoodFilterBean filter;
+    GoodFilterBean goodFilter;
+    ShopFilterBean shopFilter;
     GoodPresenter mPresenter;
     @Override
     protected int getLayout() {
@@ -44,20 +65,38 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
         mPresenter = new GoodPresenter(mContext);
         mPresenter.attachView(this);
 
+
+
         AreaBean bean =(AreaBean) getIntent().getSerializableExtra("areabean");
 
         mGoodList = new ArrayList<>();
-        filter  = new GoodFilterBean();
-       filter.setShop_id(String.valueOf(bean.getShop_id()));
-       filter.setSpm(bean.getSpm());
+        goodFilter = new GoodFilterBean();
+       goodFilter.setShop_id(String.valueOf(bean.getShop_id()));
+       goodFilter.setSpm(bean.getSpm());
+
+       shopFilter= new ShopFilterBean();
+       shopFilter.setShop_id(String.valueOf(bean.getShop_id()));
+       shopFilter.setSpm(bean.getSpm());
 
 
         mAdapter = new StyleAdapter(mContext,mGoodList);
         mRecyclerView.setLayoutManager(new GridLayoutManager(mContext,2));
         mRecyclerView.setAdapter(mAdapter);
 
-        mPresenter.load(filter);
+        mPresenter.loadGoods(goodFilter);
+        mPresenter.loadShop(shopFilter);
 
+    }
+
+    @Override
+    public void showShop(ShopBean shopBean) {
+        GlideUtil.loadRoundImage(shopBean.getSerller_head_original(),mAvatar);
+        mShopName.setText(shopBean.getShop_name());
+        mPosition.setText(shopBean.getMarket()+"-"+shopBean.getFloor()+"-"+shopBean.getDangkou());
+        MultiTransformation multi= new MultiTransformation(new BlurTransformation(25,2),new ColorFilterTransformation(R.color.gray));
+        Glide.with(this).load(shopBean.getSerller_head_original())
+                .apply(RequestOptions.bitmapTransform(multi))
+                .into(mShopBackground);
     }
 
     @Override

@@ -8,6 +8,7 @@ import retrofit2.Call;
 import retrofit2.http.Query;
 import yonky.yiqi.bean.MainPageBean;
 import yonky.yiqi.bean.MarketBean;
+import yonky.yiqi.bean.ShopPage;
 import yonky.yiqi.bean.StyleBean;
 import yonky.yiqi.http.RetrofitHelper;
 import yonky.yiqi.http.RetrofitService;
@@ -50,4 +51,12 @@ public class DataManager {
                                                String keyword){
         return mRetrofitService.getStyleData(shop_id,size,seller_cid,pindex,from,price2,dtype,zdid, price1,psize,orderby,color ,spm,keyword);
     }
+
+    //获取店铺详情
+//    http://api2.17zwd.com/rest/shop/get_shop?shop_id=26974&from=android&user_id=-1&zdid=48&spm=c5jEjVMzAhEqMknXPYkPU9EOVa4gg6EKJId8KFy3%2BVE%3D
+    public Observable<ShopPage> getShopData(String shop_id, String from, String user_id, String zdid, String spm){
+        return mRetrofitService.getShop(shop_id, from, user_id, zdid, spm);
+    }
+
+
 }

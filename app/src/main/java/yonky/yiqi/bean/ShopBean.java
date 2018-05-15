@@ -260,4 +260,5 @@ public class ShopBean {
             this.wap_url = wap_url;
         }
 
+
 }
