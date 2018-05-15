@@ -18,6 +18,9 @@ public class GoodFilterBean {
     private   String zdid="48";
     private String spm="";
     private String shop_id ="";
+    private String goods_id="";
+    private String user_id="-1";
+
 
 
 
@@ -131,5 +134,21 @@ public class GoodFilterBean {
 
     public void setShop_id(String shop_id) {
         this.shop_id = shop_id;
+    }
+
+    public String getGoods_id() {
+        return goods_id;
+    }
+
+    public void setGoods_id(String goods_id) {
+        this.goods_id = goods_id;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 }

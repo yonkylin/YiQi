@@ -22,7 +22,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title"/>
 
@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:textColor="@color/gray"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_price2"/>
 
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:text="Button"
+        android:text="图搜同款"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_price1"/>
 
@@ -77,7 +77,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:text="Button"
+        android:text="搜标题"
         app:layout_constraintStart_toEndOf="@+id/bt_img_search"
         app:layout_constraintTop_toTopOf="@+id/bt_img_search"/>
 
@@ -86,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:text="Button"
+        android:text="加入采购单"
         app:layout_constraintStart_toEndOf="@+id/bt_search_titile"
         app:layout_constraintTop_toTopOf="@+id/bt_search_titile"/>
 

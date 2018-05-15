@@ -6,6 +6,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import yonky.yiqi.bean.GoodDetailBean;
 import yonky.yiqi.bean.MainPageBean;
 import yonky.yiqi.bean.MarketBean;
 import yonky.yiqi.bean.ShopPage;
@@ -101,6 +102,13 @@ public interface RetrofitService {
 
 //    http://api2.17zwd.com/rest/goods/get_item?goods_id=106373882&from=android&user_id=-1&zdid=48&spm=c5jEjVMzAhEqMknXPYkPU9EOVa4gg6EKJId8KFy3%2BVE%3D
 
+    @GET("/rest/goods/get_item")
+    Observable<GoodDetailBean> getGoodDetail(@Query("goods_id")String goods_id,
+                                             @Query("from")String from,
+                                             @Query("user_id")String user_id,
+                                             @Query("zdid")String zdid,
+                                             @Query("spm")String spm
+    );
 
 
 

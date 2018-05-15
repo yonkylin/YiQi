@@ -51,9 +51,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
         android:textSize="12sp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/gray"
         app:layout_constraintStart_toEndOf="@+id/iv_img"
         app:layout_constraintTop_toBottomOf="@+id/tv_shop"/>
 

@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".v.GoodsActivity"/>
-        <activity android:name="v.GoodDetailActivity"/>
+        <activity android:name=".v.GoodDetailActivity"/>
 
     </application>
 

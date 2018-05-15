@@ -6,6 +6,7 @@ import android.content.Context;
 import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.Query;
+import yonky.yiqi.bean.GoodDetailBean;
 import yonky.yiqi.bean.MainPageBean;
 import yonky.yiqi.bean.MarketBean;
 import yonky.yiqi.bean.ShopPage;
@@ -58,5 +59,9 @@ public class DataManager {
         return mRetrofitService.getShop(shop_id, from, user_id, zdid, spm);
     }
 
+//    http://api2.17zwd.com/rest/goods/get_item?goods_id=106373882&from=android&user_id=-1&zdid=48&spm=c5jEjVMzAhEqMknXPYkPU9EOVa4gg6EKJId8KFy3%2BVE%3D
 
+    public Observable<GoodDetailBean> getGoodDetail(String goods_id, String from, String user_id, String zdid, String spm){
+        return mRetrofitService.getGoodDetail(goods_id, from, user_id, zdid, spm);
+    }
 }

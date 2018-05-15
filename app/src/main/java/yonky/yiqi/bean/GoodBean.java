@@ -1,5 +1,7 @@
 package yonky.yiqi.bean;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2018/5/12.
  */
@@ -51,7 +53,7 @@ public class GoodBean {
     private String shop_floor;
     private String shop_dangkou;
     private String shop_services;
-    private Object shop_youhui;
+    private String shop_youhui;
     private int shop_is_flagship;
     private int goods_id;
     private int gid_old;
@@ -60,16 +62,16 @@ public class GoodBean {
     private double price2;
     private String gno;
     private int cate_id;
-    private Object cate_name;
+    private String cate_name;
     private String tb_url;
     private long tb_num_iid;
     private int status;
     private String tb_img;
-    private Object tb_imgs;
+    private String tb_imgs;
     private int quantity;
-    private Object attributes;
-    private Sku_attributes sku_attributes;
-    private Skus skus;
+    private List<String> attributes;
+    private SkuAttributesBean sku_attributes;
+    private List<SkusBean> skus;
     private String spm;
     private String wap_url;
 
@@ -161,11 +163,11 @@ public class GoodBean {
         this.shop_services = shop_services;
     }
 
-    public Object getShop_youhui() {
+    public String getShop_youhui() {
         return shop_youhui;
     }
 
-    public void setShop_youhui(Object shop_youhui) {
+    public void setShop_youhui(String shop_youhui) {
         this.shop_youhui = shop_youhui;
     }
 
@@ -233,11 +235,11 @@ public class GoodBean {
         this.cate_id = cate_id;
     }
 
-    public Object getCate_name() {
+    public String getCate_name() {
         return cate_name;
     }
 
-    public void setCate_name(Object cate_name) {
+    public void setCate_name(String cate_name) {
         this.cate_name = cate_name;
     }
 
@@ -273,11 +275,11 @@ public class GoodBean {
         this.tb_img = tb_img;
     }
 
-    public Object getTb_imgs() {
+    public String getTb_imgs() {
         return tb_imgs;
     }
 
-    public void setTb_imgs(Object tb_imgs) {
+    public void setTb_imgs(String tb_imgs) {
         this.tb_imgs = tb_imgs;
     }
 
@@ -289,28 +291,12 @@ public class GoodBean {
         this.quantity = quantity;
     }
 
-    public Object getAttributes() {
-        return attributes;
-    }
-
-    public void setAttributes(Object attributes) {
-        this.attributes = attributes;
-    }
-
-    public Sku_attributes getSku_attributes() {
+    public SkuAttributesBean getSku_attributes() {
         return sku_attributes;
     }
 
-    public void setSku_attributes(Sku_attributes sku_attributes) {
+    public void setSku_attributes(SkuAttributesBean sku_attributes) {
         this.sku_attributes = sku_attributes;
-    }
-
-    public Skus getSkus() {
-        return skus;
-    }
-
-    public void setSkus(Skus skus) {
-        this.skus = skus;
     }
 
     public String getSpm() {
@@ -329,91 +315,121 @@ public class GoodBean {
         this.wap_url = wap_url;
     }
 
+    public List<String> getAttributes() {
+        return attributes;
+    }
 
-     class Sku_attributes{
-        String colors;
-        String sizes;
+    public void setAttributes(List<String> attributes) {
+        this.attributes = attributes;
+    }
 
-         public String getColors() {
-             return colors;
-         }
+    public List<SkusBean> getSkus() {
+        return skus;
+    }
 
-         public void setColors(String colors) {
-             this.colors = colors;
-         }
+    public void setSkus(List<SkusBean> skus) {
+        this.skus = skus;
+    }
 
-         public String getSizes() {
-             return sizes;
-         }
+    public static class SkuAttributesBean {
+        /**
+         * colors : 乳白色,白色,灰色,姜黄色,军绿色
+         * sizes : S,M,L,XL,2XL
+         */
 
-         public void setSizes(String sizes) {
-             this.sizes = sizes;
-         }
-     }
+        private String colors;
+        private String sizes;
 
-     class Skus{
-        String price;
-        String price2;
-        String properties;
-        String properties_name;
-        String num;
-        String sku_id;
-        String img_url;
+        public String getColors() {
+            return colors;
+        }
 
-         public String getPrice() {
-             return price;
-         }
+        public void setColors(String colors) {
+            this.colors = colors;
+        }
 
-         public void setPrice(String price) {
-             this.price = price;
-         }
+        public String getSizes() {
+            return sizes;
+        }
 
-         public String getPrice2() {
-             return price2;
-         }
+        public void setSizes(String sizes) {
+            this.sizes = sizes;
+        }
+    }
 
-         public void setPrice2(String price2) {
-             this.price2 = price2;
-         }
+    public static class SkusBean {
+        /**
+         * price : 888
+         * price2 : 868
+         * properties : 1627207:15409374;20518:28314
+         * properties_name : 1627207:15409374:姜黄色;20518:28314:S
+         * num : 5000
+         * sku_id : 3783241614758
+         * img_url : https://img.alicdn.com/bao/uploaded/i1/2489702925/TB2c65mlv5TBuNjSspcXXbnGFXa_!!2489702925.jpg
+         */
 
-         public String getProperties() {
-             return properties;
-         }
+        private int price;
+        private int price2;
+        private String properties;
+        private String properties_name;
+        private int num;
+        private long sku_id;
+        private String img_url;
 
-         public void setProperties(String properties) {
-             this.properties = properties;
-         }
+        public int getPrice() {
+            return price;
+        }
 
-         public String getProperties_name() {
-             return properties_name;
-         }
+        public void setPrice(int price) {
+            this.price = price;
+        }
 
-         public void setProperties_name(String properties_name) {
-             this.properties_name = properties_name;
-         }
+        public int getPrice2() {
+            return price2;
+        }
 
-         public String getNum() {
-             return num;
-         }
+        public void setPrice2(int price2) {
+            this.price2 = price2;
+        }
 
-         public void setNum(String num) {
-             this.num = num;
-         }
+        public String getProperties() {
+            return properties;
+        }
 
-         public String getSku_id() {
-             return sku_id;
-         }
+        public void setProperties(String properties) {
+            this.properties = properties;
+        }
 
-         public void setSku_id(String sku_id) {
-             this.sku_id = sku_id;
-         }
+        public String getProperties_name() {
+            return properties_name;
+        }
 
-         public String getImg_url() {
-             return img_url;
-         }
+        public void setProperties_name(String properties_name) {
+            this.properties_name = properties_name;
+        }
 
-         public void setImg_url(String img_url) {
-             this.img_url = img_url;
-         }
-     }
+        public int getNum() {
+            return num;
+        }
+
+        public void setNum(int num) {
+            this.num = num;
+        }
+
+        public long getSku_id() {
+            return sku_id;
+        }
+
+        public void setSku_id(long sku_id) {
+            this.sku_id = sku_id;
+        }
+
+        public String getImg_url() {
+            return img_url;
+        }
+
+        public void setImg_url(String img_url) {
+            this.img_url = img_url;
+        }
+    }
 }
