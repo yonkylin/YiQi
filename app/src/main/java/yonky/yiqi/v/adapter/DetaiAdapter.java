@@ -3,7 +3,6 @@ package yonky.yiqi.v.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.StrikethroughSpan;
@@ -36,6 +35,7 @@ public class DetaiAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
     private GoodBean bean;
+    private List<String> imgList;
     private LayoutInflater layoutInflater;
     private int type=TYPE_PIC;
 
@@ -45,8 +45,17 @@ public class DetaiAdapter extends RecyclerView.Adapter {
     }
 
     @Override
+
     public int getItemCount() {
-        return 3;
+        int i=0;
+        int j=0;
+        if(imgList!=null){
+            i=imgList.size();
+        }
+        if(bean!=null){
+            j=bean.getAttributes().size();
+        }
+        return type==TYPE_PIC? 3+i: 3+j;
     }
 
     @Override
@@ -73,7 +82,7 @@ public class DetaiAdapter extends RecyclerView.Adapter {
                 return new TypeHolder(layoutInflater.inflate(R.layout.item_detail_type,parent,false));
                 default:
 
-                      return new PicHolder(layoutInflater.inflate(R.layout.item_detail_img,parent,false));
+                      return new PicTextHolder(layoutInflater.inflate(R.layout.item_detail_img,parent,false));
 
         }
 
@@ -83,22 +92,24 @@ public class DetaiAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if(bean!=null){
             if(holder instanceof BannerHolder){
-              String s= bean.getTb_imgs();
-             String[] imgs= s.split(",");
-             List<String> urls= new ArrayList<>();
-             for(int i=0;i<imgs.length;i++){
-                 urls.add(imgs[i]);
-             }
-             ((BannerHolder) holder).banner.setImages(urls).setImageLoader(new GlideUtil()).start();
-             ((BannerHolder) holder).title.setText(bean.getTitle());
-             ((BannerHolder) holder).price2.setText(String.format("¥ %.1f",bean.getPrice2()));
-//             删除线
-             SpannableString spannableString = new SpannableString("淘宝价¥"+bean.getPrice1());
-             StrikethroughSpan strikethroughSpan = new StrikethroughSpan();
-             spannableString.setSpan(strikethroughSpan,0,spannableString.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-             ((BannerHolder) holder).price1.setText(spannableString);
+                String s= bean.getTb_imgs();
+                String[] imgs= s.split(",");
+                List<String> urls= new ArrayList<>();
+                for(int i=0;i<imgs.length;i++) {
+                    urls.add(imgs[i]);
+                }
+                ((BannerHolder) holder).banner.setImages(urls).setImageLoader(new GlideUtil()).start();
 
-             ((BannerHolder) holder).goodsId.setText("货号"+bean.getGno());
+
+                ((BannerHolder) holder).title.setText(bean.getTitle());
+                ((BannerHolder) holder).price2.setText(String.format("¥ %.1f",bean.getPrice2()));
+//             删除线
+                SpannableString spannableString = new SpannableString("淘宝价¥"+bean.getPrice1());
+                StrikethroughSpan strikethroughSpan = new StrikethroughSpan();
+                spannableString.setSpan(strikethroughSpan,0,spannableString.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                ((BannerHolder) holder).price1.setText(spannableString);
+
+                ((BannerHolder) holder).goodsId.setText("货号"+bean.getGno());
 
             }else if(holder instanceof ShopHolder){
 
@@ -106,9 +117,17 @@ public class DetaiAdapter extends RecyclerView.Adapter {
                 ((ShopHolder) holder).discount.setText(bean.getShop_youhui());
                 ((ShopHolder) holder).position.setText(bean.getShop_market()+"-"+bean.getShop_floor()+"-"+bean.getShop_dangkou());
 //                ((ShopHolder) holder).major.setText(bean.get);
+            }else if(holder instanceof PicTextHolder){
+                if(type==TYPE_PIC &imgList!=null){
+                    GlideUtil.loadImage(imgList.get(position-3),((PicTextHolder) holder).pic);
+                }else{
+                    ((PicTextHolder) holder).detail.setText(bean.getAttributes().get(position-3));
+                }
             }
-
         }
+
+
+
 
     }
 
@@ -165,12 +184,12 @@ public class DetaiAdapter extends RecyclerView.Adapter {
         }
     }
 
-    class PicHolder extends RecyclerView.ViewHolder{
-        @BindView(R.id.iv_img)
+    class PicTextHolder extends RecyclerView.ViewHolder{
+        @BindView(R.id.iv_pic)
         ImageView pic;
         @BindView(R.id.tv_detail)
         TextView detail;
-        public PicHolder(View itemView) {
+        public PicTextHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
         }
@@ -182,5 +201,13 @@ public class DetaiAdapter extends RecyclerView.Adapter {
 
     public void setBean(GoodBean bean) {
         this.bean = bean;
+    }
+
+    public List<String> getImgList() {
+        return imgList;
+    }
+
+    public void setImgList(List<String> imgList) {
+        this.imgList = imgList;
     }
 }

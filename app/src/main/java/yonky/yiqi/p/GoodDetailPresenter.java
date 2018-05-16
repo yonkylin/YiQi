@@ -3,6 +3,8 @@ package yonky.yiqi.p;
 import android.content.Context;
 import android.util.Log;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -28,7 +30,7 @@ public class GoodDetailPresenter implements GoodDetailContract.Presenter {
 
     @Override
     public void loadGoodDetail(GoodFilterBean filter) {
-        Observable<GoodDetailBean> observable = dataManager.getGoodDetail(filter.getGoods_id(),filter.getFrom(),filter.getUser_id(),filter.getZdid(),filter.getSpm());
+        Observable<GoodDetailBean> observable = dataManager.getGoodDetail("get_item",filter.getGoods_id(),filter.getFrom(),filter.getUser_id(),filter.getZdid(),filter.getSpm());
         observable.subscribeOn(Schedulers.io())
                 .filter(new Predicate<GoodDetailBean>() {
                     @Override
@@ -48,6 +50,37 @@ public class GoodDetailPresenter implements GoodDetailContract.Presenter {
                     @Override
                     public void accept(GoodBean goodBean) throws Exception {
                         view.showResult(goodBean);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        throwable.printStackTrace();
+                    }
+                });
+    }
+
+    @Override
+    public void loadImgs(GoodFilterBean filter) {
+        Observable<GoodDetailBean> observable = dataManager.getGoodDetail("get_item_imgs",filter.getGoods_id(),filter.getFrom(),filter.getUser_id(),filter.getZdid(),filter.getSpm());
+        observable.subscribeOn(Schedulers.io())
+                .filter(new Predicate<GoodDetailBean>() {
+                    @Override
+                    public boolean test(GoodDetailBean goodDetailBean) throws Exception {
+                        Log.e(TAG,"the status_cod is "+goodDetailBean.getStatus_code());
+                        return goodDetailBean.getStatus_code()==200;
+                    }
+                })
+                .map(new Function<GoodDetailBean, List<String>>() {
+                    @Override
+                    public List<String> apply(GoodDetailBean goodDetailBean) throws Exception {
+                        return goodDetailBean.getGoods_item_get_response().getImgs();
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<String>>() {
+                    @Override
+                    public void accept(List<String> imgList) throws Exception {
+                        view.showImgs(imgList);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

@@ -70,7 +70,6 @@ public class MainActivity extends BaseActivity{
 
             ImageView icon=view.findViewById(R.id.iv_tab);
             icon.setImageResource(icons[i]);
-
             tabLayout.addTab(tab);
 
         }

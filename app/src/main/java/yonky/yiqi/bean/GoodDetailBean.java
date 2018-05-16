@@ -46,6 +46,7 @@ public class GoodDetailBean {
 
         private GoodBean item;
         private int is_favor_goods;
+        private List<String>imgs;
 
         public GoodBean getItem() {
             return item;
@@ -63,6 +64,12 @@ public class GoodDetailBean {
             this.is_favor_goods = is_favor_goods;
         }
 
+        public List<String> getImgs() {
+            return imgs;
+        }
 
+        public void setImgs(List<String> imgs) {
+            this.imgs = imgs;
+        }
     }
 }
