@@ -1,6 +1,7 @@
 package yonky.yiqi.v.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
@@ -22,6 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import yonky.yiqi.R;
 import yonky.yiqi.bean.GoodBean;
+import yonky.yiqi.bean.ShopBean;
 import yonky.yiqi.util.GlideUtil;
 
 public class DetaiAdapter extends RecyclerView.Adapter {
@@ -34,8 +36,10 @@ public class DetaiAdapter extends RecyclerView.Adapter {
 
 
     private Context mContext;
-    private GoodBean bean;
+    private GoodBean goodBean;
+    private ShopBean shopBean;
     private List<String> imgList;
+
     private LayoutInflater layoutInflater;
     private int type=TYPE_PIC;
 
@@ -52,8 +56,8 @@ public class DetaiAdapter extends RecyclerView.Adapter {
         if(imgList!=null){
             i=imgList.size();
         }
-        if(bean!=null){
-            j=bean.getAttributes().size();
+        if(goodBean !=null){
+            j= goodBean.getAttributes().size();
         }
         return type==TYPE_PIC? 3+i: 3+j;
     }
@@ -90,9 +94,9 @@ public class DetaiAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if(bean!=null){
+        if(goodBean !=null){
             if(holder instanceof BannerHolder){
-                String s= bean.getTb_imgs();
+                String s= goodBean.getTb_imgs();
                 String[] imgs= s.split(",");
                 List<String> urls= new ArrayList<>();
                 for(int i=0;i<imgs.length;i++) {
@@ -101,27 +105,43 @@ public class DetaiAdapter extends RecyclerView.Adapter {
                 ((BannerHolder) holder).banner.setImages(urls).setImageLoader(new GlideUtil()).start();
 
 
-                ((BannerHolder) holder).title.setText(bean.getTitle());
-                ((BannerHolder) holder).price2.setText(String.format("¥ %.1f",bean.getPrice2()));
+                ((BannerHolder) holder).title.setText(goodBean.getTitle());
+                ((BannerHolder) holder).price2.setText(String.format("¥ %.1f", goodBean.getPrice2()));
 //             删除线
-                SpannableString spannableString = new SpannableString("淘宝价¥"+bean.getPrice1());
+                SpannableString spannableString = new SpannableString("淘宝价¥"+ goodBean.getPrice1());
                 StrikethroughSpan strikethroughSpan = new StrikethroughSpan();
                 spannableString.setSpan(strikethroughSpan,0,spannableString.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
                 ((BannerHolder) holder).price1.setText(spannableString);
 
-                ((BannerHolder) holder).goodsId.setText("货号"+bean.getGno());
+                ((BannerHolder) holder).goodsId.setText("货号"+ goodBean.getGno());
 
             }else if(holder instanceof ShopHolder){
+                if(shopBean!=null){
+                    GlideUtil.loadImage(shopBean.getSerller_head_original(),((ShopHolder) holder).shopImg);
+                    ((ShopHolder) holder).major.setText(shopBean.getMajor());
+                    ((ShopHolder) holder).shopName.setText(shopBean.getShop_name());
+                    ((ShopHolder) holder).discount.setText(shopBean.getDiscount());
+                    ((ShopHolder) holder).position.setText(shopBean.getMarket()+"-"+ shopBean.getFloor()+"-"+ shopBean.getDangkou());
+                }
 
-                ((ShopHolder) holder).shopName.setText(bean.getShop_name());
-                ((ShopHolder) holder).discount.setText(bean.getShop_youhui());
-                ((ShopHolder) holder).position.setText(bean.getShop_market()+"-"+bean.getShop_floor()+"-"+bean.getShop_dangkou());
-//                ((ShopHolder) holder).major.setText(bean.get);
-            }else if(holder instanceof PicTextHolder){
+            }else  if(holder instanceof TypeHolder){
+                if(type==TYPE_PIC){
+                    ((TypeHolder) holder).goodPic.setTextColor(Color.RED);
+                    ((TypeHolder) holder).goodParam.setTextColor(Color.BLACK);
+                    ((TypeHolder) holder).goodParam.setOnClickListener(new DetailClickListener());
+
+                }else {
+                    ((TypeHolder) holder).goodPic.setTextColor(Color.BLACK);
+                    ((TypeHolder) holder).goodParam.setTextColor(Color.RED);
+                    ((TypeHolder) holder).goodPic.setOnClickListener(new DetailClickListener());
+                }
+
+
+            } else if(holder instanceof PicTextHolder){
                 if(type==TYPE_PIC &imgList!=null){
                     GlideUtil.loadImage(imgList.get(position-3),((PicTextHolder) holder).pic);
                 }else{
-                    ((PicTextHolder) holder).detail.setText(bean.getAttributes().get(position-3));
+                    ((PicTextHolder) holder).detail.setText(goodBean.getAttributes().get(position-3));
                 }
             }
         }
@@ -140,12 +160,12 @@ public class DetaiAdapter extends RecyclerView.Adapter {
         TextView price2;
         @BindView(R.id.tv_price1)
         TextView price1;
-        @BindView(R.id.bt_img_search)
-        Button imgSearch;
-        @BindView(R.id.bt_search_titile)
-        Button searchTitle;
-        @BindView(R.id.bt_add_list)
-        Button addList;
+        @BindView(R.id.tv_img_search)
+        TextView imgSearch;
+        @BindView(R.id.tv_search_titile)
+        TextView searchTitle;
+        @BindView(R.id.tv_add_list)
+        TextView addList;
         @BindView(R.id.tv_goods_id)
         TextView goodsId;
         public BannerHolder(View itemView) {
@@ -195,12 +215,30 @@ public class DetaiAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public GoodBean getBean() {
-        return bean;
+    class DetailClickListener implements View.OnClickListener{
+//        int type;
+
+//        public DetailClickListener(int type) {
+//            this.type = type;
+//        }
+
+        @Override
+        public void onClick(View view) {
+            if(type==TYPE_PIC){
+                type=TYPE_PARAM;
+            }else if(type==TYPE_PARAM){
+                type=TYPE_PIC;
+            }
+
+            notifyDataSetChanged();
+        }
+    }
+    public GoodBean getGoodBean() {
+        return goodBean;
     }
 
-    public void setBean(GoodBean bean) {
-        this.bean = bean;
+    public void setGoodBean(GoodBean goodBean) {
+        this.goodBean = goodBean;
     }
 
     public List<String> getImgList() {
@@ -209,5 +247,13 @@ public class DetaiAdapter extends RecyclerView.Adapter {
 
     public void setImgList(List<String> imgList) {
         this.imgList = imgList;
+    }
+
+    public ShopBean getShopBean() {
+        return shopBean;
+    }
+
+    public void setShopBean(ShopBean shopBean) {
+        this.shopBean = shopBean;
     }
 }

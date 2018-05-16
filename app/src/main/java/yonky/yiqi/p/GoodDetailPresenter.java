@@ -15,6 +15,9 @@ import yonky.yiqi.base.contract.GoodDetailContract;
 import yonky.yiqi.bean.GoodBean;
 import yonky.yiqi.bean.GoodDetailBean;
 import yonky.yiqi.bean.GoodFilterBean;
+import yonky.yiqi.bean.ShopBean;
+import yonky.yiqi.bean.ShopFilterBean;
+import yonky.yiqi.bean.ShopPage;
 import yonky.yiqi.m.DataManager;
 
 public class GoodDetailPresenter implements GoodDetailContract.Presenter {
@@ -86,6 +89,30 @@ public class GoodDetailPresenter implements GoodDetailContract.Presenter {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         throwable.printStackTrace();
+                    }
+                });
+    }
+    @Override
+    public void getShopDetail(ShopFilterBean filter){
+        Observable<ShopPage> observable=dataManager.getShopData(filter.getShop_id(),filter.getFrom(),filter.getUser_id(),filter.getZdid(),filter.getSpm());
+        observable.subscribeOn(Schedulers.io())
+                .filter(new Predicate<ShopPage>() {
+                    @Override
+                    public boolean test(ShopPage shopPage) throws Exception {
+                        return shopPage.getStatus_code()==200;
+                    }
+                })
+                .map(new Function<ShopPage, ShopBean>() {
+                    @Override
+                    public ShopBean apply(ShopPage shopPage) throws Exception {
+                        return shopPage.getShop_item_get_response().getItem();
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ShopBean>() {
+                    @Override
+                    public void accept(ShopBean shopBean) throws Exception {
+                        view.showShop(shopBean);
                     }
                 });
     }
