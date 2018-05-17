@@ -359,7 +359,9 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
 
+    public void stopBanner(){
 
+    }
 
     public void setBannerList(List<AreaBean> bannerList) {
         this.bannerList = bannerList;

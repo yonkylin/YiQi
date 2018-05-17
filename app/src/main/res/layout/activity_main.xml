@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     >
-    <include layout="@layout/topbar"/>
+
     <yonky.yiqi.widget.MyViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"

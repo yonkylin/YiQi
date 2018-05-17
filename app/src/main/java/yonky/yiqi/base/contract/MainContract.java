@@ -19,7 +19,7 @@ public interface MainContract {
     }
     interface Presenter extends BasePresenter<View>{
         void checkPermission();
-        void loadDatas(String tag);
+        void loadDatas(String tag,String zdid);
 
     }
 }

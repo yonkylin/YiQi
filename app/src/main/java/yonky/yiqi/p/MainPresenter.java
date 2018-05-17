@@ -54,9 +54,9 @@ public class MainPresenter implements MainContract.Presenter {
 
 
     @Override
-    public void loadDatas(String tag) {
+    public void loadDatas(String tag,String zdid) {
        String type= tag;
-      Observable<MainPageBean> topObservable=  mDataManager.getMainPage("android","48",tag,"false");
+      Observable<MainPageBean> topObservable=  mDataManager.getMainPage("android",zdid,tag,"false");
             topObservable.subscribeOn(Schedulers.io())
                     .map(new Function<MainPageBean,MainPageBean.PopularizeItemsListGetResponseBean>() {
                         @Override

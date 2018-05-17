@@ -24,8 +24,7 @@ public class MainActivity extends BaseActivity{
     MyViewPager mViewPager;
     @BindView(R.id.tab_layout)
     TabLayout mTabLayout;
-    @BindView(R.id.button)
-    Button bt;
+
 
     List<Fragment> fragments;
 
