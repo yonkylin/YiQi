@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
+import yonky.yiqi.R;
 import yonky.yiqi.util.MyUtil;
 
 /**
@@ -41,7 +42,7 @@ public class RegionLinearLayout extends LinearLayout {
 
         this.mContext = mContext;
        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-       mPaint.setColor(Color.LTGRAY);
+       mPaint.setColor(getResources().getColor(R.color.light_background));
        path = new Path();
        x0=0;
        h=MyUtil.dp2px(mContext,5);

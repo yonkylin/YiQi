@@ -14,6 +14,7 @@ public interface GoodDetailContract {
         void showResult(GoodBean goodBean);
         void showImgs(List<String> imgList);
         void showShop(ShopBean shopBean);
+        void showError();
     }
     interface Presenter extends BasePresenter<View>{
         void loadGoodDetail(GoodFilterBean filter);

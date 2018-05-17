@@ -9,4 +9,5 @@
 
     <color name="discountBackground">#3786f9</color>
     <color name="login_button_background">#b8b8b8</color>
+    <color name="light_background">#f7f7f7</color>
 </resources>

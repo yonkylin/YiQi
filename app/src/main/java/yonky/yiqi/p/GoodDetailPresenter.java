@@ -39,6 +39,9 @@ public class GoodDetailPresenter implements GoodDetailContract.Presenter {
                     @Override
                     public boolean test(GoodDetailBean goodDetailBean) throws Exception {
                         Log.e(TAG,"the status_cod is "+goodDetailBean.getStatus_code());
+                        if(goodDetailBean.getStatus_code()==201){
+                            view.showError();
+                        }
                         return goodDetailBean.getStatus_code()==200;
                     }
                 })
@@ -70,6 +73,7 @@ public class GoodDetailPresenter implements GoodDetailContract.Presenter {
                     @Override
                     public boolean test(GoodDetailBean goodDetailBean) throws Exception {
                         Log.e(TAG,"the status_cod is "+goodDetailBean.getStatus_code());
+
                         return goodDetailBean.getStatus_code()==200;
                     }
                 })

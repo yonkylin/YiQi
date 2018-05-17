@@ -1,8 +1,17 @@
 package yonky.yiqi.v;
 
+import android.animation.ObjectAnimator;
+import android.content.SharedPreferences;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.animation.BounceInterpolator;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 
 import java.util.List;
 
@@ -16,6 +25,7 @@ import yonky.yiqi.bean.GoodFilterBean;
 import yonky.yiqi.bean.ShopBean;
 import yonky.yiqi.bean.ShopFilterBean;
 import yonky.yiqi.p.GoodDetailPresenter;
+import yonky.yiqi.util.MyUtil;
 import yonky.yiqi.v.adapter.DetaiAdapter;
 
 /**
@@ -34,6 +44,8 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
     GoodDetailPresenter mPresenter;
     GoodFilterBean goodFilter;
     ShopFilterBean shopFilter;
+
+    SharedPreferences preferences;
     @Override
     protected int getLayout() {
         return R.layout.activity_good_detail;
@@ -47,16 +59,19 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
 
     @Override
     protected void initEventAndData() {
+        preferences=mContext.getSharedPreferences("data",0);
 //        setTabs(tab,LayoutInflater.from(mContext),drawables,titles);
         AreaBean bean = (AreaBean) getIntent().getSerializableExtra("areabean");
         mPresenter = new GoodDetailPresenter(mContext);
         mPresenter.attachView(this);
         goodFilter = new GoodFilterBean();
         goodFilter.setSpm(bean.getSpm());
+        goodFilter.setZdid(preferences.getString("regionId","42"));
         goodFilter.setGoods_id(String.valueOf(bean.getGoods_id()));
 
         shopFilter=new ShopFilterBean();
         shopFilter.setShop_id(String.valueOf(bean.getShop_id()));
+        shopFilter.setZdid(preferences.getString("regionId","42"));
         shopFilter.setSpm(bean.getSpm());
 
         Log.d(TAG,bean.getSpm());
@@ -86,6 +101,30 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
     public void showShop(ShopBean shopBean) {
         mAdapter.setShopBean(shopBean);
         mAdapter.notifyDataSetChanged();
+    }
+@Override
+    public void showError(){
+        View contentView = LayoutInflater.from(mContext).inflate(R.layout.window_no_data,null);
+        final PopupWindow popupWindow = new PopupWindow(contentView, FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT,true);
+        popupWindow.setContentView(contentView);
+        ImageView iv=contentView.findViewById(R.id.window_iv);
+
+        Button bt=contentView.findViewById(R.id.window_bt);
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+                finish();
+            }
+        });
+
+        View root=LayoutInflater.from(mContext).inflate(getLayout(),null);
+        popupWindow.showAsDropDown(root);
+    ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(iv,"translationX",0, MyUtil.dp2px(mContext,10),-MyUtil.dp2px(mContext,10),0);
+//        objectAnimator.setInterpolator(new BounceInterpolator());
+    objectAnimator.setDuration(500);
+    objectAnimator.start();
+
     }
 
     //    private void setTabs(TabLayout tabLayout, LayoutInflater inflater, int[] icons, String[] titles){

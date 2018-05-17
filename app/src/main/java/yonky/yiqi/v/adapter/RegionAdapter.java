@@ -19,12 +19,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import yonky.yiqi.R;
+import yonky.yiqi.listener.RegionListener;
 
 /**
  * Created by Administrator on 2018/5/17.
  */
 
 public class RegionAdapter extends RecyclerView.Adapter <RegionAdapter.RegionViewHolder>{
+    private static final String TAG=RegionAdapter.class.getSimpleName();
     Context mContext;
     SharedPreferences.Editor editor;
     String region;
@@ -45,11 +47,12 @@ public class RegionAdapter extends RecyclerView.Adapter <RegionAdapter.RegionVie
            };
 
     int isSelected;
+    RegionListener listener;
 
     public RegionAdapter(Context context,String region) {
         mContext = context;
         this.region = region;
-        editor=mContext.getSharedPreferences("region",0).edit();
+        editor=mContext.getSharedPreferences("data",0).edit();
         isSelected= searchString(regions,region)/2;
     }
 
@@ -71,7 +74,7 @@ public class RegionAdapter extends RecyclerView.Adapter <RegionAdapter.RegionVie
     public void onBindViewHolder(@NonNull RegionViewHolder holder, final int position) {
 //        isSelected= Arrays.binarySearch(regions,region)/2;
 
-        Log.d("RegionAdapter",""+isSelected);
+//        Log.d("RegionAdapter",""+isSelected);
         if(position==isSelected){
             holder.region.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
         }else {
@@ -82,6 +85,7 @@ public class RegionAdapter extends RecyclerView.Adapter <RegionAdapter.RegionVie
                 @Override
                 public void onClick(View v) {
                     setSelect(position);
+                    listener.regionClick();
                 }
             });
     }
@@ -97,8 +101,10 @@ public class RegionAdapter extends RecyclerView.Adapter <RegionAdapter.RegionVie
     }
     private void setSelect(int position){
         isSelected=position;
+        Log.d(TAG,"REGION:"+regions[isSelected*2]+regions[isSelected*2+1]);
         editor.putString("region",regions[isSelected*2]);
-        editor.putString("regionId",regions[isSelected+1]);
+        editor.putString("regionId",regions[isSelected*2+1]);
+        editor.apply();
         notifyDataSetChanged();
     }
     private int searchString(String[] strings,String s){
@@ -108,5 +114,13 @@ public class RegionAdapter extends RecyclerView.Adapter <RegionAdapter.RegionVie
             }
         }
         return -1;
+    }
+
+    public RegionListener getListener() {
+        return listener;
+    }
+
+    public void setListener(RegionListener listener) {
+        this.listener = listener;
     }
 }

@@ -30,6 +30,7 @@ import yonky.yiqi.base.BaseFragment;
 import yonky.yiqi.base.contract.MainContract;
 import yonky.yiqi.bean.AreaBean;
 import yonky.yiqi.bean.AreaEBean;
+import yonky.yiqi.listener.RegionListener;
 import yonky.yiqi.p.MainPresenter;
 import yonky.yiqi.util.MyUtil;
 import yonky.yiqi.v.adapter.MainAdapter;
@@ -38,7 +39,7 @@ import yonky.yiqi.v.adapter.RegionAdapter;
 import static yonky.yiqi.v.adapter.MainAdapter.TYPE_THREE;
 import static yonky.yiqi.v.adapter.MainAdapter.TYPE_TWO;
 
-public class MainFragment extends BaseFragment implements MainContract.View{
+public class MainFragment extends BaseFragment implements MainContract.View,RegionListener{
     private static final String TAG = MainFragment.class.getSimpleName();
     @BindView(R.id.rv_main)
     RecyclerView recyclerViewMain;
@@ -111,37 +112,46 @@ public class MainFragment extends BaseFragment implements MainContract.View{
         });
         recyclerViewMain.setLayoutManager(layoutManager );
         recyclerViewMain.setAdapter(mainAdapter);
+        loadData();
 
+    }
+    private void loadData(){
         mPresenter.loadDatas("A",zdid);
         mPresenter.loadDatas("B",zdid);
         mPresenter.loadDatas("C",zdid);
         mPresenter.loadDatas("D",zdid);
         mPresenter.loadDatas("E",zdid);
-//        recyclerViewMain.setVisibility(View.GONE);
     }
+
 
     @Override
     public void showResult(List<AreaBean> areaBeanList, String type) {
 
-        if("A".equals(type)&& mainAdapter.getBannerList()==null){
+//        if("A".equals(type)&& mainAdapter.getBannerList()==null){
+        if("A".equals(type)){
             mainAdapter.setBannerList(areaBeanList);
             mainAdapter.notifyDataSetChanged();
-        }else if("B1".equals(type)&& mainAdapter.getB1List()==null ){
+//        }else if("B1".equals(type)&& mainAdapter.getB1List()==null ){
+        }else if("B1".equals(type) ){
             mainAdapter.setB1List(areaBeanList);
             mainAdapter.notifyDataSetChanged();
-        }else if("B2".equals(type)&&mainAdapter.getB2List()==null){
+//        }else if("B2".equals(type)&&mainAdapter.getB2List()==null){
+        }else if("B2".equals(type)){
             mainAdapter.setB2List(areaBeanList);
             mainAdapter.notifyDataSetChanged();
             for(int i = 0;i<areaBeanList.size();i++){
                 Log.d(TAG,areaBeanList.get(i).getTitle());
             }
-        }else if("C1".equals(type)&& mainAdapter.getC1List()==null ){
+//        }else if("C1".equals(type)&& mainAdapter.getC1List()==null ){
+        }else if("C1".equals(type)){
             mainAdapter.setC1List(areaBeanList);
             mainAdapter.notifyDataSetChanged();
-        }else if("C2".equals(type)&&mainAdapter.getC2List()==null){
+//        }else if("C2".equals(type)&&mainAdapter.getC2List()==null){
+        }else if("C2".equals(type)){
             mainAdapter.setC2List(areaBeanList);
             mainAdapter.notifyDataSetChanged();
-        }else if("D".equals(type)&&mainAdapter.getDList()==null){
+//        }else if("D".equals(type)&&mainAdapter.getDList()==null){
+        }else if("D".equals(type)){
             mainAdapter.setDList(areaBeanList);
             mainAdapter.notifyDataSetChanged();
         }
@@ -158,7 +168,7 @@ public class MainFragment extends BaseFragment implements MainContract.View{
     }
     private void showRegion(){
         View contentView= LayoutInflater.from(mContext).inflate(R.layout.window_region,null);
-        mPopupWindow = new PopupWindow(contentView, FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT,true){
+        mPopupWindow = new PopupWindow(contentView, FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT,true){
             @Override
             public void dismiss() {
                 super.dismiss();
@@ -170,6 +180,7 @@ public class MainFragment extends BaseFragment implements MainContract.View{
         RecyclerView rvRegion=contentView.findViewById(R.id.rv_region1);
 
         mRegionAdapter=new RegionAdapter(mContext,regionSelected);
+        mRegionAdapter.setListener(this);
         FlexboxLayoutManager regionManager= new FlexboxLayoutManager();
         regionManager.setFlexDirection(FlexDirection.ROW);
         regionManager.setFlexWrap(FlexWrap.WRAP);
@@ -179,8 +190,13 @@ public class MainFragment extends BaseFragment implements MainContract.View{
         mPopupWindow.showAsDropDown(btRegion,0, -MyUtil.dp2px(mContext,5));
     }
     private void updateButton(){
-        btRegion.setText(preferences.getString("region","广州"));
-        zdid=preferences.getString("regionId","42");
+        String s=preferences.getString("region","广州");
+        if(!s.equals(regionSelected)){
+            regionSelected=s;
+            btRegion.setText(s);
+            zdid=preferences.getString("regionId","42");
+            loadData();
+        }
 
     }
 
@@ -192,5 +208,9 @@ public class MainFragment extends BaseFragment implements MainContract.View{
         super.onDestroyView();
     }
 
-
+    @Override
+    public void regionClick() {
+        mPopupWindow.dismiss();
+        updateButton();
+    }
 }
