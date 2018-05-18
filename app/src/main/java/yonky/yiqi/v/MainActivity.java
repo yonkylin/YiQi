@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -85,8 +84,8 @@ public class MainActivity extends BaseActivity{
         MainFragment mainFragment = new MainFragment();
         MarketFragment mainFragment2 = new MarketFragment();
         StyleFragment mainFragment3 = new StyleFragment();
-        FragmentTest mainFragment4 = new FragmentTest();
-        FragmentTest mainFragment5 = new FragmentTest();
+        FragmentLogin mainFragment4 = new FragmentLogin();
+        FragmentLogin mainFragment5 = new FragmentLogin();
         fragments.add(mainFragment);
         fragments.add(mainFragment2);
         fragments.add(mainFragment3);

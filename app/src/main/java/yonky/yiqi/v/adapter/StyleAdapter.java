@@ -1,6 +1,7 @@
 package yonky.yiqi.v.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import butterknife.ButterKnife;
 import yonky.yiqi.R;
 import yonky.yiqi.bean.GoodBean;
 import yonky.yiqi.util.GlideUtil;
+import yonky.yiqi.v.GoodDetailActivity;
 
 public class StyleAdapter extends RecyclerView.Adapter <StyleAdapter.StyleHolder>{
     List<GoodBean> beanList;
@@ -39,15 +41,30 @@ public class StyleAdapter extends RecyclerView.Adapter <StyleAdapter.StyleHolder
 
 
     @Override
-    public void onBindViewHolder(@NonNull StyleHolder holder, int position) {
+    public void onBindViewHolder(@NonNull StyleHolder holder, final int position) {
         if(beanList!=null){
             GoodBean bean = beanList.get(position);
             GlideUtil.loadImage(bean.getTb_img(),holder.imageView);
             holder.title.setText(bean.getTitle());
             holder.price.setText(mContext.getResources().getString(R.string.price,bean.getPrice2()));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              startDetail(position);
+            }
+        });
         }
 
+
     }
+    private void startDetail(int position){
+        GoodBean bean =beanList.get(position);
+        Intent intent = new Intent(mContext, GoodDetailActivity.class);
+        intent.putExtra("goodbean",bean);
+        mContext.startActivity(intent);
+
+    }
+
     class StyleHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.tv_title)
         TextView title;

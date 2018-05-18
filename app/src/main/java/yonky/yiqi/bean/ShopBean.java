@@ -1,10 +1,12 @@
 package yonky.yiqi.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2018/5/12.
  */
 
-public class ShopBean {
+public class ShopBean implements Serializable{
 
         /**
          * site_id : 48
@@ -33,10 +35,10 @@ public class ShopBean {
          * spm : C67%2b6Q5%2b6im0MUn7W8yuK7N4%2b56FHZmG
          * wap_url : http://cs.m.17zwd.com/shop/505447.htm
          */
-
-        private int site_id;
+        private static final long serialVersionUID = 1234567892;
+        private String site_id;
         private String site_tag;
-        private int shop_id;
+        private String shop_id;
         private String shop_name;
         private int is_reg;
         private int vip;
@@ -60,11 +62,12 @@ public class ShopBean {
         private String spm;
         private String wap_url;
 
-        public int getSite_id() {
+
+        public String getSite_id() {
             return site_id;
         }
 
-        public void setSite_id(int site_id) {
+        public void setSite_id(String site_id) {
             this.site_id = site_id;
         }
 
@@ -76,11 +79,11 @@ public class ShopBean {
             this.site_tag = site_tag;
         }
 
-        public int getShop_id() {
+        public String getShop_id() {
             return shop_id;
         }
 
-        public void setShop_id(int shop_id) {
+        public void setShop_id(String shop_id) {
             this.shop_id = shop_id;
         }
 

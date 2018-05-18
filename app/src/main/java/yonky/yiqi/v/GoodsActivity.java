@@ -67,16 +67,30 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
 
 
 
-        AreaBean bean =(AreaBean) getIntent().getSerializableExtra("areabean");
+        AreaBean areaBean =(AreaBean) getIntent().getSerializableExtra("areabean");
+        ShopBean shopBean=(ShopBean) getIntent().getSerializableExtra("shopbean");
 
         mGoodList = new ArrayList<>();
         goodFilter = new GoodFilterBean();
-       goodFilter.setShop_id(String.valueOf(bean.getShop_id()));
-       goodFilter.setSpm(bean.getSpm());
+        shopFilter= new ShopFilterBean();
 
-       shopFilter= new ShopFilterBean();
-       shopFilter.setShop_id(String.valueOf(bean.getShop_id()));
-       shopFilter.setSpm(bean.getSpm());
+        if(areaBean!=null){
+//            设置过滤条件
+            goodFilter.setShop_id(areaBean.getShop_id());
+            goodFilter.setSpm(areaBean.getSpm());
+            goodFilter.setZdid(areaBean.getSite_id());
+            shopFilter.setShop_id(areaBean.getShop_id());
+            shopFilter.setSpm(areaBean.getSpm());
+            shopFilter.setZdid(areaBean.getSite_id());
+        }else if(shopBean!=null){
+            goodFilter.setShop_id(shopBean.getShop_id());
+            goodFilter.setSpm(shopBean.getSpm());
+            goodFilter.setZdid(shopBean.getSite_id());
+            shopFilter.setShop_id(shopBean.getShop_id());
+            shopFilter.setSpm(shopBean.getSpm());
+            shopFilter.setZdid(shopBean.getSite_id());
+        }
+
 
 
         mAdapter = new StyleAdapter(mContext,mGoodList);

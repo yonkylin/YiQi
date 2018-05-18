@@ -34,20 +34,25 @@ public class GoodDetailPresenter implements GoodDetailContract.Presenter {
     @Override
     public void loadGoodDetail(GoodFilterBean filter) {
         Observable<GoodDetailBean> observable = dataManager.getGoodDetail("get_item",filter.getGoods_id(),filter.getFrom(),filter.getUser_id(),filter.getZdid(),filter.getSpm());
-        observable.subscribeOn(Schedulers.io())
+        observable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .filter(new Predicate<GoodDetailBean>() {
                     @Override
                     public boolean test(GoodDetailBean goodDetailBean) throws Exception {
-                        Log.e(TAG,"the status_cod is "+goodDetailBean.getStatus_code());
+                        Log.e(TAG,"load Good detail the status_cod is "+goodDetailBean.getStatus_code());
                         if(goodDetailBean.getStatus_code()==201){
+
                             view.showError();
                         }
+                        Log.d(TAG,"TEST METHOD RUN IN"+Thread.currentThread().getName());
                         return goodDetailBean.getStatus_code()==200;
                     }
                 })
                 .map(new Function<GoodDetailBean, GoodBean>() {
                     @Override
                     public GoodBean apply(GoodDetailBean goodDetailBean) throws Exception {
+                        Log.d(TAG,"MAP METHOD RUN IN"+Thread.currentThread().getName());
                         return goodDetailBean.getGoods_item_get_response().getItem();
                     }
                 })
@@ -55,11 +60,13 @@ public class GoodDetailPresenter implements GoodDetailContract.Presenter {
                 .subscribe(new Consumer<GoodBean>() {
                     @Override
                     public void accept(GoodBean goodBean) throws Exception {
+                        Log.d(TAG,"CONSUMER METHOD RUN IN"+Thread.currentThread().getName());
                         view.showResult(goodBean);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
+                        view.showError();
                         throwable.printStackTrace();
                     }
                 });
@@ -72,8 +79,7 @@ public class GoodDetailPresenter implements GoodDetailContract.Presenter {
                 .filter(new Predicate<GoodDetailBean>() {
                     @Override
                     public boolean test(GoodDetailBean goodDetailBean) throws Exception {
-                        Log.e(TAG,"the status_cod is "+goodDetailBean.getStatus_code());
-
+                        Log.e(TAG,"Load imgs the status_cod is "+goodDetailBean.getStatus_code()+goodDetailBean.getResult());
                         return goodDetailBean.getStatus_code()==200;
                     }
                 })

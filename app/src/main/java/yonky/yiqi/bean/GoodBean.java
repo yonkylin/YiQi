@@ -1,12 +1,13 @@
 package yonky.yiqi.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2018/5/12.
  */
 
-public class GoodBean {
+public class GoodBean implements Serializable{
     /**
      * site_id : 48
      * shop_market_id : 274
@@ -42,10 +43,10 @@ public class GoodBean {
      * wap_url : http://cs.m.17zwd.com/item.htm?gid=106778639
      */
 
-    private int site_id;
+    private String site_id;
     private int shop_market_id;
     private int shop_floor_id;
-    private int shop_id;
+    private String shop_id;
     private String shop_name;
     private String shop_tb_nick;
     private String shop_qq;
@@ -55,7 +56,7 @@ public class GoodBean {
     private String shop_services;
     private String shop_youhui;
     private int shop_is_flagship;
-    private int goods_id;
+    private String goods_id;
     private int gid_old;
     private String title;
     private double price1;
@@ -74,12 +75,13 @@ public class GoodBean {
     private List<SkusBean> skus;
     private String spm;
     private String wap_url;
+    private static final long serialVersionUID = 1234567891;
 
-    public int getSite_id() {
+    public String getSite_id() {
         return site_id;
     }
 
-    public void setSite_id(int site_id) {
+    public void setSite_id(String site_id) {
         this.site_id = site_id;
     }
 
@@ -99,11 +101,11 @@ public class GoodBean {
         this.shop_floor_id = shop_floor_id;
     }
 
-    public int getShop_id() {
+    public String getShop_id() {
         return shop_id;
     }
 
-    public void setShop_id(int shop_id) {
+    public void setShop_id(String shop_id) {
         this.shop_id = shop_id;
     }
 
@@ -179,11 +181,11 @@ public class GoodBean {
         this.shop_is_flagship = shop_is_flagship;
     }
 
-    public int getGoods_id() {
+    public String getGoods_id() {
         return goods_id;
     }
 
-    public void setGoods_id(int goods_id) {
+    public void setGoods_id(String goods_id) {
         this.goods_id = goods_id;
     }
 

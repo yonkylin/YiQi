@@ -1,6 +1,7 @@
 package yonky.yiqi.v.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import butterknife.ButterKnife;
 import yonky.yiqi.R;
 import yonky.yiqi.bean.ShopBean;
 import yonky.yiqi.util.GlideUtil;
+import yonky.yiqi.v.GoodsActivity;
 
 /**
  * Created by Administrator on 2018/5/12.
@@ -41,7 +43,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.MarketHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MarketHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MarketHolder holder, final int position) {
         if(mBeanList!=null){
             ShopBean item = mBeanList.get(position);
             GlideUtil.loadImage(item.getSerller_head_original(),holder.shopImg);
@@ -51,8 +53,19 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.MarketHold
             holder.major.setText("主营:"+item.getMajor());
             holder.service.setText("服务:"+item.getS_service());
 
-
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    goGoodsActivity(position);
+                }
+            });
         }
+    }
+    private void goGoodsActivity(int position){
+        ShopBean bean =mBeanList.get(position);
+        Intent intent = new Intent(mContext, GoodsActivity.class);
+        intent.putExtra("shopbean",bean);
+        mContext.startActivity(intent);
     }
 
     class MarketHolder extends RecyclerView.ViewHolder{

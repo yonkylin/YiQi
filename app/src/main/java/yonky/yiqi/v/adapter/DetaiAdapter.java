@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 import yonky.yiqi.R;
 import yonky.yiqi.bean.GoodBean;
 import yonky.yiqi.bean.ShopBean;
+import yonky.yiqi.listener.RegionListener;
 import yonky.yiqi.util.GlideUtil;
 
 public class DetaiAdapter extends RecyclerView.Adapter {
@@ -32,7 +33,6 @@ public class DetaiAdapter extends RecyclerView.Adapter {
     public static final int TYPE_PIC=0X003;
     public static final int TYPE_PARAM=0X004;
     public static final int TYPE_STYLE=0X005;
-
 
 
     private Context mContext;
@@ -123,6 +123,7 @@ public class DetaiAdapter extends RecyclerView.Adapter {
                     ((ShopHolder) holder).discount.setText(shopBean.getDiscount());
                     ((ShopHolder) holder).position.setText(shopBean.getMarket()+"-"+ shopBean.getFloor()+"-"+ shopBean.getDangkou());
                 }
+
 
             }else  if(holder instanceof TypeHolder){
                 if(type==TYPE_PIC){
@@ -256,4 +257,5 @@ public class DetaiAdapter extends RecyclerView.Adapter {
     public void setShopBean(ShopBean shopBean) {
         this.shopBean = shopBean;
     }
+
 }

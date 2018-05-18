@@ -23,17 +23,17 @@ public class AreaBean implements Serializable{
      * seconds : 5
      */
 
-    private static final long serialVersionUID = 12345678910111213L;
+    private static final long serialVersionUID = 1234567890;
 
-    private int site_id;
+    private String site_id;
     private int ad_id;
     private int page_id;
     private int pos_id;
     private String data_type;
     private String media_type;
     private String target;
-    private int goods_id;
-    private int shop_id;
+    private String goods_id;
+    private String shop_id;
     private String title;
     private float price;
     private String url;
@@ -43,11 +43,11 @@ public class AreaBean implements Serializable{
     private int seconds;
     private String type;
 
-    public int getSite_id() {
+    public String getSite_id() {
         return site_id;
     }
 
-    public void setSite_id(int site_id) {
+    public void setSite_id(String site_id) {
         this.site_id = site_id;
     }
 
@@ -99,19 +99,19 @@ public class AreaBean implements Serializable{
         this.target = target;
     }
 
-    public int getGoods_id() {
+    public String getGoods_id() {
         return goods_id;
     }
 
-    public void setGoods_id(int goods_id) {
+    public void setGoods_id(String goods_id) {
         this.goods_id = goods_id;
     }
 
-    public int getShop_id() {
+    public String getShop_id() {
         return shop_id;
     }
 
-    public void setShop_id(int shop_id) {
+    public void setShop_id(String shop_id) {
         this.shop_id = shop_id;
     }
 
