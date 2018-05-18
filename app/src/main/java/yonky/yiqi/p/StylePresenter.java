@@ -12,6 +12,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 import yonky.yiqi.base.contract.StyleContract;
+import yonky.yiqi.bean.GoodAttributeBean;
 import yonky.yiqi.bean.GoodBean;
 import yonky.yiqi.bean.GoodFilterBean;
 import yonky.yiqi.bean.StyleBean;
@@ -60,7 +61,35 @@ public class StylePresenter implements StyleContract.Presenter {
                     }
                 });
     }
-
+@Override
+    public void getGoodColor(String type ){
+        Observable<GoodAttributeBean>  observable=dataManager.getGoodAttr(type);
+        observable.subscribeOn(Schedulers.io())
+                .filter(new Predicate<GoodAttributeBean>() {
+                    @Override
+                    public boolean test(GoodAttributeBean goodAttributeBean) throws Exception {
+                        return goodAttributeBean.getStatus_code()==200;
+                    }
+                })
+                .map(new Function<GoodAttributeBean,GoodAttributeBean.GoodsItemGetResponseBean>() {
+                    @Override
+                    public GoodAttributeBean.GoodsItemGetResponseBean apply(GoodAttributeBean goodAttributeBean) throws Exception {
+                        return goodAttributeBean.getGoods_item_get_response();
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<GoodAttributeBean.GoodsItemGetResponseBean>() {
+                    @Override
+                    public void accept(GoodAttributeBean.GoodsItemGetResponseBean goodsItemGetResponseBean) throws Exception {
+                        view.showGoodAttr(goodsItemGetResponseBean);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        throwable.printStackTrace();
+                    }
+                });
+    }
     @Override
     public void attachView(StyleContract.View view) {
         this.view = view;

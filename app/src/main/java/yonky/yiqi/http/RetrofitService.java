@@ -1,12 +1,10 @@
 package yonky.yiqi.http;
 
 import io.reactivex.Observable;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import yonky.yiqi.bean.GoodAttributeBean;
 import yonky.yiqi.bean.GoodDetailBean;
 import yonky.yiqi.bean.MainPageBean;
 import yonky.yiqi.bean.MarketBean;
@@ -113,10 +111,13 @@ public interface RetrofitService {
     );
 
 
+//    http://api2.17zwd.com/rest/goods/get_colors?from=android&shadow$_klass_=class+com.hanyun.onlineproject.entity.NetRequest
+//    http://api2.17zwd.com/rest/goods/get_sizes?from=android&shadow$_klass_=class+com.hanyun.onlineproject.entity.NetRequest
 
+@GET("/rest/goods/{type}?from=android&shadow$_klass_=class+com.hanyun.onlineproject.entity.NetRequest")
+    Observable<GoodAttributeBean> getGoodAttribute(@Path("type")String type);
 
-
-
+//    http://api2.17zwd.com/rest/shop/get_services?from=android&shadow$_klass_=class+com.hanyun.onlineproject.entity.NetRequest
 
 }
 

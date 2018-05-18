@@ -6,6 +6,7 @@ import android.content.Context;
 import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.Query;
+import yonky.yiqi.bean.GoodAttributeBean;
 import yonky.yiqi.bean.GoodDetailBean;
 import yonky.yiqi.bean.MainPageBean;
 import yonky.yiqi.bean.MarketBean;
@@ -63,5 +64,10 @@ public class DataManager {
 
     public Observable<GoodDetailBean> getGoodDetail(String type,String goods_id, String from, String user_id, String zdid, String spm){
         return mRetrofitService.getGoodDetail(type,goods_id, from, user_id, zdid, spm);
+    }
+    //    http://api2.17zwd.com/rest/goods/get_colors?from=android&shadow$_klass_=class+com.hanyun.onlineproject.entity.NetRequest
+//    http://api2.17zwd.com/rest/goods/get_sizes?from=android&shadow$_klass_=class+com.hanyun.onlineproject.entity.NetRequest
+    public Observable<GoodAttributeBean> getGoodAttr(String type){
+        return mRetrofitService.getGoodAttribute(type);
     }
 }
