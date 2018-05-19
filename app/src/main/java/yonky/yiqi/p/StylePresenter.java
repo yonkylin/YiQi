@@ -34,7 +34,7 @@ public class StylePresenter implements StyleContract.Presenter {
     @Override
     public void loadDatas(GoodFilterBean filter) {
         Observable<StyleBean> observable =dataManager.getStyleData(filter.getShop_id(),filter.getSize(),filter.getSeller_cid(),filter.getPindex(),filter.getFrom(),filter.getPrice2(),
-                filter.getDtype(),filter.getZdid(), filter.getPrice1(),filter.getPsize(),filter.getOrderby(),filter.getColor() ,filter.getSpm(),filter.getKeyword());
+                filter.getDtype(),filter.getZdid(), filter.getPrice1(),filter.getPsize(),filter.getOrderby(),filter.getColor() ,filter.getSpm(),filter.getKeyword(),filter.getMid(),filter.getFid());
         observable.subscribeOn(Schedulers.io())
                 .filter(new Predicate<StyleBean>() {
                     @Override
@@ -100,4 +100,6 @@ public class StylePresenter implements StyleContract.Presenter {
     public void detachView() {
         view =null;
     }
+
+
 }

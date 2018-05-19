@@ -8,18 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import yonky.yiqi.R;
-import yonky.yiqi.listener.RegionListener;
+import yonky.yiqi.listener.MyListener;
 
 /**
  * Created by Administrator on 2018/5/17.
@@ -47,7 +41,7 @@ public class RegionAdapter extends RecyclerView.Adapter <RegionAdapter.RegionVie
            };
 
     int isSelected;
-    RegionListener listener;
+    MyListener listener;
 
     public RegionAdapter(Context context,String region) {
         mContext = context;
@@ -85,7 +79,7 @@ public class RegionAdapter extends RecyclerView.Adapter <RegionAdapter.RegionVie
                 @Override
                 public void onClick(View v) {
                     setSelect(position);
-                    listener.regionClick();
+                    listener.onClick();
                 }
             });
     }
@@ -116,11 +110,11 @@ public class RegionAdapter extends RecyclerView.Adapter <RegionAdapter.RegionVie
         return -1;
     }
 
-    public RegionListener getListener() {
+    public MyListener getListener() {
         return listener;
     }
 
-    public void setListener(RegionListener listener) {
+    public void setListener(MyListener listener) {
         this.listener = listener;
     }
 }

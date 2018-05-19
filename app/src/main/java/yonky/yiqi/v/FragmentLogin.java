@@ -35,7 +35,7 @@ public class FragmentLogin extends BaseFragment {
         helper = new RippleViewHelper(rippleView);
         ObjectAnimator csAnimation=ObjectAnimator.ofFloat(csLayout,"translationX", MyUtil.getDisplayWidth(mContext),0);
         csAnimation.setInterpolator(new OvershootInterpolator());
-        csAnimation.setDuration(1200);
+        csAnimation.setDuration(1000);
         ObjectAnimator ivAnimation1=ObjectAnimator.ofFloat(ivLogo,"scaleX",0,1);
         ObjectAnimator ivAnimation2=ObjectAnimator.ofFloat(ivLogo,"scaleY",0,1);
         animatorSet = new AnimatorSet();

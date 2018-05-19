@@ -34,7 +34,7 @@ public class DataManager {
         return mRetrofitService.getSearchData(psize,orderby,keyword,bq,service,pindex,from,zdid);
     }
 
-    //    http://api2.17zwd.com/rest/goods/search?price1=0.0&psize=10&size=&seller_cid=&orderby=mr&color=&keyword=&pindex=1&from=android&price2=9999.0&dtype=sks&zdid=48
+    //    http://api2.17zwd.com/rest/goods/search?price1=0.0&psize=10&size=&seller_cid=&orderby=mr&color=&keyword=&pindex=1&from=android&price2=9999.0&dtype=sks&zdid=48&mid=&fid=
 //搜款式
 
     public  Observable<StyleBean> getStyleData(String shop_id,
@@ -50,8 +50,10 @@ public class DataManager {
                                                String orderby,
                                                String color ,
                                                String spm,
-                                               String keyword){
-        return mRetrofitService.getStyleData(shop_id,size,seller_cid,pindex,from,price2,dtype,zdid, price1,psize,orderby,color ,spm,keyword);
+                                               String keyword,
+                                               String mid,
+                                               String fid){
+        return mRetrofitService.getStyleData(shop_id,size,seller_cid,pindex,from,price2,dtype,zdid, price1,psize,orderby,color ,spm,keyword,mid,fid);
     }
 
     //获取店铺详情

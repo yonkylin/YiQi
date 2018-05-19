@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_background"
+    android:background="@color/white"
     tools:layout_editor_absoluteY="25dp">
 
     <EditText
@@ -39,8 +39,9 @@
         android:id="@+id/view"
         android:layout_width="40dp"
         android:layout_height="1px"
+        android:visibility="visible"
         android:layout_marginBottom="8dp"
-        android:background="@color/light_background"
+        android:background="@color/gray"
         app:layout_constraintBottom_toBottomOf="@+id/price_from"
         app:layout_constraintEnd_toStartOf="@+id/price_to"
         app:layout_constraintHorizontal_bias="0.5"
@@ -93,10 +94,15 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_color"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/ib_color"
+        app:layout_constraintHorizontal_bias="0.105"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintTop_toTopOf="@+id/guideline"/>
 
     <Button
         android:id="@+id/bt_reset"
@@ -141,5 +147,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rv_color"
         app:srcCompat="@drawable/icon_expand" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_size"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/ib_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ib_size"/>
+
 
 </android.support.constraint.ConstraintLayout>

@@ -20,6 +20,8 @@ public class GoodFilterBean {
     private String shop_id ="";
     private String goods_id="";
     private String user_id="-1";
+    private String mid="";
+    private String fid="";
 
 
 
@@ -151,4 +153,22 @@ public class GoodFilterBean {
     public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
+
+    public String getMid() {
+        return mid;
+    }
+
+    public void setMid(String mid) {
+        this.mid = mid;
+    }
+
+    public String getFid() {
+        return fid;
+    }
+
+    public void setFid(String fid) {
+        this.fid = fid;
+    }
+//    http://api2.17zwd.com/rest/goods/search?price1=0.0&psize=10&size=&seller_cid=&orderby=mr&color=&keyword=&pindex=1&from=android&price2=9999.0&dtype=sks&zdid=48
+
 }

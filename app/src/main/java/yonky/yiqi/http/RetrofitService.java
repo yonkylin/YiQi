@@ -57,7 +57,9 @@ public interface RetrofitService {
                                        @Query("orderby") String orderby,
                                        @Query("color")  String color ,
                                        @Query("spm")String spm,
-                                       @Query("keyword") String keyword);
+                                       @Query("keyword") String keyword,
+                                       @Query("mid")String mid,
+                                       @Query("fid")String fid);
            /* @Query("price1") String price1,
                                        @Query("psize") String psize,
                                        @Query("size")String size,

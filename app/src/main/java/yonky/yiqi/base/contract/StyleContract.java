@@ -7,6 +7,7 @@ import yonky.yiqi.base.BaseView;
 import yonky.yiqi.bean.GoodAttributeBean;
 import yonky.yiqi.bean.GoodBean;
 import yonky.yiqi.bean.GoodFilterBean;
+import yonky.yiqi.bean.KVBean;
 import yonky.yiqi.bean.ShopFilterBean;
 
 public interface StyleContract {

@@ -24,7 +24,6 @@ import butterknife.ButterKnife;
 import yonky.yiqi.R;
 import yonky.yiqi.bean.GoodBean;
 import yonky.yiqi.bean.ShopBean;
-import yonky.yiqi.listener.RegionListener;
 import yonky.yiqi.util.GlideUtil;
 
 public class DetaiAdapter extends RecyclerView.Adapter {

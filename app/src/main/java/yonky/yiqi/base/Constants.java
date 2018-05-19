@@ -5,4 +5,7 @@ package yonky.yiqi.base;
  */
 
 public class Constants {
+    public static final int FILTER_CLOTHES=0X001;
+    public static final int FILTER_COLOR=0X002;
+
 }

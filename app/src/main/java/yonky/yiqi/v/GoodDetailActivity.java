@@ -1,7 +1,6 @@
 package yonky.yiqi.v;
 
 import android.animation.ObjectAnimator;
-import android.content.SharedPreferences;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,9 +9,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.BounceInterpolator;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -20,7 +17,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 import yonky.yiqi.R;
 import yonky.yiqi.base.BaseActivity;
 import yonky.yiqi.base.contract.GoodDetailContract;
@@ -29,7 +25,6 @@ import yonky.yiqi.bean.GoodBean;
 import yonky.yiqi.bean.GoodFilterBean;
 import yonky.yiqi.bean.ShopBean;
 import yonky.yiqi.bean.ShopFilterBean;
-import yonky.yiqi.listener.RegionListener;
 import yonky.yiqi.p.GoodDetailPresenter;
 import yonky.yiqi.util.MyUtil;
 import yonky.yiqi.v.adapter.DetaiAdapter;

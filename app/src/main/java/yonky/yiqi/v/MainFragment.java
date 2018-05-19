@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 
@@ -30,7 +29,7 @@ import yonky.yiqi.base.BaseFragment;
 import yonky.yiqi.base.contract.MainContract;
 import yonky.yiqi.bean.AreaBean;
 import yonky.yiqi.bean.AreaEBean;
-import yonky.yiqi.listener.RegionListener;
+import yonky.yiqi.listener.MyListener;
 import yonky.yiqi.p.MainPresenter;
 import yonky.yiqi.util.MyUtil;
 import yonky.yiqi.v.adapter.MainAdapter;
@@ -39,7 +38,7 @@ import yonky.yiqi.v.adapter.RegionAdapter;
 import static yonky.yiqi.v.adapter.MainAdapter.TYPE_THREE;
 import static yonky.yiqi.v.adapter.MainAdapter.TYPE_TWO;
 
-public class MainFragment extends BaseFragment implements MainContract.View,RegionListener{
+public class MainFragment extends BaseFragment implements MainContract.View,MyListener {
     private static final String TAG = MainFragment.class.getSimpleName();
     @BindView(R.id.rv_main)
     RecyclerView recyclerViewMain;
@@ -209,7 +208,7 @@ public class MainFragment extends BaseFragment implements MainContract.View,Regi
     }
 
     @Override
-    public void regionClick() {
+    public void onClick() {
         mPopupWindow.dismiss();
         updateButton();
     }
