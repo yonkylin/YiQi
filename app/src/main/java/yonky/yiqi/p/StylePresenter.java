@@ -15,6 +15,7 @@ import yonky.yiqi.base.contract.StyleContract;
 import yonky.yiqi.bean.GoodAttributeBean;
 import yonky.yiqi.bean.GoodBean;
 import yonky.yiqi.bean.GoodFilterBean;
+import yonky.yiqi.bean.RegionBean;
 import yonky.yiqi.bean.StyleBean;
 import yonky.yiqi.m.DataManager;
 
@@ -82,6 +83,34 @@ public class StylePresenter implements StyleContract.Presenter {
                     @Override
                     public void accept(GoodAttributeBean.GoodsItemGetResponseBean goodsItemGetResponseBean) throws Exception {
                         view.showGoodAttr(goodsItemGetResponseBean);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        throwable.printStackTrace();
+                    }
+                });
+    }
+    //    http://api2.17zwd.com/rest/region/get_list?from=android&shadow$_klass_=class+com.hanyun.onlineproject.entity.NetRequest&zdid=52&fid=899
+    public void getRegionData(String zdid,String fid,final int type){
+        Observable<RegionBean> observable= dataManager.getRegionData("android","class+com.hanyun.onlineproject.entity.NetRequest",zdid,fid);
+        observable.subscribeOn(Schedulers.io())
+                .filter(new Predicate<RegionBean>() {
+                    @Override
+                    public boolean test(RegionBean regionBean) throws Exception {
+                        return regionBean.getStatus_code()==200;
+                    }
+                })
+                .map(new Function<RegionBean,List<RegionBean.ItemsBean>>() {
+                    @Override
+                    public List<RegionBean.ItemsBean> apply(RegionBean regionBean) throws Exception {
+                        return regionBean.getRegion_items_list_get_response().getItems();
+                    }
+                }).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<RegionBean.ItemsBean>>() {
+                    @Override
+                    public void accept(List<RegionBean.ItemsBean> itemsBeans) throws Exception {
+                        view.showRegion(itemsBeans,type);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

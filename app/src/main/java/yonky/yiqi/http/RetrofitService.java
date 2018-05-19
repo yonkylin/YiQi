@@ -8,6 +8,7 @@ import yonky.yiqi.bean.GoodAttributeBean;
 import yonky.yiqi.bean.GoodDetailBean;
 import yonky.yiqi.bean.MainPageBean;
 import yonky.yiqi.bean.MarketBean;
+import yonky.yiqi.bean.RegionBean;
 import yonky.yiqi.bean.ShopPage;
 import yonky.yiqi.bean.StyleBean;
 
@@ -121,6 +122,12 @@ public interface RetrofitService {
 
 //    http://api2.17zwd.com/rest/shop/get_services?from=android&shadow$_klass_=class+com.hanyun.onlineproject.entity.NetRequest
 
+//    http://api2.17zwd.com/rest/region/get_list?from=android&shadow$_klass_=class+com.hanyun.onlineproject.entity.NetRequest&zdid=52&fid=899
+@GET("rest/region/get_list")
+    Observable<RegionBean> getRegionData(@Query("from")String from,
+                                         @Query("shadow$_klass_")String shadow,
+                                         @Query("zdid")String zdid,
+                                         @Query("fid")String fid);
 }
 
 

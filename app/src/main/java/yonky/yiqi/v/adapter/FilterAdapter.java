@@ -16,6 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import yonky.yiqi.R;
 import yonky.yiqi.bean.KVBean;
+import yonky.yiqi.bean.RegionBean;
 import yonky.yiqi.util.MyUtil;
 
 /**
@@ -26,27 +27,42 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterHold
     public static final String TAG=FilterAdapter.class.getSimpleName();
     public static final int TYPE_ALL=0X1000;
     public static final int TYPE_SELECTED_NONE=0X100;
+    public static final int TYPE_REGION=0X10000;
+    public static final int TYPE_KV=0X10000;
+
 
 
     private Context mContext;
     private List<KVBean> list;
+    private List<RegionBean.ItemsBean> regionList;
     private  int count;
     private int select=TYPE_SELECTED_NONE;
+    private int type;
 
-    public FilterAdapter(Context context, List<KVBean> list,int count,int select) {
+
+    public FilterAdapter(Context context,int type, int count,int select) {
         this.select = select;
         mContext = context;
-        this.list = list;
         this.count = count;
+        this.type= type;
     }
 
     @Override
     public int getItemCount() {
-        if(list==null){
-            return 0;
+        if(type==TYPE_KV){
+            if(list==null){
+                return 0;
+            }else{
+                return count==TYPE_ALL||list.size()<count? list.size():count;
+            }
         }else{
-            return count==TYPE_ALL? list.size():count;
+            if(regionList==null){
+                return 0;
+            }else{
+                return count==TYPE_ALL||regionList.size()<count? regionList.size():count;
+            }
         }
+
 
     }
 
@@ -65,13 +81,22 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterHold
             holder.tv.setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimary));
             holder.tv.setTextColor(mContext.getResources().getColor(R.color.white));
         }
+        if(type==TYPE_KV){
+            holder.tv.setText(list.get(position).getText());
+        }else {
+            holder.tv.setText(regionList.get(position).getTitle());
 
-        holder.tv.setText(list.get(position).getText());
+        }
+
         holder.tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(select==position){
+                    setSelect(TYPE_SELECTED_NONE);
+                }else{
+                    setSelect(position);
+                }
 
-                setSelect(position);
                 notifyDataSetChanged();
             }
         });
@@ -107,7 +132,24 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterHold
         select=TYPE_SELECTED_NONE;
         notifyDataSetChanged();
     }
-    public String getSelectString(int position){
-        return MyUtil.encode(list.get(position).getValue());
+
+    public List<KVBean> getList() {
+        return list;
     }
+
+    public void setList(List<KVBean> list) {
+        this.list = list;
+    }
+
+    public List<RegionBean.ItemsBean> getRegionList() {
+        return regionList;
+    }
+
+    public void setRegionList(List<RegionBean.ItemsBean> regionList) {
+        this.regionList = regionList;
+    }
+    //    public String getSelectString(int position){
+//        Log.d(TAG,"ENCODE TO "+MyUtil.encode(list.get(position).getValue()));
+//        return MyUtil.encode(list.get(position).getValue());
+//    }
 }

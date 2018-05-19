@@ -1,5 +1,6 @@
 package yonky.yiqi.v;
 
+import android.content.SharedPreferences;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -27,6 +28,7 @@ import yonky.yiqi.bean.GoodAttributeBean;
 import yonky.yiqi.bean.GoodBean;
 import yonky.yiqi.bean.GoodFilterBean;
 import yonky.yiqi.bean.KVBean;
+import yonky.yiqi.bean.RegionBean;
 import yonky.yiqi.listener.MyClickListener;
 import yonky.yiqi.listener.MyListener;
 import yonky.yiqi.p.StylePresenter;
@@ -35,9 +37,11 @@ import yonky.yiqi.v.adapter.StyleAdapter;
 
 import static yonky.yiqi.base.Constants.FILTER_CLOTHES;
 import static yonky.yiqi.base.Constants.FILTER_COLOR;
+import static yonky.yiqi.base.Constants.FILTER_REGION;
 
 public class StyleFragment extends BaseFragment implements StyleContract.View ,MyListener {
     private static final String TAG=StyleFragment.class.getSimpleName();
+    SharedPreferences preferences;
     @BindView(R.id.rv_style)
     RecyclerView recyclerView;
     @BindView(R.id.bt_filter)
@@ -52,6 +56,8 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
 //   GoodAttributeBean.GoodsItemGetResponseBean goodAttrs;
    List<KVBean> colorList;
    List<KVBean> clothList;
+   List<RegionBean.ItemsBean> regionList;
+   List<RegionBean.ItemsBean> floorList;
    WindowGoodFilter mWindowGoodFilter;
     @Override
     protected int getLayoutId() {
@@ -60,10 +66,13 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
 
     @Override
     protected void initEventAndData() {
+        preferences = mContext.getSharedPreferences("data",0);
         mWindowGoodFilter = WindowGoodFilter.getInstance();
         mWindowGoodFilter.setListener(this);
         colorList= new ArrayList<>();
         clothList= new ArrayList<>();
+        floorList = new ArrayList<>();
+        regionList=new ArrayList<>();
 //        goodAttrs=new GoodAttributeBean.GoodsItemGetResponseBean();
         mPresenter= new StylePresenter(mContext);
         mPresenter.attachView(this);
@@ -77,6 +86,7 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
         mPresenter.loadDatas(filterBean);
         mPresenter.getGoodColor("get_colors");
         mPresenter.getGoodColor("get_sizes");
+        mPresenter.getRegionData(preferences.getString("regionId","42"),"",FILTER_REGION);
     }
 
 
@@ -98,7 +108,17 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
        }
 
     }
-//    逛商场 筛选按钮
+
+    @Override
+    public void showRegion(List<RegionBean.ItemsBean> regionList,int type) {
+        if(type==FILTER_REGION){
+            mWindowGoodFilter.setRegionList(regionList);
+            Log.d(TAG,"SHOW Region data "+regionList.size());
+
+        }
+    }
+
+    //    逛商场 筛选按钮
     @OnClick(R.id.bt_filter)  void filter(){
 
         PopupWindow mPopupWindow=mWindowGoodFilter.newWindow(mContext);
@@ -111,8 +131,11 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
 
     @Override
     public void onClick() {
-        filterBean.setColor(mWindowGoodFilter.getColorString());
+        Log.d(TAG,"ON CLICK GET ENCODE"+mWindowGoodFilter.getColor());
+//        filterBean.setColor(mWindowGoodFilter.getColorString()mWindowGoodFilter.getColorString());
+        filterBean.setColor(mWindowGoodFilter.getColor());
         filterBean.setSize(mWindowGoodFilter.getSize());
+//        filterBean.
         mPresenter.loadDatas(filterBean);
     }
 }

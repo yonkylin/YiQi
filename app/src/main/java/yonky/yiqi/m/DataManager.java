@@ -10,6 +10,7 @@ import yonky.yiqi.bean.GoodAttributeBean;
 import yonky.yiqi.bean.GoodDetailBean;
 import yonky.yiqi.bean.MainPageBean;
 import yonky.yiqi.bean.MarketBean;
+import yonky.yiqi.bean.RegionBean;
 import yonky.yiqi.bean.ShopPage;
 import yonky.yiqi.bean.StyleBean;
 import yonky.yiqi.http.RetrofitHelper;
@@ -71,5 +72,11 @@ public class DataManager {
 //    http://api2.17zwd.com/rest/goods/get_sizes?from=android&shadow$_klass_=class+com.hanyun.onlineproject.entity.NetRequest
     public Observable<GoodAttributeBean> getGoodAttr(String type){
         return mRetrofitService.getGoodAttribute(type);
+    }
+
+    //    http://api2.17zwd.com/rest/region/get_list?from=android&shadow$_klass_=class+com.hanyun.onlineproject.entity.NetRequest&zdid=52&fid=899
+
+    public Observable<RegionBean> getRegionData(String from,String shadow,String zdid,String fid){
+        return mRetrofitService.getRegionData(from,shadow,zdid,fid);
     }
 }
