@@ -1,9 +1,11 @@
 package yonky.yiqi.v;
 
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,8 +48,10 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
     TextView mShopName;
     @BindView(R.id.tv_position)
     TextView mPosition;
+    @BindView(R.id.fab)
+        FloatingActionButton fab;
 
-
+    boolean isLoadingMore;
     StyleAdapter mAdapter;
     List<GoodBean> mGoodList;
     GoodFilterBean goodFilter;
@@ -62,6 +66,7 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
 
     @Override
     protected void initEventAndData() {
+        fab.hide();
         mPresenter = new GoodPresenter(mContext);
         mPresenter.attachView(this);
 
@@ -97,9 +102,40 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
         mRecyclerView.setLayoutManager(new GridLayoutManager(mContext,2));
         mRecyclerView.setAdapter(mAdapter);
 
-        mPresenter.loadGoods(goodFilter);
+        mPresenter.loadGoods(goodFilter,false);
         mPresenter.loadShop(shopFilter);
 
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int firstItemPosition =((GridLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+                int lastItemPosition =((GridLayoutManager)recyclerView.getLayoutManager()).findLastVisibleItemPosition();
+                int totalCount =recyclerView.getLayoutManager().getItemCount();
+                if(firstItemPosition<2||dy>0 ){
+                    fab.hide();
+                }else{
+                    fab.show();
+                }
+
+//                最后一个显示时，加载更多
+                if(lastItemPosition>=totalCount-1&&dy>0){
+                    if(!isLoadingMore){
+                        isLoadingMore=true;
+                        int page=Integer.valueOf(goodFilter.getPindex())+1;
+                        goodFilter.setPindex(String.valueOf(page));
+                        mPresenter.loadGoods(goodFilter,true);
+                    }
+                }
+            }
+        });
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRecyclerView.smoothScrollToPosition(0);
+            }
+        });
     }
 
     @Override
@@ -114,10 +150,15 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
     }
 
     @Override
-    public void showResult(List<GoodBean> list) {
-        mAdapter.setBeanList(list);
+    public void showResult(List<GoodBean> list,boolean loadingMore) {
+        if(loadingMore){
+            isLoadingMore=false;
+            mAdapter.getBeanList().addAll(list);
+        }else{
+            mAdapter.setBeanList(list);
+        }
+
         mAdapter.notifyDataSetChanged();
-        Log.e(TAG,list.get(0).getShop_name());
     }
 
     @Override

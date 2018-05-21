@@ -42,7 +42,7 @@ public class MarketPresenter implements MarketContract.Presenter {
 //    http://api2.17zwd.com/rest/shop/search_shops/?psize=10&orderby=mr&keyword=&bq=&service=&pindex=1&from=android&zdid=48  逛市场
 
     @Override
-    public void loadData(ShopFilterBean filter) {
+    public void loadData(ShopFilterBean filter, final Boolean isLoadMore) {
 
         Observable<MarketBean> observable = mDataManager.getSearchData(filter.getPsize(),filter.getOrderby(),filter.getKeyword(),
                 filter.getBq(),filter.getService(),filter.getPindex(),filter.getFrom(),filter.getZdid());
@@ -65,7 +65,7 @@ public class MarketPresenter implements MarketContract.Presenter {
                 .subscribe(new Consumer<List<ShopBean>>() {
                     @Override
                     public void accept(List<ShopBean> beanList) throws Exception {
-                        mView.showResult(beanList);
+                        mView.showResult(beanList,isLoadMore);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

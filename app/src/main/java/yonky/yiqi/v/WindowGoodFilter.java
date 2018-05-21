@@ -44,8 +44,8 @@ private List<RegionBean.ItemsBean> regionList;
 private List<RegionBean.ItemsBean> floorList;
   private   FilterAdapter colorAdapter;
   private   FilterAdapter sizeAdapter;
-  private   FilterAdapter regionAdapter;
-  private   FilterAdapter floorAdapter;
+//  private   FilterAdapter regionAdapter;
+//  private   FilterAdapter floorAdapter;
 private int selectColor=TYPE_SELECTED_NONE;
 private int selectSize=TYPE_SELECTED_NONE;
 private int selectRegion=TYPE_SELECTED_NONE;
@@ -72,23 +72,23 @@ private int colorExpandSelected,sizeExpandSelected,regionExpandSelected,floorExp
 
         RecyclerView rvColor=contentView.findViewById(R.id.rv_color);
         RecyclerView rvSize=contentView.findViewById(R.id.rv_size);
-        RecyclerView rvRegion=contentView.findViewById(R.id.rv_region);
+//        RecyclerView rvRegion=contentView.findViewById(R.id.rv_region);
 
         Button btConcern=contentView.findViewById(R.id.bt_sure);
         Button btReset=contentView.findViewById(R.id.bt_reset);
 
         final ImageView colorExpand=contentView.findViewById(R.id.iv_color);
         ImageView sizeExpand=contentView.findViewById(R.id.iv_size);
-        ImageView regionExpand=contentView.findViewById(R.id.iv_region);
+//        ImageView regionExpand=contentView.findViewById(R.id.iv_region);
 
 
         colorAdapter= new FilterAdapter(mContext,TYPE_KV,5,selectColor);
         sizeAdapter = new FilterAdapter(mContext,TYPE_KV,6,selectSize);
-        regionAdapter=new FilterAdapter(mContext,TYPE_REGION,4,selectRegion);
+//        regionAdapter=new FilterAdapter(mContext,TYPE_REGION,4,selectRegion);
 
         colorAdapter.setList(colorList);
         sizeAdapter.setList(clothList);
-        regionAdapter.setRegionList(regionList);
+//        regionAdapter.setRegionList(regionList);
 
         rvColor.setLayoutManager(getLayoutManager());
         rvColor.setAdapter(colorAdapter);
@@ -96,8 +96,8 @@ private int colorExpandSelected,sizeExpandSelected,regionExpandSelected,floorExp
         rvSize.setLayoutManager(getLayoutManager());
         rvSize.setAdapter(sizeAdapter);
 
-        rvRegion.setLayoutManager(getLayoutManager());
-        rvRegion.setAdapter(regionAdapter);
+//        rvRegion.setLayoutManager(getLayoutManager());
+//        rvRegion.setAdapter(regionAdapter);
 
         btConcern.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,19 +144,19 @@ private int colorExpandSelected,sizeExpandSelected,regionExpandSelected,floorExp
             }
         });
 
-        regionExpand.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                regionExpandSelected++;
-                if(regionExpandSelected%2==1){
-                    regionAdapter.setCount(TYPE_ALL);
-                }else{
-                    regionAdapter.setCount(4);
-                }
-                Log.e("REGION","REGION COUNT IS"+regionAdapter.getItemCount());
-                regionAdapter.notifyDataSetChanged();
-            }
-        });
+//        regionExpand.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                regionExpandSelected++;
+//                if(regionExpandSelected%2==1){
+//                    regionAdapter.setCount(TYPE_ALL);
+//                }else{
+//                    regionAdapter.setCount(4);
+//                }
+//                Log.e("REGION","REGION COUNT IS"+regionAdapter.getItemCount());
+//                regionAdapter.notifyDataSetChanged();
+//            }
+//        });
         return mPopupWindow;
     }
 

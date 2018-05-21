@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -40,6 +41,8 @@ import static yonky.yiqi.v.adapter.MainAdapter.TYPE_TWO;
 
 public class MainFragment extends BaseFragment implements MainContract.View,MyListener {
     private static final String TAG = MainFragment.class.getSimpleName();
+    @BindView(R.id.swipe_refresh)
+    SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.rv_main)
     RecyclerView recyclerViewMain;
     MainAdapter mainAdapter;
@@ -113,6 +116,13 @@ public class MainFragment extends BaseFragment implements MainContract.View,MyLi
         recyclerViewMain.setAdapter(mainAdapter);
         loadData();
 
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadData();
+            }
+        });
+
     }
     private void loadData(){
         mPresenter.loadDatas("A",zdid);
@@ -154,7 +164,7 @@ public class MainFragment extends BaseFragment implements MainContract.View,MyLi
             mainAdapter.setDList(areaBeanList);
             mainAdapter.notifyDataSetChanged();
         }
-
+        mSwipeRefreshLayout.setRefreshing(false);
     }
     @Override
     public void showE(List<AreaEBean> listE){

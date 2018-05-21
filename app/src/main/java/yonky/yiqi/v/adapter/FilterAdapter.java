@@ -28,7 +28,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterHold
     public static final int TYPE_ALL=0X1000;
     public static final int TYPE_SELECTED_NONE=0X100;
     public static final int TYPE_REGION=0X10000;
-    public static final int TYPE_KV=0X10000;
+    public static final int TYPE_KV=0X10001;
 
 
 
@@ -45,6 +45,8 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterHold
         mContext = context;
         this.count = count;
         this.type= type;
+        Log.e(TAG,"init filterAdapter"+type);
+
     }
 
     @Override
@@ -56,6 +58,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterHold
                 return count==TYPE_ALL||list.size()<count? list.size():count;
             }
         }else{
+            Log.e(TAG,"regionList size is "+regionList.size());
             if(regionList==null){
                 return 0;
             }else{
@@ -84,6 +87,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterHold
         if(type==TYPE_KV){
             holder.tv.setText(list.get(position).getText());
         }else {
+            Log.e(TAG,"onBindViewHolder regionList   "+regionList.get(position).getTitle());
             holder.tv.setText(regionList.get(position).getTitle());
 
         }

@@ -1,6 +1,8 @@
 package yonky.yiqi.v;
 
 import android.content.SharedPreferences;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -42,10 +44,18 @@ import static yonky.yiqi.base.Constants.FILTER_REGION;
 public class StyleFragment extends BaseFragment implements StyleContract.View ,MyListener {
     private static final String TAG=StyleFragment.class.getSimpleName();
     SharedPreferences preferences;
+    @BindView(R.id.swipe_refresh)
+    SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.rv_style)
     RecyclerView recyclerView;
     @BindView(R.id.bt_filter)
     Button btFilter;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+
+    boolean isLoadingMore;
+
+
      StyleAdapter styleAdapter;
      StylePresenter mPresenter;
     List<GoodBean> goodBeans;
@@ -66,6 +76,7 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
 
     @Override
     protected void initEventAndData() {
+        fab.hide();
         preferences = mContext.getSharedPreferences("data",0);
         mWindowGoodFilter = WindowGoodFilter.getInstance();
         mWindowGoodFilter.setListener(this);
@@ -83,18 +94,66 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
         recyclerView.setLayoutManager(new GridLayoutManager(mContext,2));
         recyclerView.setAdapter(styleAdapter);
 
-        mPresenter.loadDatas(filterBean);
+        mPresenter.loadDatas(filterBean,false);
         mPresenter.getGoodColor("get_colors");
         mPresenter.getGoodColor("get_sizes");
-        mPresenter.getRegionData(preferences.getString("regionId","42"),"",FILTER_REGION);
+//        mPresenter.getRegionData(preferences.getString("regionId","42"),"",FILTER_REGION);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                filterBean.setPindex("1");
+                mPresenter.loadDatas(filterBean,false);
+            }
+        });
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int firstItemPosition =((GridLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+                int lastItemPosition =((GridLayoutManager)recyclerView.getLayoutManager()).findLastVisibleItemPosition();
+                int totalCount =recyclerView.getLayoutManager().getItemCount();
+                if(firstItemPosition<2||dy>0 ){
+                    fab.hide();
+                }else{
+                    fab.show();
+                }
+
+//                最后一个显示时，加载更多
+                if(lastItemPosition>=totalCount-1&&dy>0){
+                    if(!isLoadingMore){
+                        isLoadingMore=true;
+                        int page=Integer.valueOf(filterBean.getPindex())+1;
+                        filterBean.setPindex(String.valueOf(page));
+                        mPresenter.loadDatas(filterBean,true);
+                    }
+                }
+            }
+        });
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.smoothScrollToPosition(0);
+            }
+        });
+
     }
 
 
 
     @Override
-    public void showResult(List<GoodBean> beanList) {
-        styleAdapter.setBeanList(beanList);
+    public void showResult(List<GoodBean> beanList,boolean loadingMore) {
+        mSwipeRefreshLayout.setRefreshing(false);
+        if(loadingMore){
+            isLoadingMore=false;
+            styleAdapter.getBeanList().addAll(beanList);
+        }else{
+            styleAdapter.setBeanList(beanList);
+        }
+
         styleAdapter.notifyDataSetChanged();
+
     }
 
     @Override
@@ -112,7 +171,7 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
     @Override
     public void showRegion(List<RegionBean.ItemsBean> regionList,int type) {
         if(type==FILTER_REGION){
-            mWindowGoodFilter.setRegionList(regionList);
+//            mWindowGoodFilter.setRegionList(regionList);
             Log.d(TAG,"SHOW Region data "+regionList.size());
 
         }
@@ -135,7 +194,7 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
 //        filterBean.setColor(mWindowGoodFilter.getColorString()mWindowGoodFilter.getColorString());
         filterBean.setColor(mWindowGoodFilter.getColor());
         filterBean.setSize(mWindowGoodFilter.getSize());
-//        filterBean.
-        mPresenter.loadDatas(filterBean);
+        filterBean.setPindex("1");
+        mPresenter.loadDatas(filterBean,false);
     }
 }

@@ -13,10 +13,10 @@ import yonky.yiqi.bean.ShopFilterBean;
 
 public interface MarketContract {
     interface View extends BaseView{
-       void showResult(List<ShopBean> listBeans);
+       void showResult(List<ShopBean> listBeans,Boolean loadingMore);
     }
     interface Presenter extends BasePresenter<View>{
-        void loadData(ShopFilterBean filterBean);
+        void loadData(ShopFilterBean filterBean,Boolean loadingMore);
         void loadMore();
     }
 }

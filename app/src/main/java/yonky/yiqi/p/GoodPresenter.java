@@ -46,7 +46,7 @@ public class GoodPresenter implements GoodContract.Presenter {
     }
 
     @Override
-    public void loadGoods(GoodFilterBean filter) {
+    public void loadGoods(GoodFilterBean filter,final boolean loadingMore) {
         Observable<StyleBean> observable =mDataManager.getStyleData(filter.getShop_id(),filter.getSize(),filter.getSeller_cid(),filter.getPindex(),filter.getFrom(),filter.getPrice2(),
                 filter.getDtype(),filter.getZdid(), filter.getPrice1(),filter.getPsize(),filter.getOrderby(),filter.getColor() ,filter.getSpm(),filter.getKeyword(),filter.getMid(),filter.getFid());
         observable.subscribeOn(Schedulers.io())
@@ -66,7 +66,7 @@ public class GoodPresenter implements GoodContract.Presenter {
                 .subscribe(new Consumer<List<GoodBean>>() {
                     @Override
                     public void accept(List<GoodBean> goodBeans) throws Exception {
-                        view.showResult(goodBeans);
+                        view.showResult(goodBeans,loadingMore);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

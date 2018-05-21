@@ -2,6 +2,8 @@ package yonky.yiqi.v;
 
 import android.animation.ObjectAnimator;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -43,12 +45,16 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
     ConstraintLayout csLayout;
     @BindView(R.id.connect)
     TextView tvConnect;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
 //    @BindView(R.id.tab_layout)
 //    TabLayout tab;
     DetaiAdapter mAdapter;
     GoodDetailPresenter mPresenter;
     GoodFilterBean goodFilter;
     ShopFilterBean shopFilter;
+
+    boolean isLoadingMore;
 
 //    SharedPreferences preferences;
     @Override
@@ -64,7 +70,7 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
 
     @Override
     protected void initEventAndData() {
-
+        fab.hide();
 //        preferences=mContext.getSharedPreferences("data",0);
 //        String regionId=preferences.getString("regionId","42");
 //        setTabs(tab,LayoutInflater.from(mContext),drawables,titles);
@@ -100,6 +106,27 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
         mPresenter.loadImgs(goodFilter);
         mPresenter.loadGoodDetail(goodFilter);
         mPresenter.getShopDetail(shopFilter);
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int firstItemPosition =((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+                int lastItemPosition =((LinearLayoutManager)recyclerView.getLayoutManager()).findLastVisibleItemPosition();
+                int totalCount =recyclerView.getLayoutManager().getItemCount();
+                if(firstItemPosition<5||dy>0 ){
+                    fab.hide();
+                }else{
+                    fab.show();
+                }
+            }
+        });
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.smoothScrollToPosition(0);
+            }
+        });
 
     }
 

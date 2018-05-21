@@ -33,7 +33,8 @@ public class StylePresenter implements StyleContract.Presenter {
     //    http://api2.17zwd.com/rest/goods/search?price1=0.0&psize=10&size=&seller_cid=&orderby=mr&color=&keyword=&pindex=1&from=android&price2=9999.0&dtype=sks&zdid=48
 //搜款式
     @Override
-    public void loadDatas(GoodFilterBean filter) {
+    public void loadDatas(GoodFilterBean filter, final boolean isLoadMore) {
+
         Observable<StyleBean> observable =dataManager.getStyleData(filter.getShop_id(),filter.getSize(),filter.getSeller_cid(),filter.getPindex(),filter.getFrom(),filter.getPrice2(),
                 filter.getDtype(),filter.getZdid(), filter.getPrice1(),filter.getPsize(),filter.getOrderby(),filter.getColor() ,filter.getSpm(),filter.getKeyword(),filter.getMid(),filter.getFid());
         observable.subscribeOn(Schedulers.io())
@@ -53,7 +54,7 @@ public class StylePresenter implements StyleContract.Presenter {
                 .subscribe(new Consumer<List<GoodBean>>() {
                     @Override
                     public void accept(List<GoodBean> goodBeans) throws Exception {
-                        view.showResult(goodBeans);
+                        view.showResult(goodBeans,isLoadMore);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

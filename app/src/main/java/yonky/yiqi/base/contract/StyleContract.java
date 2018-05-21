@@ -13,12 +13,12 @@ import yonky.yiqi.bean.ShopFilterBean;
 
 public interface StyleContract {
     interface View extends BaseView{
-        void showResult(List<GoodBean> beanList);
+        void showResult(List<GoodBean> beanList,boolean isLoadingMore);
         void showGoodAttr(GoodAttributeBean.GoodsItemGetResponseBean bean);
         void showRegion(List<RegionBean.ItemsBean> regionList,int type);
     }
     interface Presenter extends BasePresenter<View>{
-        void loadDatas(GoodFilterBean filter);
+        void loadDatas(GoodFilterBean filter,boolean isLoadingMore);
         void getGoodColor(String type );
     }
 

@@ -15,11 +15,11 @@ import yonky.yiqi.bean.ShopFilterBean;
 
 public interface GoodContract {
     interface View extends BaseView{
-        void showResult(List<GoodBean> list);
+        void showResult(List<GoodBean> list,boolean isLoadingMore);
         void showShop(ShopBean shopBean);
     }
     interface Presenter extends BasePresenter<View>{
-        void loadGoods(GoodFilterBean filter);
+        void loadGoods(GoodFilterBean filter,boolean isLoadingMore);
         void loadShop(ShopFilterBean filter);
     }
 }
