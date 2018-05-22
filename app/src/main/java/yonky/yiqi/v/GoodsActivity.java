@@ -32,6 +32,8 @@ import yonky.yiqi.p.GoodPresenter;
 import yonky.yiqi.util.GlideUtil;
 import yonky.yiqi.v.adapter.StyleAdapter;
 
+import static yonky.yiqi.v.adapter.StyleAdapter.TYPE_NODATA;
+
 /**
  * Created by Administrator on 2018/5/14.
  */
@@ -99,7 +101,18 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
 
 
         mAdapter = new StyleAdapter(mContext,mGoodList);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(mContext,2));
+        GridLayoutManager layoutManager = new GridLayoutManager(mContext,2);
+        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if( mAdapter.getItemViewType(position)==TYPE_NODATA){
+                    return 2;
+                }else{
+                    return 1;
+                }
+            }
+        });
+        mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
 
@@ -159,6 +172,12 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
             mAdapter.setBeanList(list);
         }
 
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showEmpty() {
+        mAdapter.setEmptyCount(1);
         mAdapter.notifyDataSetChanged();
     }
 

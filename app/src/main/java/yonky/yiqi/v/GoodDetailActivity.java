@@ -114,7 +114,7 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
                 int firstItemPosition =((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
                 int lastItemPosition =((LinearLayoutManager)recyclerView.getLayoutManager()).findLastVisibleItemPosition();
                 int totalCount =recyclerView.getLayoutManager().getItemCount();
-                if(firstItemPosition<5||dy>0 ){
+                if(firstItemPosition<3||dy>0 ){
                     fab.hide();
                 }else{
                     fab.show();

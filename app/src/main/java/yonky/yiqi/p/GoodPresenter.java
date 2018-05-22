@@ -50,9 +50,13 @@ public class GoodPresenter implements GoodContract.Presenter {
         Observable<StyleBean> observable =mDataManager.getStyleData(filter.getShop_id(),filter.getSize(),filter.getSeller_cid(),filter.getPindex(),filter.getFrom(),filter.getPrice2(),
                 filter.getDtype(),filter.getZdid(), filter.getPrice1(),filter.getPsize(),filter.getOrderby(),filter.getColor() ,filter.getSpm(),filter.getKeyword(),filter.getMid(),filter.getFid());
         observable.subscribeOn(Schedulers.io())
-                .filter(new Predicate<StyleBean>() {
+                .observeOn(AndroidSchedulers.mainThread())
+                                .filter(new Predicate<StyleBean>() {
                     @Override
                     public boolean test(StyleBean styleBean) throws Exception {
+                        if(styleBean.getStatus_code()==201){
+                            view.showEmpty();
+                        }
                         return styleBean.getStatus_code()==200;
                     }
                 })

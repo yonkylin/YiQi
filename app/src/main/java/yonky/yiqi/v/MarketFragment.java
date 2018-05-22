@@ -1,13 +1,19 @@
 package yonky.yiqi.v;
 
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ImageSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +31,7 @@ import yonky.yiqi.v.adapter.MarketAdapter;
  * Created by Administrator on 2018/5/12.
  */
 
-public class MarketFragment extends BaseFragment implements MarketContract.View{
+public class MarketFragment extends BaseFragment implements MarketContract.View,View.OnClickListener{
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.rv_market)
@@ -34,6 +40,14 @@ public class MarketFragment extends BaseFragment implements MarketContract.View{
     FloatingActionButton fab;
     @BindView(R.id.button)
     Button btRegion;
+    @BindView(R.id.bt_default)
+            Button btDefault;
+    @BindView(R.id.bt_dk)
+    Button btDk;
+    @BindView(R.id.bt_new)
+            Button btNew;
+
+
     MarketAdapter mMarketAdapter;
     List<ShopBean> shopBean;
     ShopFilterBean shopFilter;
@@ -44,6 +58,7 @@ public class MarketFragment extends BaseFragment implements MarketContract.View{
     SharedPreferences mPreferences;
     String regionSelected;
     String zdid;
+    String sort;
 
         @Override
     protected int getLayoutId() {
@@ -115,6 +130,32 @@ public class MarketFragment extends BaseFragment implements MarketContract.View{
 //                fab.setVisibility(View.INVISIBLE);
             }
         });
+btDk.setOnClickListener(this);
+btDefault.setOnClickListener(this);
+btNew.setOnClickListener(this);
+
+    }
+    private int i;
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.bt_default:
+            setColor(btDefault,btDk,btNew);
+            Log.e("MarketFragment"," default is clicked");
+            sort="mr";
+            break;
+            case R.id.bt_dk:
+                Log.e("MarketFragment"," dk is clicked");
+                setColor(btDk,btDefault,btNew);
+
+        }
+    }
+
+    private void setColor(Button bt,Button bt1,Button bt2){
+            bt.setTextColor(getResources().getColor(R.color.colorPrimary));
+            bt1.setTextColor(getResources().getColor(R.color.gray));
+            bt2.setTextColor(getResources().getColor(R.color.gray));
+
     }
 
     @Override

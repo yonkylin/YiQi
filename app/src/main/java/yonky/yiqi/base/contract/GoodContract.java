@@ -17,6 +17,7 @@ public interface GoodContract {
     interface View extends BaseView{
         void showResult(List<GoodBean> list,boolean isLoadingMore);
         void showShop(ShopBean shopBean);
+        void showEmpty();
     }
     interface Presenter extends BasePresenter<View>{
         void loadGoods(GoodFilterBean filter,boolean isLoadingMore);

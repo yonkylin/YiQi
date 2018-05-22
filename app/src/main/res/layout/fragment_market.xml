@@ -36,16 +36,17 @@
                     android:text="默认"/>
 
                 <Button
-                    android:id="@+id/bt_price"
+                    android:id="@+id/bt_dk"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/gray"
+
                     android:background="@color/light_background"
                     android:text="档口号"/>
 
                 <Button
-                    android:id="@+id/bt_newer"
+                    android:id="@+id/bt_new"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -88,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="20dp"
             android:layout_marginRight="8dp"
             android:src="@drawable/top_icon"
             app:backgroundTint="@color/white"

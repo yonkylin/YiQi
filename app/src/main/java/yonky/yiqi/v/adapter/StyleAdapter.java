@@ -20,8 +20,9 @@ import yonky.yiqi.util.GlideUtil;
 import yonky.yiqi.v.GoodDetailActivity;
 
 public class StyleAdapter extends RecyclerView.Adapter <RecyclerView.ViewHolder>{
-    private static final int TYPE_NORMAL=0X01;
-    private static final int TYPE_NODATA=0X02;
+    public static final int TYPE_NORMAL=0X01;
+    public static final int TYPE_NODATA=0X02;
+    private int emptyCount;
 
     List<GoodBean> beanList;
     Context mContext;
@@ -42,7 +43,7 @@ public class StyleAdapter extends RecyclerView.Adapter <RecyclerView.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return beanList.size()==0? 1:beanList.size();
+        return beanList.size()==0? emptyCount:beanList.size();
     }
 
     @NonNull
@@ -111,4 +112,8 @@ public class StyleAdapter extends RecyclerView.Adapter <RecyclerView.ViewHolder>
         this.beanList = beanList;
     }
 
+
+    public void setEmptyCount(int emptyCount) {
+        this.emptyCount = emptyCount;
+    }
 }
