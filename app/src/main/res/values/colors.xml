@@ -8,6 +8,8 @@
     <color name="white">#ffff</color>
 
     <color name="discountBackground">#3786f9</color>
-    <color name="login_button_background">#b8b8b8</color>
+    <color name="light_gray">#b8b8b8</color>
     <color name="light_background">#f7f7f7</color>
+    <color name="light">#d1d1d1</color>
+
 </resources>

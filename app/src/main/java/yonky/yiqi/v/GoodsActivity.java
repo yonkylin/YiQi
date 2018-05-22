@@ -102,6 +102,7 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
         mRecyclerView.setLayoutManager(new GridLayoutManager(mContext,2));
         mRecyclerView.setAdapter(mAdapter);
 
+
         mPresenter.loadGoods(goodFilter,false);
         mPresenter.loadShop(shopFilter);
 

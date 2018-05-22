@@ -52,6 +52,8 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
     Button btFilter;
     @BindView(R.id.fab)
     FloatingActionButton fab;
+    @BindView(R.id.button)
+            Button btRegion;
 
     boolean isLoadingMore;
 
@@ -137,6 +139,8 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
                 recyclerView.smoothScrollToPosition(0);
             }
         });
+
+        btRegion.setText(preferences.getString("region","广州"));
 
     }
 

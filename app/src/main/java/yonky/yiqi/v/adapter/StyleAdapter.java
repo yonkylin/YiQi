@@ -19,7 +19,10 @@ import yonky.yiqi.bean.GoodBean;
 import yonky.yiqi.util.GlideUtil;
 import yonky.yiqi.v.GoodDetailActivity;
 
-public class StyleAdapter extends RecyclerView.Adapter <StyleAdapter.StyleHolder>{
+public class StyleAdapter extends RecyclerView.Adapter <RecyclerView.ViewHolder>{
+    private static final int TYPE_NORMAL=0X01;
+    private static final int TYPE_NODATA=0X02;
+
     List<GoodBean> beanList;
     Context mContext;
 
@@ -29,24 +32,38 @@ public class StyleAdapter extends RecyclerView.Adapter <StyleAdapter.StyleHolder
     }
 
     @Override
+    public int getItemViewType(int position) {
+        if(beanList.size()==0){
+            return TYPE_NODATA;
+        }else {
+            return TYPE_NORMAL;
+        }
+    }
+
+    @Override
     public int getItemCount() {
-        return beanList==null? 0:beanList.size();
+        return beanList.size()==0? 1:beanList.size();
     }
 
     @NonNull
     @Override
-    public StyleHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new StyleHolder(LayoutInflater.from(mContext).inflate(R.layout.item_style,parent,false));
-    }
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if(viewType==TYPE_NODATA){
+           return new NoDataHolder(LayoutInflater.from(mContext).inflate(R.layout.item_nodata,parent,false));
+        }else{
+            return new StyleHolder(LayoutInflater.from(mContext).inflate(R.layout.item_style,parent,false));
+        }
+        }
+
 
 
     @Override
-    public void onBindViewHolder(@NonNull StyleHolder holder, final int position) {
-        if(beanList!=null){
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
+        if(beanList.size()!=0){
             GoodBean bean = beanList.get(position);
-            GlideUtil.loadImage(bean.getTb_img(),holder.imageView);
-            holder.title.setText(bean.getTitle());
-            holder.price.setText(mContext.getResources().getString(R.string.price,bean.getPrice2()));
+            GlideUtil.loadImage(bean.getTb_img(),((StyleHolder)holder).imageView);
+            ((StyleHolder)holder).title.setText(bean.getTitle());
+            ((StyleHolder)holder).price.setText(mContext.getResources().getString(R.string.price,bean.getPrice2()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +93,13 @@ public class StyleAdapter extends RecyclerView.Adapter <StyleAdapter.StyleHolder
         public StyleHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+        }
+    }
+
+    class NoDataHolder extends RecyclerView.ViewHolder{
+
+        public NoDataHolder(View itemView) {
+            super(itemView);
         }
     }
 
