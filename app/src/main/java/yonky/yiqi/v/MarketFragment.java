@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import yonky.yiqi.R;
 import yonky.yiqi.base.BaseFragment;
 import yonky.yiqi.base.contract.MarketContract;
@@ -31,7 +32,7 @@ import yonky.yiqi.v.adapter.MarketAdapter;
  * Created by Administrator on 2018/5/12.
  */
 
-public class MarketFragment extends BaseFragment implements MarketContract.View,View.OnClickListener{
+public class MarketFragment extends BaseFragment implements MarketContract.View{
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.rv_market)
@@ -122,39 +123,112 @@ public class MarketFragment extends BaseFragment implements MarketContract.View,
             }
         }
         );
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                recyclerView.scrollToPosition(0);
-                recyclerView.smoothScrollToPosition(0);
-//                fab.setVisibility(View.INVISIBLE);
-            }
-        });
-btDk.setOnClickListener(this);
-btDefault.setOnClickListener(this);
-btNew.setOnClickListener(this);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                recyclerView.scrollToPosition(0);
+//                recyclerView.smoothScrollToPosition(0);
+////                fab.setVisibility(View.INVISIBLE);
+//            }
+//        });
+//btDk.setOnClickListener(this);
+//btDefault.setOnClickListener(this);
+//btNew.setOnClickListener(this);
 
     }
-    private int i;
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.bt_default:
-            setColor(btDefault,btDk,btNew);
-            Log.e("MarketFragment"," default is clicked");
-            sort="mr";
-            break;
-            case R.id.bt_dk:
-                Log.e("MarketFragment"," dk is clicked");
-                setColor(btDk,btDefault,btNew);
+//    private int i,j;
+//    @Override
+//    public void onClick(View view) {
+//        switch (view.getId()){
+//            case R.id.bt_default:
+//            setColor(btDefault,btDk,btNew,i);
+////            Log.e("MarketFragment"," default is clicked");
+//            sort="mr";
+//                shopFilter.setOrderby(sort);
+//                mPresenter.loadData(shopFilter,false);
+//                break;
+//            case R.id.bt_dk:
+//                Log.e("MarketFragment"," dk is clicked");
+//                setColor(btDk,btDefault,btNew,i);
+//                if(i%2==0){
+//                    sort="dkOn_asc";
+//                }else{
+//                    sort="dkOn_desc";
+//                }
+//                i++;
+//                j=0;
+//                shopFilter.setOrderby(sort);
+//                mPresenter.loadData(shopFilter,false);
+//
+//                break;
+//            case R.id.bt_new:
+//                setColor(btNew,btDefault,btDk,j);
+//                if(j%2==0){
+//                    sort="newOn_asc";
+//                }else{
+//                    sort="newOn_desc";
+//                }
+//                j++;
+//                i=0;
+//                shopFilter.setOrderby(sort);
+//                mPresenter.loadData(shopFilter,false);
+//                break;
+//
+//        }
+//
+//    }
 
+//    设置点击事件
+    @OnClick(R.id.bt_default) void setBtDefault(){
+        setColor(btDefault,btDk,btNew,i);
+        sort="mr";
+        shopFilter.setOrderby(sort);
+        mPresenter.loadData(shopFilter,false);
+    }
+    private int i,j;
+    @OnClick(R.id.bt_new)void setBtNew(){
+        setColor(btNew,btDefault,btDk,j);
+        if(j%2==0){
+            sort="newOn_asc";
+        }else{
+            sort="newOn_desc";
         }
+        j++;
+        i=0;
+        shopFilter.setOrderby(sort);
+        mPresenter.loadData(shopFilter,false);
     }
 
-    private void setColor(Button bt,Button bt1,Button bt2){
-            bt.setTextColor(getResources().getColor(R.color.colorPrimary));
-            bt1.setTextColor(getResources().getColor(R.color.gray));
-            bt2.setTextColor(getResources().getColor(R.color.gray));
+    @OnClick(R.id.bt_dk)void setBtDk(){
+        setColor(btDk,btDefault,btNew,i);
+        if(i%2==0){
+            sort="dkOn_asc";
+        }else{
+            sort="dkOn_desc";
+        }
+        i++;
+        j=0;
+        shopFilter.setOrderby(sort);
+        mPresenter.loadData(shopFilter,false);
+    }
+    @OnClick(R.id.fab)void setFab(){
+        recyclerView.smoothScrollToPosition(0);
+    }
+    private void setColor(Button bt,Button bt1,Button bt2,int count){
+
+        bt.setTextColor(getResources().getColor(R.color.colorPrimary));
+        bt1.setTextColor(getResources().getColor(R.color.gray));
+        bt2.setTextColor(getResources().getColor(R.color.gray));
+        bt1.setBackgroundResource(R.color.light_background);
+        bt2.setBackgroundResource(R.color.light_background);
+        if(bt.getId()!=R.id.bt_default){
+           if(count%2==0){
+               bt.setBackgroundResource(R.drawable.background_sort_up);
+           }else{
+               bt.setBackgroundResource(R.drawable.background_sort_down);
+           }
+        }
+
 
     }
 

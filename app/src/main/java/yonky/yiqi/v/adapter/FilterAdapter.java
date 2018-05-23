@@ -78,10 +78,10 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterHold
     @Override
     public void onBindViewHolder(@NonNull final FilterHolder holder, final int position) {
         if(position!=select){
-            holder.tv.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+            holder.tv.setBackgroundResource(R.drawable.background_rect_gray);
             holder.tv.setTextColor(mContext.getResources().getColor(R.color.gray));
         }else{
-            holder.tv.setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimary));
+            holder.tv.setBackgroundResource(R.color.colorPrimary);
             holder.tv.setTextColor(mContext.getResources().getColor(R.color.white));
         }
         if(type==TYPE_KV){

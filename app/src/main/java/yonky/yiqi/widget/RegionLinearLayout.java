@@ -2,10 +2,8 @@ package yonky.yiqi.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
@@ -18,8 +16,10 @@ import yonky.yiqi.util.MyUtil;
  */
 
 public class RegionLinearLayout extends LinearLayout {
-    private Paint mPaint;
-    private Path path;
+    private Paint mPaint1;
+    private Paint mPaint2;
+    private Path path1;
+    private Path path2;
     Context mContext;
     int x0,x1,x2,x3,h;
     public RegionLinearLayout(Context context) {
@@ -41,9 +41,15 @@ public class RegionLinearLayout extends LinearLayout {
        setWillNotDraw(false);
 
         this.mContext = mContext;
-       mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-       mPaint.setColor(getResources().getColor(R.color.light_background));
-       path = new Path();
+       mPaint1 = new Paint(Paint.ANTI_ALIAS_FLAG);
+       mPaint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
+       mPaint2.setStyle(Paint.Style.STROKE);
+       mPaint2.setStrokeWidth(1);
+       mPaint2.setColor(getResources().getColor(R.color.light));
+
+       mPaint1.setColor(getResources().getColor(R.color.light_background));
+       path1 = new Path();
+       path2 = new Path();
        x0=0;
        h=MyUtil.dp2px(mContext,5);
        x1=MyUtil.dp2px(mContext,40);
@@ -55,17 +61,23 @@ public class RegionLinearLayout extends LinearLayout {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        path.moveTo(x0,h);
-        path.lineTo(x1,h);
-        path.lineTo(x2,0);
-        path.lineTo(x3,h);
-        path.lineTo(getWidth(),h);
-        path.lineTo(getWidth(),getHeight());
-        path.lineTo(0,getHeight());
+
+        path1.moveTo(x0,h);
+        path1.lineTo(x1,h);
+        path1.lineTo(x2,0);
+        path1.lineTo(x3,h);
+        path1.lineTo(getWidth(),h);
+        path1.lineTo(getWidth(),getHeight());
+        path1.lineTo(0,getHeight());
+        path1.close();
+        canvas.drawPath(path1, mPaint1);
 
 
-
-        path.close();
-        canvas.drawPath(path,mPaint);
+        path2.moveTo(x0,h);
+        path2.lineTo(x1,h);
+        path2.lineTo(x2,0);
+        path2.lineTo(x3,h);
+        path2.lineTo(getWidth(),h);
+        canvas.drawPath(path2,mPaint2);
     }
 }

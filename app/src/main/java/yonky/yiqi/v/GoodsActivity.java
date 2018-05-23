@@ -1,9 +1,12 @@
 package yonky.yiqi.v;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -40,6 +43,8 @@ import static yonky.yiqi.v.adapter.StyleAdapter.TYPE_NODATA;
 
 public class GoodsActivity extends BaseActivity implements GoodContract.View{
     public static final String TAG=GoodsActivity.class.getSimpleName();
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     @BindView(R.id.rv_goods)
     RecyclerView mRecyclerView;
     @BindView(R.id.iv_shop)
@@ -64,7 +69,11 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
         return R.layout.activity_goods;
     }
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
+    }
 
     @Override
     protected void initEventAndData() {

@@ -48,6 +48,12 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
     SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.rv_style)
     RecyclerView recyclerView;
+    @BindView((R.id.bt_default))
+    Button btDefault;
+    @BindView(R.id.bt_new)
+    Button btNew;
+    @BindView(R.id.bt_price)
+    Button btPrice;
     @BindView(R.id.bt_filter)
     Button btFilter;
     @BindView(R.id.fab)
@@ -56,6 +62,7 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
             Button btRegion;
 
     boolean isLoadingMore;
+    String sort;
 
 
      StyleAdapter styleAdapter;
@@ -132,19 +139,92 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
                 }
             }
         });
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recyclerView.smoothScrollToPosition(0);
-            }
-        });
-
         btRegion.setText(preferences.getString("region","广州"));
+
+//     fab.setOnClickListener(this);
+//     btDefault.setOnClickListener(this);
+//     btNew.setOnClickListener(this);
+//     btPrice.setOnClickListener(this);
 
     }
 
+//
+//    public void onClick(View v) {
+//        switch (v.getId()){
+//
+//            case R.id.bt_new:
+////                setColor(btNew,btDefault,btPrice);
+////                sort="newOn_asc";
+////                filterBean.setOrderby(sort);
+////                mPresenter.loadDatas(filterBean,false);
+////                break;
+//            case R.id.bt_price:
+////                setColor(btPrice,btNew,btDefault);
+////                if(i%2==0){
+////                    btPrice.setBackgroundResource(R.drawable.background_sort_up);
+////                    sort="priOn_asc";
+////                }else{
+////                    btPrice.setBackgroundResource(R.drawable.background_sort_down);
+////                    sort="priOn_desc";
+////                }
+////                filterBean.setOrderby(sort);
+////                mPresenter.loadDatas(filterBean,false);
+////                i++;
+////               break;
+//            case R.id.fab:
+//                recyclerView.smoothScrollToPosition(0);
+//                break;
+//
+//        }
+//    }
+    //    逛商场 筛选按钮
+    @OnClick(R.id.bt_filter)  void setBtFilter(){
+        PopupWindow mPopupWindow=mWindowGoodFilter.newWindow(mContext);
+        mPopupWindow.showAsDropDown(btFilter);
 
+    }
+    @OnClick(R.id.bt_default) void setBtDefault(){
+        setColor(btDefault,btNew,btPrice);
+        sort="mr";
+        filterBean.setOrderby(sort);
+        mPresenter.loadDatas(filterBean,false);
+    }
+
+    private int i;
+    @OnClick(R.id.bt_price) void setBtPrice(){
+        setColor(btPrice,btNew,btDefault);
+        if(i%2==0){
+            btPrice.setBackgroundResource(R.drawable.background_sort_up);
+            sort="priOn_asc";
+        }else{
+            btPrice.setBackgroundResource(R.drawable.background_sort_down);
+            sort="priOn_desc";
+        }
+        filterBean.setOrderby(sort);
+        mPresenter.loadDatas(filterBean,false);
+        i++;
+    }
+    @OnClick(R.id.bt_new)void setBtNew(){
+        setColor(btNew,btDefault,btPrice);
+        sort="newOn_asc";
+        filterBean.setOrderby(sort);
+        mPresenter.loadDatas(filterBean,false);
+    }
+    @OnClick(R.id.fab)void setFab(){
+        recyclerView.smoothScrollToPosition(0);
+    }
+
+
+
+    private void setColor(Button bt, Button bt1, Button bt2){
+
+        bt.setTextColor(getResources().getColor(R.color.colorPrimary));
+        bt1.setTextColor(getResources().getColor(R.color.gray));
+        bt2.setTextColor(getResources().getColor(R.color.gray));
+        bt1.setBackgroundResource(R.color.light_background);
+        bt2.setBackgroundResource(R.color.light_background);
+
+    }
 
     @Override
     public void showResult(List<GoodBean> beanList,boolean loadingMore) {
@@ -181,16 +261,8 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
         }
     }
 
-    //    逛商场 筛选按钮
-    @OnClick(R.id.bt_filter)  void filter(){
-
-        PopupWindow mPopupWindow=mWindowGoodFilter.newWindow(mContext);
-
-        mPopupWindow.showAsDropDown(btFilter);
 
 
-
-    }
 
     @Override
     public void onClick() {
@@ -199,6 +271,8 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
         filterBean.setColor(mWindowGoodFilter.getColor());
         filterBean.setSize(mWindowGoodFilter.getSize());
         filterBean.setPindex("1");
+        filterBean.setPrice1(mWindowGoodFilter.getPrice1());
+        filterBean.setPrice2(mWindowGoodFilter.getPrice2());
         mPresenter.loadDatas(filterBean,false);
     }
 }

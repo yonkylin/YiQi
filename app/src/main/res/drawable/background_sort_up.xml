@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/light_background"/>
+    <item
+          android:gravity="right|center_vertical"
+          android:right="5dp"
+
+        >
+        <bitmap android:src="@drawable/sort_up"
+                android:tileMode="disabled"
+            />
+    </item>
+</layer-list>
+
+<!--<bitmap xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:src="@drawable/sort_up"-->
+        <!--android:gravity="center_vertical|right"-->
+    <!--android:tileMode="disabled"-->
+        <!---->
+
+
+    <!--&gt;-->
+
+<!--</bitmap>-->

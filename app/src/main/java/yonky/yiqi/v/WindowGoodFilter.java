@@ -9,11 +9,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -51,6 +54,8 @@ private int selectSize=TYPE_SELECTED_NONE;
 private int selectRegion=TYPE_SELECTED_NONE;
 private int selectFloor=TYPE_SELECTED_NONE;
 private int colorExpandSelected,sizeExpandSelected,regionExpandSelected,floorExpandSelected;
+private TextView tvPrice1,tvPrice2;
+private String price1,price2;
 
     public static WindowGoodFilter getInstance(){
         if(mWindowGoodFilter==null){
@@ -68,6 +73,11 @@ private int colorExpandSelected,sizeExpandSelected,regionExpandSelected,floorExp
         mPopupWindow.setContentView(contentView);
 
 //        RecyclerView rvColor;
+        tvPrice1=contentView.findViewById(R.id.price_from);
+        tvPrice2=contentView.findViewById(R.id.price_to);
+
+        tvPrice1.setText(price1);
+        tvPrice2.setText(price2);
 
 
         RecyclerView rvColor=contentView.findViewById(R.id.rv_color);
@@ -105,7 +115,8 @@ private int colorExpandSelected,sizeExpandSelected,regionExpandSelected,floorExp
                 selectColor=colorAdapter.getSelect();
                 selectSize=sizeAdapter.getSelect();
                 selectRegion=sizeAdapter.getSelect();
-
+                price1=String.valueOf(tvPrice1.getText());
+                price2=String.valueOf(tvPrice2.getText());
                 mPopupWindow.dismiss();
                 listener.onClick();
             }
@@ -228,12 +239,20 @@ private int colorExpandSelected,sizeExpandSelected,regionExpandSelected,floorExp
 
         return selectSize==TYPE_SELECTED_NONE? "":clothList.get(selectSize).getValue();
     }
+    public String getPrice1(){
+        return price1.equals("")? "0.0":tvPrice1.getText()+".0";
+    }
+    public String getPrice2(){
+        return price2.equals("")? "0.0":tvPrice2.getText()+".0";
+    }
 
     public void resetSelect(){
         selectColor =TYPE_SELECTED_NONE;
         selectSize=TYPE_SELECTED_NONE;
         colorAdapter.resetSelect();
         sizeAdapter.resetSelect();
+        tvPrice1.setText("");
+        tvPrice2.setText("");
     }
 
 
