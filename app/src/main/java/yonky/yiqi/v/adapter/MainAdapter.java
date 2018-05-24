@@ -51,6 +51,8 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public static final int TYPE_GOODS =0X20;    //打开店铺详情
     public static final int TYPE_GOOD_DETAIL =0X21;    //打开商品详情
+    public static final int TYPE_SERVICE =0X22;    //打开每日推荐，模特实拍等
+
 
 
 

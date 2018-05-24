@@ -35,9 +35,9 @@ public class StyleAdapter extends RecyclerView.Adapter <RecyclerView.ViewHolder>
     @Override
     public int getItemViewType(int position) {
         if(beanList.size()==0){
-            return TYPE_NODATA;
+            return TYPE_NODATA;  //加载失败或返回201 没有数据
         }else {
-            return TYPE_NORMAL;
+            return TYPE_NORMAL; //正常情况下
         }
     }
 

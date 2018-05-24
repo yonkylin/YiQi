@@ -1,6 +1,7 @@
 package yonky.yiqi.v.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +26,7 @@ import yonky.yiqi.R;
 import yonky.yiqi.bean.GoodBean;
 import yonky.yiqi.bean.ShopBean;
 import yonky.yiqi.util.GlideUtil;
+import yonky.yiqi.v.GoodsActivity;
 
 public class DetaiAdapter extends RecyclerView.Adapter {
     public static final int TYPE_BANNER=0X001;
@@ -121,6 +123,14 @@ public class DetaiAdapter extends RecyclerView.Adapter {
                     ((ShopHolder) holder).shopName.setText(shopBean.getShop_name());
                     ((ShopHolder) holder).discount.setText(shopBean.getDiscount());
                     ((ShopHolder) holder).position.setText(shopBean.getMarket()+"-"+ shopBean.getFloor()+"-"+ shopBean.getDangkou());
+                    ((ShopHolder) holder).goShop.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(mContext, GoodsActivity.class);
+                            intent.putExtra("shopbean",shopBean);
+                            mContext.startActivity(intent);
+                        }
+                    });
                 }
 
 

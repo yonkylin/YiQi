@@ -63,6 +63,7 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
 
     boolean isLoadingMore;
     String sort;
+    String dtype;
 
 
      StyleAdapter styleAdapter;
@@ -78,6 +79,8 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
    List<RegionBean.ItemsBean> regionList;
    List<RegionBean.ItemsBean> floorList;
    WindowGoodFilter mWindowGoodFilter;
+
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_style;
@@ -85,6 +88,12 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
 
     @Override
     protected void initEventAndData() {
+        filterBean = new GoodFilterBean();
+        if(getArguments()!=null){
+            dtype= getArguments().getString("dtype");
+            filterBean.setDtype(dtype);
+        }
+
         fab.hide();
         preferences = mContext.getSharedPreferences("data",0);
         mWindowGoodFilter = WindowGoodFilter.getInstance();
@@ -98,10 +107,12 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
         mPresenter.attachView(this);
 
         goodBeans = new ArrayList<>();
-        filterBean = new GoodFilterBean();
+
         styleAdapter= new StyleAdapter(mContext,goodBeans);
         recyclerView.setLayoutManager(new GridLayoutManager(mContext,2));
         recyclerView.setAdapter(styleAdapter);
+
+        filterBean.setZdid(preferences.getString("regionId","42"));
 
         mPresenter.loadDatas(filterBean,false);
         mPresenter.getGoodColor("get_colors");

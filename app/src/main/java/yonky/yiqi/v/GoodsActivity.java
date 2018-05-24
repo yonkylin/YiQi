@@ -171,7 +171,8 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
         mShopName.setText(shopBean.getShop_name());
 //        mToolbar.setTitle(shopBean.getShop_name());
         mPosition.setText(shopBean.getMarket()+"-"+shopBean.getFloor()+"-"+shopBean.getDangkou());
-        MultiTransformation multi= new MultiTransformation(new BlurTransformation(25,2),new ColorFilterTransformation(R.color.gray));
+//        BlurTransformation blurTransformation = new BlurTransformation(15,2);
+        MultiTransformation multi= new MultiTransformation(new BlurTransformation(15,2),new ColorFilterTransformation(R.color.light_gray));
         Glide.with(this).load(shopBean.getSerller_head_original())
                 .apply(RequestOptions.bitmapTransform(multi))
                 .into(mShopBackground);

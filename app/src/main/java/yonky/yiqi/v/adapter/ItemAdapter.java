@@ -1,6 +1,7 @@
 package yonky.yiqi.v.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import static yonky.yiqi.v.adapter.MainAdapter.TYPE_GOODS;
 import static yonky.yiqi.v.adapter.MainAdapter.TYPE_ITEM_MRXK;
 import static yonky.yiqi.v.adapter.MainAdapter.TYPE_ITEM_MY;
 import static yonky.yiqi.v.adapter.MainAdapter.TYPE_ITEM_TJBB;
+import static yonky.yiqi.v.adapter.MainAdapter.TYPE_SERVICE;
 
 /**
  * Created by Administrator on 2018/5/10.
@@ -33,10 +35,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     private Context mContext;
     private int type;
     private int[] drawables;
+    private SharedPreferences preferences;
 
     public ItemAdapter(Context context) {
         mContext = context;
         drawables = new int[]{R.drawable.home_mrxk,R.drawable.home_mtsp,R.drawable.home_scbb,R.drawable.home_scdk,R.drawable.home_wtk};
+        preferences= context.getSharedPreferences("data",0);
     }
 
     @NonNull
@@ -54,6 +58,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 layoutParams.height= MyUtil.dp2px(mContext,100);
                 holder.iv.setLayoutParams(layoutParams);
                 holder.iv.setImageResource(drawables[position]);
+                if(position==0){
+                    holder.itemView.setOnClickListener(new MyClickListener(mContext,"mrxk",TYPE_SERVICE));
+                }else if(position==1){
+                    holder.itemView.setOnClickListener(new MyClickListener(mContext,"mtsp",TYPE_SERVICE));
+                }
+
                 break;
             case TYPE_ITEM_TJBB:
                 layoutParams.width=MyUtil.dp2px(mContext,130);

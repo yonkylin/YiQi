@@ -13,4 +13,5 @@
     <color name="light">#d1d1d1</color>
 
     <color name="half_transparent">#66000000</color>
+    <color name="test">#808080</color>
 </resources>

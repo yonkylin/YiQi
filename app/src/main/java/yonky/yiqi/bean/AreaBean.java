@@ -41,7 +41,7 @@ public class AreaBean implements Serializable{
     private String img_url2;
     private String spm;
     private int seconds;
-    private String type;
+    private String dtype="sks";
 
     public String getSite_id() {
         return site_id;
@@ -171,4 +171,11 @@ public class AreaBean implements Serializable{
         this.seconds = seconds;
     }
 
+    public String getDtype() {
+        return dtype;
+    }
+
+    public void setDtype(String dtype) {
+        this.dtype = dtype;
+    }
 }
