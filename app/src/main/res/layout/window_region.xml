@@ -8,7 +8,7 @@
         android:id="@+id/region_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+
         >
 
         <android.support.v7.widget.RecyclerView

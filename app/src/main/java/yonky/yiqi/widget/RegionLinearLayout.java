@@ -43,11 +43,9 @@ public class RegionLinearLayout extends LinearLayout {
         this.mContext = mContext;
        mPaint1 = new Paint(Paint.ANTI_ALIAS_FLAG);
        mPaint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
-       mPaint2.setStyle(Paint.Style.STROKE);
-       mPaint2.setStrokeWidth(1);
-       mPaint2.setColor(getResources().getColor(R.color.light));
+       mPaint2.setColor(getResources().getColor(R.color.light_background));
 
-       mPaint1.setColor(getResources().getColor(R.color.light_background));
+       mPaint1.setColor(getResources().getColor(R.color.light));
        path1 = new Path();
        path2 = new Path();
        x0=0;
@@ -73,11 +71,13 @@ public class RegionLinearLayout extends LinearLayout {
         canvas.drawPath(path1, mPaint1);
 
 
-        path2.moveTo(x0,h);
+        path2.lineTo(x0,h);
         path2.lineTo(x1,h);
         path2.lineTo(x2,0);
         path2.lineTo(x3,h);
         path2.lineTo(getWidth(),h);
+        path2.lineTo(getWidth(),0);
+        path2.close();
         canvas.drawPath(path2,mPaint2);
     }
 }

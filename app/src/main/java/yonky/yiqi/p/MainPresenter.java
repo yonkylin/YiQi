@@ -51,7 +51,7 @@ public class MainPresenter implements MainContract.Presenter {
 //        }
 //        mCompositeDisposable.add(compositeDisposable);
 //    }
-
+//  http://api2.17zwd.com/rest/popularize/get_home_data?from=android&zdid=48&tag=A&debug=false  首页
 
     @Override
     public void loadDatas(String tag,String zdid) {

@@ -12,5 +12,5 @@
     <color name="light_background">#f7f7f7</color>
     <color name="light">#d1d1d1</color>
 
-    <color name="half_transparent"/>
+    <color name="half_transparent">#66000000</color>
 </resources>

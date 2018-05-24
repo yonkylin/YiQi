@@ -3,6 +3,7 @@ package yonky.yiqi.v;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -57,7 +58,8 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
     TextView mPosition;
     @BindView(R.id.fab)
         FloatingActionButton fab;
-
+    @BindView(R.id.ctl)
+    CollapsingToolbarLayout mCollapsingToolbarLayout;
     boolean isLoadingMore;
     StyleAdapter mAdapter;
     List<GoodBean> mGoodList;
@@ -98,6 +100,7 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
             shopFilter.setShop_id(areaBean.getShop_id());
             shopFilter.setSpm(areaBean.getSpm());
             shopFilter.setZdid(areaBean.getSite_id());
+
         }else if(shopBean!=null){
             goodFilter.setShop_id(shopBean.getShop_id());
             goodFilter.setSpm(shopBean.getSpm());
@@ -105,6 +108,7 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
             shopFilter.setShop_id(shopBean.getShop_id());
             shopFilter.setSpm(shopBean.getSpm());
             shopFilter.setZdid(shopBean.getSite_id());
+
         }
 
 
@@ -165,6 +169,7 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
     public void showShop(ShopBean shopBean) {
         GlideUtil.loadRoundImage(shopBean.getSerller_head_original(),mAvatar);
         mShopName.setText(shopBean.getShop_name());
+//        mToolbar.setTitle(shopBean.getShop_name());
         mPosition.setText(shopBean.getMarket()+"-"+shopBean.getFloor()+"-"+shopBean.getDangkou());
         MultiTransformation multi= new MultiTransformation(new BlurTransformation(25,2),new ColorFilterTransformation(R.color.gray));
         Glide.with(this).load(shopBean.getSerller_head_original())

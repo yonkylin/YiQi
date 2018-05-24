@@ -69,25 +69,22 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     private Context mContext;
-//    private LayoutHelper mLayoutHelper;
-//    private RecyclerView.LayoutParams mLayoutParams;
-//    private int count =0;
 
-
-//    public MainAdapter(Context context, LayoutHelper layoutHelper, int count){
     public MainAdapter(Context context){
-//        this(context,layoutHelper,count,new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,300));
-//    }
-//    public MainAdapter(Context context,LayoutHelper layoutHelper,int count, @NonNull RecyclerView.LayoutParams layoutParams){
+
         this.mContext = context;
-//        this.mLayoutHelper = layoutHelper;
-//        this.count = count;
-//        this.mLayoutParams = layoutParams;
-
-
         titles = new String[]{"推荐宝贝","精品热卖","每日新款"};
-    }
 
+        bannerList= new ArrayList<>();
+        b1List=new ArrayList<>();
+        b2List=new ArrayList<>();
+        c1List=new ArrayList<>();
+        c2List=new ArrayList<>();
+        dList=new ArrayList<>();
+        eList=new ArrayList<>();
+
+    }
+//这里暂时还不是动态的，待修改
     @Override
     public int getItemViewType(int position) {
         switch(position){
@@ -122,48 +119,22 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-/*    public AreaBean getAreaBean(int position){
-        AreaBean bean = new AreaBean();
-        if(position==3&&b1List!=null) {
-            bean = b1List.get(0);
-
-        }else if(position==6&&c1List!=null){
-                    bean =c1List.get(0);
-
-        }else if(position>=7 && position<=12&&c2List!=null){
-            bean =c2List.get(position-7);
-
-        }else if(position>=15 && position%5==0&&eList!=null){
-             对应位置为
-       15 20 25 30 35
-            -15
-        0  5  10 15 20
-                对5取整
-        0  1  2  3  4
-*//*
-
-            int i = (position-15)/5;
-            bean =eList.get(i).getM_Item1().get(0);
-        }else if(position>=15 && position%5!=0&&eList!=null){
-
-    两列类型的位置为    转为elist对应的位置
-    16 17 18 19               1  2  3  4                             0
-    21 22 23 24               6  7  8  9                             1
-    26 27 28 29       -15得   11 12 13 14      对5取整               2
-    31 32 33 34               16 17 18 19                            3
-    36 37 38 39               21 22 23 24                            4
-
-            int i=(position-15)/5;
-            int j=(position-15)%5 -1;
-            bean = eList.get(i).getM_Item2().get(j);
-        }
-
-        return bean;
-    }*/
 
     @Override
     public int getItemCount() {
-        return 40;
+//        1个我的收藏那栏，3个标题
+//        c2List 6个网格布局
+//        bannerList,b1List,b2List,c1List,dList, 有数据的话只有1个item
+//        eList 一个item包含5个
+
+        int countBaner=bannerList.size()==0? 0:1;
+        int countB1=b1List.size()==0? 0:1;
+        int countB2=b2List.size()==0? 0:1;
+        int countC1=c1List.size()==0? 0:1;
+        int countC2=c2List.size();
+        int countD=dList.size()==0? 0:1;
+       int countE= eList.size()*5;
+        return 1+3+countBaner+countB1+countB2+countC1+countC2+countD+countE;
     }
 
 
@@ -192,9 +163,9 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
          AreaBean bean = new AreaBean();
         ArrayList<String>images = new ArrayList<>();
-        Log.d("yonky","onBindViewHoder");
+        Log.d("yonky","onBindViewHoder"+position);
 
-        if(holder instanceof BannerViewHolder && bannerList!=null){
+        if(holder instanceof BannerViewHolder && bannerList.size()!=0){
                 for(int i=0;i<bannerList.size();i++){
                     images.add(bannerList.get(i).getImg_url());
                 }
@@ -216,10 +187,10 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             if(position ==1) {
                 ((MyViewHolder) holder).itemAdapter.setType(TYPE_ITEM_MY);
-            }else if(b2List!=null && position==4){
+            }else if(b2List.size()!=0 && position==4){
                     ((MyViewHolder) holder).itemAdapter.setB2List(b2List);
                     ((MyViewHolder) holder).itemAdapter.setType(TYPE_ITEM_TJBB);
-            }else if(dList!=null && position==14){
+            }else if(dList.size()!=0 && position==14){
                 ((MyViewHolder) holder).itemAdapter.setDList(dList);
                 ((MyViewHolder) holder).itemAdapter.setType(TYPE_ITEM_MRXK);
 
@@ -245,18 +216,18 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             layoutParams.width=ViewGroup.LayoutParams.MATCH_PARENT;
             layoutParams.height=MyUtil.dp2px(mContext,140);
             ((SingleViewHolder) holder).iv.setLayoutParams(layoutParams);
-            if(b1List!=null &&position==3){
+            if(b1List.size()!=0 &&position==3){
                 bean =b1List.get(0);
                 GlideUtil.loadImage(bean.getImg_url(),((SingleViewHolder) holder).iv);
 
-            }else if(c1List!=null&&position==6){
+            }else if(c1List.size()!=0&&position==6){
                 bean=c1List.get(0);
                 GlideUtil.loadImage(bean.getImg_url(),((SingleViewHolder) holder).iv);
-            }else if(c2List!=null && position>=7 &&position<=12){
+            }else if(c2List.size()!=0 && position>=7 &&position<=12){
                 bean = c2List.get(position-7);
                 layoutParams.height=MyUtil.dp2px(mContext,140);
                 GlideUtil.loadImage(bean.getImg_url(),((SingleViewHolder) holder).iv);
-            }else if(eList!=null&&position>14){
+            }else if(eList.size()!=0&&position>14){
               /* 对应位置为
                15 20 25 30 35
                     -15
@@ -280,7 +251,7 @@ public class MainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             31 32 33 34               16 17 18 19                            3
             36 37 38 39               21 22 23 24                            4
           */
-           if(eList!=null){
+           if(eList.size()!=0){
               int i=(position-15)/5;
               int j=(position-15)%5 -1;
                bean = eList.get(i).getM_Item2().get(j);

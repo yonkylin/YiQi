@@ -35,4 +35,12 @@ public class MyViewPager extends ViewPager {
     public void setCanSwipe(boolean canSwipe) {
         isCanSwipe = canSwipe;
     }
+
+
+    @Override
+    public void setCurrentItem(int item) {
+        super.setCurrentItem(item,false);
+    }
+
+
 }
