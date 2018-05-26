@@ -55,67 +55,91 @@
             app:layout_constraintStart_toStartOf="@+id/cl_login_info"
             app:layout_constraintTop_toBottomOf="@+id/cl_login_info"/>
 
-        <android.support.constraint.ConstraintLayout
+        <android.support.v7.widget.CardView
             android:id="@+id/cl_login_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:background="@drawable/login_corner_background"
-            app:layout_constraintHorizontal_bias="0.504"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+
+            app:cardCornerRadius="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_login_password"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/login_icon_newpasswork"/>
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/tv_login_name"
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:ems="10"
-                android:hint="@string/username"
-                android:inputType="textPersonName"
-                android:textColor="@color/gray"
-                android:textSize="12sp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView2"
-                app:layout_constraintTop_toTopOf="parent"/>
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view3"
+                    app:srcCompat="@drawable/login_icon_newpasswork" />
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_login_name"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/login_icon_name"/>
+                <EditText
+                    android:id="@+id/tv_login_name"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@null"
+                    android:ems="10"
+                    android:hint="@string/username"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView2"
+                    app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
-            <EditText
-                android:id="@+id/tv_login_password"
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:ems="10"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:textColor="@color/gray"
-                android:textSize="12sp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView3"
-                app:layout_constraintTop_toBottomOf="@+id/tv_login_name"/>
-        </android.support.constraint.ConstraintLayout>
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="50dp"
+                    android:background="@color/light"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/login_icon_name" />
+
+                <EditText
+                    android:id="@+id/tv_login_password"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@null"
+                    android:ems="10"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+                    app:layout_constraintStart_toEndOf="@+id/imageView3"
+                    app:layout_constraintTop_toTopOf="@+id/imageView3" />
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.CardView>
 
         <TextView
             android:id="@+id/tv_register"

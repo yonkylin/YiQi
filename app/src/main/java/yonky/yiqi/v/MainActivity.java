@@ -84,8 +84,8 @@ public class MainActivity extends BaseActivity{
         MainFragment mainFragment = new MainFragment();
         MarketFragment mainFragment2 = new MarketFragment();
         StyleFragment mainFragment3 = new StyleFragment();
-        FragmentLogin mainFragment4 = new FragmentLogin();
-        FragmentLogin mainFragment5 = new FragmentLogin();
+        LoginFragment mainFragment4 = new LoginFragment();
+        MyFragment mainFragment5 = new MyFragment();
         fragments.add(mainFragment);
         fragments.add(mainFragment2);
         fragments.add(mainFragment3);

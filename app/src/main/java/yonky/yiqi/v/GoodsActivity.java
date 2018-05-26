@@ -198,12 +198,14 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
         });
     }
     private void pop(){
-
+        if(mShopBean!=null){
             int[] positions=new int[2];
             tabLayout.getLocationInWindow(positions);
             PopupWindow popupWindow = new ConnectWindow(mContext,mShopBean).newWindow(positions[1]- MyUtil.dp2px(mContext,24));
 
             popupWindow.showAtLocation(tabLayout, Gravity.NO_GRAVITY,0,0);
+
+        }
 
     }
 

@@ -138,11 +138,14 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
 
     @OnClick(R.id.connect) void setTvConnect(){
 //        新建窗口是有状态栏的，大概25dp
-        int height =csLayout.getHeight()-mLinearLayout.getHeight()-MyUtil.dp2px(mContext,24);
+        if(mShopBean!=null){
+            int height =csLayout.getHeight()-mLinearLayout.getHeight()-MyUtil.dp2px(mContext,24);
 
-        PopupWindow popupWindow = new ConnectWindow(mContext,mShopBean).newWindow(height);
+            PopupWindow popupWindow = new ConnectWindow(mContext,mShopBean).newWindow(height);
 
-        popupWindow.showAtLocation(mLinearLayout,Gravity.NO_GRAVITY,0,0);
+            popupWindow.showAtLocation(mLinearLayout,Gravity.NO_GRAVITY,0,0);
+        }
+
 
     }
 

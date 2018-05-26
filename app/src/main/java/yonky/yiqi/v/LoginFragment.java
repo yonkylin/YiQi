@@ -14,7 +14,7 @@ import yonky.yiqi.util.MyUtil;
 import yonky.yiqi.util.RippleViewHelper;
 import yonky.yiqi.widget.RippleView;
 
-public class FragmentLogin extends BaseFragment {
+public class LoginFragment extends BaseFragment {
     @BindView(R.id.ripple_view)
     RippleView rippleView;
     @BindView(R.id.cs_login_info)
@@ -52,8 +52,14 @@ public class FragmentLogin extends BaseFragment {
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onPause() {
+        super.onPause();
         helper.cancel();
     }
+
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//
+//    }
 }
