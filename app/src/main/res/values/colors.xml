@@ -14,4 +14,6 @@
 
     <color name="half_transparent">#66000000</color>
     <color name="test">#808080</color>
+
+    <color name="e">#eeeeee</color>
 </resources>

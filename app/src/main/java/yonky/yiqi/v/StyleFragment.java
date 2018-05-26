@@ -6,17 +6,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupWindow;
-
-import com.google.android.flexbox.AlignContent;
-import com.google.android.flexbox.AlignItems;
-import com.google.android.flexbox.FlexDirection;
-import com.google.android.flexbox.FlexWrap;
-import com.google.android.flexbox.FlexboxLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,14 +22,11 @@ import yonky.yiqi.bean.GoodBean;
 import yonky.yiqi.bean.GoodFilterBean;
 import yonky.yiqi.bean.KVBean;
 import yonky.yiqi.bean.RegionBean;
-import yonky.yiqi.listener.MyClickListener;
 import yonky.yiqi.listener.MyListener;
 import yonky.yiqi.p.StylePresenter;
-import yonky.yiqi.v.adapter.FilterAdapter;
 import yonky.yiqi.v.adapter.StyleAdapter;
+import yonky.yiqi.window.WindowGoodFilter;
 
-import static yonky.yiqi.base.Constants.FILTER_CLOTHES;
-import static yonky.yiqi.base.Constants.FILTER_COLOR;
 import static yonky.yiqi.base.Constants.FILTER_REGION;
 
 public class StyleFragment extends BaseFragment implements StyleContract.View ,MyListener {

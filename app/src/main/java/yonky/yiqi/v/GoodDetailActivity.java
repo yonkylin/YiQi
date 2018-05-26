@@ -13,12 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import yonky.yiqi.R;
 import yonky.yiqi.base.BaseActivity;
 import yonky.yiqi.base.contract.GoodDetailContract;
@@ -30,6 +32,7 @@ import yonky.yiqi.bean.ShopFilterBean;
 import yonky.yiqi.p.GoodDetailPresenter;
 import yonky.yiqi.util.MyUtil;
 import yonky.yiqi.v.adapter.DetaiAdapter;
+import yonky.yiqi.window.ConnectWindow;
 
 /**
  * Created by Administrator on 2018/5/15.
@@ -47,12 +50,15 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
     TextView tvConnect;
     @BindView(R.id.fab)
     FloatingActionButton fab;
+    @BindView(R.id.linearLayout)
+    LinearLayout mLinearLayout;
 //    @BindView(R.id.tab_layout)
 //    TabLayout tab;
     DetaiAdapter mAdapter;
     GoodDetailPresenter mPresenter;
     GoodFilterBean goodFilter;
     ShopFilterBean shopFilter;
+    ShopBean mShopBean;
 
     boolean isLoadingMore;
 
@@ -130,6 +136,16 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
 
     }
 
+    @OnClick(R.id.connect) void setTvConnect(){
+//        新建窗口是有状态栏的，大概25dp
+        int height =csLayout.getHeight()-mLinearLayout.getHeight()-MyUtil.dp2px(mContext,24);
+
+        PopupWindow popupWindow = new ConnectWindow(mContext,mShopBean).newWindow(height);
+
+        popupWindow.showAtLocation(mLinearLayout,Gravity.NO_GRAVITY,0,0);
+
+    }
+
 
     @Override
     public void showResult(GoodBean goodBean) {
@@ -148,6 +164,7 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
 
     @Override
     public void showShop(ShopBean shopBean) {
+        this.mShopBean = shopBean;
         Log.d(TAG,"showShop() is go");
         mAdapter.setShopBean(shopBean);
         mAdapter.notifyDataSetChanged();
@@ -184,30 +201,6 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
 
     }
 
-    //    private void setTabs(TabLayout tabLayout, LayoutInflater inflater, int[] icons, String[] titles){
-//        for(int i =0;i<titles.length;i++){
-//
-//            View view =inflater.inflate(R.layout.item_test,null);
-//            TabLayout.Tab tab =tabLayout.newTab();
-//            tab.setCustomView(view);
-//            LinearLayout parent=view.findViewById(R.id.ll);
-//
-////            parent.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT,1f));
-//
-//            TextView title = view.findViewById(R.id.tv_tab);
-//            title.setText(titles[i]);
-//
-//            if(i<drawables.length){
-//                ImageView icon=view.findViewById(R.id.iv_tab);
-//                icon.setImageResource(icons[i]);
-////                parent.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT,1f));
-////            }else{
-////                parent.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT,2f));
-//            }
-//            tabLayout.addTab(tab);
-//
-//        }
-//    }
 
 
 

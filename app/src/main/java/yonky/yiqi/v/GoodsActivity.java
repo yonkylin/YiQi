@@ -5,12 +5,16 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabItem;
+import android.support.design.widget.TabLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -34,7 +38,9 @@ import yonky.yiqi.bean.ShopBean;
 import yonky.yiqi.bean.ShopFilterBean;
 import yonky.yiqi.p.GoodPresenter;
 import yonky.yiqi.util.GlideUtil;
+import yonky.yiqi.util.MyUtil;
 import yonky.yiqi.v.adapter.StyleAdapter;
+import yonky.yiqi.window.ConnectWindow;
 
 import static yonky.yiqi.v.adapter.StyleAdapter.TYPE_NODATA;
 
@@ -60,12 +66,15 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
         FloatingActionButton fab;
     @BindView(R.id.ctl)
     CollapsingToolbarLayout mCollapsingToolbarLayout;
+    @BindView(R.id.tab_layout)
+    TabLayout tabLayout;
     boolean isLoadingMore;
     StyleAdapter mAdapter;
     List<GoodBean> mGoodList;
     GoodFilterBean goodFilter;
     ShopFilterBean shopFilter;
     GoodPresenter mPresenter;
+    ShopBean mShopBean;
     @Override
     protected int getLayout() {
         return R.layout.activity_goods;
@@ -163,10 +172,44 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
                 mRecyclerView.smoothScrollToPosition(0);
             }
         });
+
+
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if(tab.getPosition()==2){
+                    pop();
+                }
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                if(tab.getPosition()==2){
+                    pop();
+                }
+            }
+        });
+    }
+    private void pop(){
+
+            int[] positions=new int[2];
+            tabLayout.getLocationInWindow(positions);
+            PopupWindow popupWindow = new ConnectWindow(mContext,mShopBean).newWindow(positions[1]- MyUtil.dp2px(mContext,24));
+
+            popupWindow.showAtLocation(tabLayout, Gravity.NO_GRAVITY,0,0);
+
     }
 
     @Override
     public void showShop(ShopBean shopBean) {
+        this.mShopBean=shopBean;
         GlideUtil.loadRoundImage(shopBean.getSerller_head_original(),mAvatar);
         mShopName.setText(shopBean.getShop_name());
 //        mToolbar.setTitle(shopBean.getShop_name());

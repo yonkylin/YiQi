@@ -1,8 +1,7 @@
-package yonky.yiqi.v;
+package yonky.yiqi.window;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,22 +15,16 @@ import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import yonky.yiqi.R;
 import yonky.yiqi.bean.KVBean;
 import yonky.yiqi.bean.RegionBean;
-import yonky.yiqi.listener.MyClickListener;
 import yonky.yiqi.listener.MyListener;
 import yonky.yiqi.v.adapter.FilterAdapter;
 
 import static yonky.yiqi.v.adapter.FilterAdapter.TYPE_ALL;
 import static yonky.yiqi.v.adapter.FilterAdapter.TYPE_KV;
-import static yonky.yiqi.v.adapter.FilterAdapter.TYPE_REGION;
 import static yonky.yiqi.v.adapter.FilterAdapter.TYPE_SELECTED_NONE;
 
 /**
