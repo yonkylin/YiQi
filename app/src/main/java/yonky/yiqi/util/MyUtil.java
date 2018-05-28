@@ -1,7 +1,11 @@
 package yonky.yiqi.util;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.support.constraint.ConstraintLayout;
+
+import java.util.List;
 
 public class MyUtil {
 
@@ -36,5 +40,31 @@ public class MyUtil {
             sb.append(hexString.charAt((bytes[i]&0x0f)>>0));
         }
         return sb.toString();
+    }
+
+    public static boolean isQQAvailable(Context context) {
+
+        final PackageManager mPackageManager = context.getPackageManager();
+
+        List pinfo = mPackageManager.getInstalledPackages(0);
+
+        if(pinfo !=null) {
+
+            for(int i =0;i < pinfo.size();i++) {
+
+                String pn = ((PackageInfo)pinfo.get(i)).packageName;
+
+                if(pn.equals("com.tencent.mobileqq")) {
+
+                    return true;
+
+                }
+
+            }
+
+        }
+
+        return false;
+
     }
 }

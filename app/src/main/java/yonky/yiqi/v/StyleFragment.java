@@ -102,9 +102,7 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
 
         filterBean.setZdid(preferences.getString("regionId","42"));
 
-        mPresenter.loadDatas(filterBean,false);
-        mPresenter.getGoodColor("get_colors");
-        mPresenter.getGoodColor("get_sizes");
+
 //        mPresenter.getRegionData(preferences.getString("regionId","42"),"",FILTER_REGION);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -140,42 +138,20 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
         });
         btRegion.setText(preferences.getString("region","广州"));
 
-//     fab.setOnClickListener(this);
-//     btDefault.setOnClickListener(this);
-//     btNew.setOnClickListener(this);
-//     btPrice.setOnClickListener(this);
+
 
     }
 
-//
-//    public void onClick(View v) {
-//        switch (v.getId()){
-//
-//            case R.id.bt_new:
-////                setColor(btNew,btDefault,btPrice);
-////                sort="newOn_asc";
-////                filterBean.setOrderby(sort);
-////                mPresenter.loadDatas(filterBean,false);
-////                break;
-//            case R.id.bt_price:
-////                setColor(btPrice,btNew,btDefault);
-////                if(i%2==0){
-////                    btPrice.setBackgroundResource(R.drawable.background_sort_up);
-////                    sort="priOn_asc";
-////                }else{
-////                    btPrice.setBackgroundResource(R.drawable.background_sort_down);
-////                    sort="priOn_desc";
-////                }
-////                filterBean.setOrderby(sort);
-////                mPresenter.loadDatas(filterBean,false);
-////                i++;
-////               break;
-//            case R.id.fab:
-//                recyclerView.smoothScrollToPosition(0);
-//                break;
-//
-//        }
-//    }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser){
+            mPresenter.loadDatas(filterBean,false);
+            mPresenter.getGoodColor("get_colors");
+            mPresenter.getGoodColor("get_sizes");
+        }
+    }
+
     //    逛商场 筛选按钮
     @OnClick(R.id.bt_filter)  void setBtFilter(){
         PopupWindow mPopupWindow=mWindowGoodFilter.newWindow(mContext);

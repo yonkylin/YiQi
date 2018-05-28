@@ -30,6 +30,7 @@ public class LoginFragment extends BaseFragment {
     RippleViewHelper helper;
 
     AnimatorSet animatorSet;
+    boolean isResume;
     @Override
     protected int getLayoutId() {
 
@@ -58,8 +59,17 @@ public class LoginFragment extends BaseFragment {
     public void onResume() {
         Log.d("LoginFragment ","on Resume");
         super.onResume();
-        helper.start();
-        animatorSet.start();
+
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser){
+            helper.start();
+            animatorSet.start();
+        }
+
 
     }
 

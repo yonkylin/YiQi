@@ -86,7 +86,7 @@ public class MarketFragment extends BaseFragment implements MarketContract.View{
         recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(mMarketAdapter);
 
-        mPresenter.loadData(shopFilter,false);
+
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -123,62 +123,18 @@ public class MarketFragment extends BaseFragment implements MarketContract.View{
             }
         }
         );
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                recyclerView.scrollToPosition(0);
-//                recyclerView.smoothScrollToPosition(0);
-////                fab.setVisibility(View.INVISIBLE);
-//            }
-//        });
-//btDk.setOnClickListener(this);
-//btDefault.setOnClickListener(this);
-//btNew.setOnClickListener(this);
 
     }
-//    private int i,j;
-//    @Override
-//    public void onClick(View view) {
-//        switch (view.getId()){
-//            case R.id.bt_default:
-//            setColor(btDefault,btDk,btNew,i);
-////            Log.e("MarketFragment"," default is clicked");
-//            sort="mr";
-//                shopFilter.setOrderby(sort);
-//                mPresenter.loadData(shopFilter,false);
-//                break;
-//            case R.id.bt_dk:
-//                Log.e("MarketFragment"," dk is clicked");
-//                setColor(btDk,btDefault,btNew,i);
-//                if(i%2==0){
-//                    sort="dkOn_asc";
-//                }else{
-//                    sort="dkOn_desc";
-//                }
-//                i++;
-//                j=0;
-//                shopFilter.setOrderby(sort);
-//                mPresenter.loadData(shopFilter,false);
-//
-//                break;
-//            case R.id.bt_new:
-//                setColor(btNew,btDefault,btDk,j);
-//                if(j%2==0){
-//                    sort="newOn_asc";
-//                }else{
-//                    sort="newOn_desc";
-//                }
-//                j++;
-//                i=0;
-//                shopFilter.setOrderby(sort);
-//                mPresenter.loadData(shopFilter,false);
-//                break;
-//
-//        }
-//
-//    }
 
-//    设置点击事件
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser){
+            mPresenter.loadData(shopFilter,false);
+        }
+    }
+
+    //    设置点击事件
     @OnClick(R.id.bt_default) void setBtDefault(){
         setColor(btDefault,btDk,btNew,i);
         sort="mr";
