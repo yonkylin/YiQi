@@ -22,7 +22,7 @@ public class MyUtil {
         return   context.getResources().getDisplayMetrics().heightPixels;
     }
 
-//字符串转16进制  每个字节前面加% 以混淆
+//字符串转16进制
     public static String encode(String str)
     {
           String hexString="0123456789ABCDEF";
@@ -31,7 +31,7 @@ public class MyUtil {
         StringBuilder sb=new StringBuilder(bytes.length*2);
 //将字节数组中每个字节拆解成2位16进制整数
         for(int i=0;i<bytes.length;i++)
-        {   sb.append("%");
+        {
             sb.append(hexString.charAt((bytes[i]&0xf0)>>4));
             sb.append(hexString.charAt((bytes[i]&0x0f)>>0));
         }

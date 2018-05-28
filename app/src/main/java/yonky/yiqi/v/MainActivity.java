@@ -38,7 +38,9 @@ public class MainActivity extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initEventAndData();
-
+//        设置离屏缓存个数，默认缓存左右的两个,
+//        如下缓存数如果小于等于1的话是无效的。
+//        mViewPager.setOffscreenPageLimit(0);
 
         setTabs(mTabLayout,getLayoutInflater(),drawables,mTitles);
         ViewPagerAdaper pagerAdapter = new ViewPagerAdaper(getSupportFragmentManager(),fragments);

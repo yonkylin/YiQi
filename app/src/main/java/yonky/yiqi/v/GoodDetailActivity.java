@@ -1,11 +1,13 @@
 package yonky.yiqi.v;
 
 import android.animation.ObjectAnimator;
+import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -52,6 +54,8 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
     FloatingActionButton fab;
     @BindView(R.id.linearLayout)
     LinearLayout mLinearLayout;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 //    @BindView(R.id.tab_layout)
 //    TabLayout tab;
     DetaiAdapter mAdapter;
@@ -61,6 +65,7 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
     ShopBean mShopBean;
 
     boolean isLoadingMore;
+    int mdy;
 
 //    SharedPreferences preferences;
     @Override
@@ -125,6 +130,8 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
                 }else{
                     fab.show();
                 }
+                mdy+=dy;
+                setToolbarTansparent(mdy,MyUtil.dp2px(mContext,250));
             }
         });
         fab.setOnClickListener(new View.OnClickListener() {
@@ -134,6 +141,20 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
             }
         });
 
+    }
+
+    private void setToolbarTansparent(int dy,int limit){
+        if(dy<limit&&dy>=0){
+            int fraction=dy*255/limit;
+//            int alpha=255*dy/limit;
+//            String alpha=Integer.toHexString(255*dy/limit);
+//            if(alpha.length()==1){
+//                alpha="0"+alpha;
+//            }
+//            Log.e(TAG,"#"+alpha+"ffffff");
+//            mToolbar.setBackgroundColor(Color.parseColor("#"+Integer.toHexString(alpha)+"ffffff"));
+            mToolbar.getBackground().mutate().setAlpha(fraction);
+        }
     }
 
     @OnClick(R.id.connect) void setTvConnect(){

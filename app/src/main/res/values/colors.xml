@@ -13,7 +13,9 @@
     <color name="light">#d1d1d1</color>
 
     <color name="half_transparent">#66000000</color>
+    <color name="toolbar">#f7f7f7</color>
     <color name="test">#808080</color>
+
 
     <color name="e">#eeeeee</color>
 </resources>

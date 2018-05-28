@@ -1,5 +1,6 @@
 package yonky.yiqi.v;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -52,6 +53,8 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
     public static final String TAG=GoodsActivity.class.getSimpleName();
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.titile)
+    TextView title;
     @BindView(R.id.rv_goods)
     RecyclerView mRecyclerView;
     @BindView(R.id.iv_shop)
@@ -75,6 +78,8 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
     ShopFilterBean shopFilter;
     GoodPresenter mPresenter;
     ShopBean mShopBean;
+
+    int mdy;
     @Override
     protected int getLayout() {
         return R.layout.activity_goods;
@@ -88,6 +93,7 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
 
     @Override
     protected void initEventAndData() {
+        mToolbar.getBackground().mutate().setAlpha(0);
         fab.hide();
         mPresenter = new GoodPresenter(mContext);
         mPresenter.attachView(this);
@@ -164,6 +170,9 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
                         mPresenter.loadGoods(goodFilter,true);
                     }
                 }
+
+                mdy+=dy;
+                setToolbarTansparent(mdy,MyUtil.dp2px(mContext,250));
             }
         });
         fab.setOnClickListener(new View.OnClickListener() {
@@ -209,6 +218,29 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
 
     }
 
+
+    private void setToolbarTansparent(int dy,int limit) {
+        if (dy < limit && dy >= 0) {
+            int fraction = dy * 255 / limit;
+            int alpha=255*dy/limit;
+//
+//          String alpha=Integer.toHexString(255*dy/limit);
+//            if(alpha.length()==1){
+//                alpha="0"+alpha;
+//            }
+
+//            mToolbar.setBackgroundColor(Color.parseColor("#"+alpha+"ffffff"));
+            mToolbar.getBackground().mutate().setAlpha(alpha);
+            title.setAlpha(fraction);
+//            Log.d(TAG,"fraction"+fraction);
+//            if(fraction>100&&mShopBean!=null){
+//            if(mShopBean!=null){
+//                title.setText(mShopBean.getShop_name());
+//            }else{
+//                title.setText("");
+//            }
+        }
+    }
     @Override
     public void showShop(ShopBean shopBean) {
         this.mShopBean=shopBean;
@@ -216,11 +248,13 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
         mShopName.setText(shopBean.getShop_name());
 //        mToolbar.setTitle(shopBean.getShop_name());
         mPosition.setText(shopBean.getMarket()+"-"+shopBean.getFloor()+"-"+shopBean.getDangkou());
-//        BlurTransformation blurTransformation = new BlurTransformation(15,2);
-        MultiTransformation multi= new MultiTransformation(new BlurTransformation(15,2),new ColorFilterTransformation(R.color.light_gray));
+        BlurTransformation blurTransformation = new BlurTransformation(15,2);
+//        MultiTransformation multi= new MultiTransformation(new BlurTransformation(15,2),new ColorFilterTransformation(R.color.light_gray));
         Glide.with(this).load(shopBean.getSerller_head_original())
-                .apply(RequestOptions.bitmapTransform(multi))
+                .apply(RequestOptions.bitmapTransform(blurTransformation))
                 .into(mShopBackground);
+
+        title.setText(mShopBean.getShop_name());
     }
 
     @Override

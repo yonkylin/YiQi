@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -41,11 +42,11 @@
         app:srcCompat="@drawable/my_bg_wave3" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/iv_gzbb"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="220dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView5"
+        app:layout_constraintEnd_toStartOf="@+id/iv_gzdk"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -57,18 +58,18 @@
         android:layout_height="wrap_content"
         android:text="关注宝贝"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView4"
-        app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintEnd_toEndOf="@+id/iv_gzbb"
+        app:layout_constraintStart_toStartOf="@+id/iv_gzbb"
+        app:layout_constraintTop_toBottomOf="@+id/iv_gzbb" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/iv_gzdk"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView6"
+        app:layout_constraintEnd_toStartOf="@+id/iv_wsp"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/imageView4"
+        app:layout_constraintStart_toEndOf="@+id/iv_gzbb"
+        app:layout_constraintTop_toTopOf="@+id/iv_gzbb"
         app:srcCompat="@drawable/my_icon_likeshop_nose" />
 
     <TextView
@@ -77,18 +78,18 @@
         android:layout_height="wrap_content"
         android:text="关注档口"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView5"
-        app:layout_constraintStart_toStartOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        app:layout_constraintEnd_toEndOf="@+id/iv_gzdk"
+        app:layout_constraintStart_toStartOf="@+id/iv_gzdk"
+        app:layout_constraintTop_toBottomOf="@+id/iv_gzdk" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/iv_wsp"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView7"
+        app:layout_constraintEnd_toStartOf="@+id/iv_wtk"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="@+id/imageView5"
+        app:layout_constraintStart_toEndOf="@+id/iv_gzdk"
+        app:layout_constraintTop_toTopOf="@+id/iv_gzdk"
         app:srcCompat="@drawable/my_icon_goods_nor" />
 
     <TextView
@@ -97,18 +98,18 @@
         android:layout_height="wrap_content"
         android:text="微商品"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView6"
-        app:layout_constraintStart_toStartOf="@+id/imageView6"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        app:layout_constraintEnd_toEndOf="@+id/iv_wsp"
+        app:layout_constraintStart_toStartOf="@+id/iv_wsp"
+        app:layout_constraintTop_toBottomOf="@+id/iv_wsp" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/iv_wtk"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView8"
+        app:layout_constraintEnd_toStartOf="@+id/iv_cgd"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toTopOf="@+id/imageView6"
+        app:layout_constraintStart_toEndOf="@+id/iv_wsp"
+        app:layout_constraintTop_toTopOf="@+id/iv_wsp"
         app:srcCompat="@drawable/my_icon_photo_nor" />
 
     <TextView
@@ -117,18 +118,18 @@
         android:layout_height="wrap_content"
         android:text="微图库"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView7"
-        app:layout_constraintStart_toStartOf="@+id/imageView7"
-        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+        app:layout_constraintEnd_toEndOf="@+id/iv_wtk"
+        app:layout_constraintStart_toStartOf="@+id/iv_wtk"
+        app:layout_constraintTop_toBottomOf="@+id/iv_wtk" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/iv_cgd"
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView7"
-        app:layout_constraintTop_toTopOf="@+id/imageView7"
+        app:layout_constraintStart_toEndOf="@+id/iv_wtk"
+        app:layout_constraintTop_toTopOf="@+id/iv_wtk"
         app:srcCompat="@drawable/my_icon_order_nor" />
 
     <TextView
@@ -137,9 +138,9 @@
         android:layout_height="wrap_content"
         android:textSize="12sp"
         android:text="采购单"
-        app:layout_constraintEnd_toEndOf="@+id/imageView8"
-        app:layout_constraintStart_toStartOf="@+id/imageView8"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+        app:layout_constraintEnd_toEndOf="@+id/iv_cgd"
+        app:layout_constraintStart_toStartOf="@+id/iv_cgd"
+        app:layout_constraintTop_toBottomOf="@+id/iv_cgd" />
 
     <TextView
         android:id="@+id/textView9"
@@ -156,11 +157,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <ImageView
-        android:id="@+id/imageView9"
+        android:id="@+id/iv_kdcx"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="@+id/iv_gzbb"
         app:layout_constraintTop_toBottomOf="@+id/textView9"
         app:srcCompat="@drawable/my_icon_express_nor" />
 
@@ -170,16 +171,16 @@
         android:layout_height="wrap_content"
         android:text="快递查询"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView9"
-        app:layout_constraintStart_toStartOf="@+id/imageView9"
-        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+        app:layout_constraintEnd_toEndOf="@+id/iv_kdcx"
+        app:layout_constraintStart_toStartOf="@+id/iv_kdcx"
+        app:layout_constraintTop_toBottomOf="@+id/iv_kdcx" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/iv_dkcz"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="@+id/imageView9"
+        app:layout_constraintEnd_toEndOf="@+id/iv_gzdk"
+        app:layout_constraintTop_toTopOf="@+id/iv_kdcx"
         app:srcCompat="@drawable/my_icon_rent_nor" />
 
     <TextView
@@ -188,16 +189,16 @@
         android:layout_height="wrap_content"
         android:text="档口出租"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView10"
-        app:layout_constraintStart_toStartOf="@+id/imageView10"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+        app:layout_constraintEnd_toEndOf="@+id/iv_dkcz"
+        app:layout_constraintStart_toStartOf="@+id/iv_dkcz"
+        app:layout_constraintTop_toBottomOf="@+id/iv_dkcz" />
 
     <ImageView
-        android:id="@+id/imageView11"
+        android:id="@+id/iv_dftd"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toTopOf="@+id/imageView10"
+        app:layout_constraintEnd_toEndOf="@+id/iv_wsp"
+        app:layout_constraintTop_toTopOf="@+id/iv_dkcz"
         app:srcCompat="@drawable/my_icon_substitute_nor" />
 
     <TextView
@@ -206,16 +207,16 @@
         android:layout_height="wrap_content"
         android:text="代发团队"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView11"
-        app:layout_constraintStart_toStartOf="@+id/imageView11"
-        app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+        app:layout_constraintEnd_toEndOf="@+id/iv_dftd"
+        app:layout_constraintStart_toStartOf="@+id/iv_dftd"
+        app:layout_constraintTop_toBottomOf="@+id/iv_dftd" />
 
     <ImageView
-        android:id="@+id/imageView12"
+        android:id="@+id/iv_qmsy"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView7"
-        app:layout_constraintTop_toTopOf="@+id/imageView11"
+        app:layout_constraintEnd_toEndOf="@+id/iv_wtk"
+        app:layout_constraintTop_toTopOf="@+id/iv_dftd"
         app:srcCompat="@drawable/my_icon_photography_nor" />
 
     <TextView
@@ -224,9 +225,9 @@
         android:layout_height="wrap_content"
         android:text="全民摄影"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView12"
-        app:layout_constraintStart_toStartOf="@+id/imageView12"
-        app:layout_constraintTop_toBottomOf="@+id/imageView12" />
+        app:layout_constraintEnd_toEndOf="@+id/iv_qmsy"
+        app:layout_constraintStart_toStartOf="@+id/iv_qmsy"
+        app:layout_constraintTop_toBottomOf="@+id/iv_qmsy" />
 
     <TextView
         android:id="@+id/textView14"
@@ -241,11 +242,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <ImageView
-        android:id="@+id/imageView13"
+        android:id="@+id/iv_lxkf"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView9"
+        app:layout_constraintEnd_toEndOf="@+id/iv_kdcx"
         app:layout_constraintTop_toBottomOf="@+id/textView14"
         app:srcCompat="@drawable/my_icon_contact_nor" />
 
@@ -255,12 +256,12 @@
         android:layout_height="wrap_content"
         android:text="联系客服"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView13"
-        app:layout_constraintStart_toStartOf="@+id/imageView13"
-        app:layout_constraintTop_toBottomOf="@+id/imageView13" />
+        app:layout_constraintEnd_toEndOf="@+id/iv_lxkf"
+        app:layout_constraintStart_toStartOf="@+id/iv_lxkf"
+        app:layout_constraintTop_toBottomOf="@+id/iv_lxkf" />
 
     <ImageView
-        android:id="@+id/imageView14"
+        android:id="@+id/iv_avatar"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginLeft="24dp"
@@ -282,10 +283,10 @@
         android:layout_marginTop="8dp"
         android:text="请登录"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView14"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
         app:layout_constraintEnd_toStartOf="@+id/imageView15"
-        app:layout_constraintStart_toEndOf="@+id/imageView14"
-        app:layout_constraintTop_toTopOf="@+id/imageView14" />
+        app:layout_constraintStart_toEndOf="@+id/iv_avatar"
+        app:layout_constraintTop_toTopOf="@+id/iv_avatar" />
 
     <ImageView
         android:id="@+id/imageView15"
