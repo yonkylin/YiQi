@@ -209,6 +209,11 @@ public class MainFragment extends BaseFragment implements MainContract.View,MyLi
 
     }
 
+    @OnClick(R.id.imageView)
+    void alarm(){
+        MyUtil.toast(mContext);
+    }
+
     @Override
     public void onDestroyView() {
         if(mPresenter!=null){
@@ -222,4 +227,5 @@ public class MainFragment extends BaseFragment implements MainContract.View,MyLi
         mPopupWindow.dismiss();
         updateButton();
     }
+
 }

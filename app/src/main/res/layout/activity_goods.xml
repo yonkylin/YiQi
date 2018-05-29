@@ -70,7 +70,7 @@
             android:layout_marginRight="10dp"
             android:src="@drawable/top_icon"
             app:backgroundTint="@color/white"
-            app:layout_anchor="@+id/tab_layout"
+            app:layout_anchor="@+id/ll"
             app:layout_anchorGravity="right|bottom"
             app:rippleColor="@color/white"/>
 
@@ -83,30 +83,50 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             />
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tab_layout"
+    <LinearLayout
+        android:id="@+id/ll"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_gravity="bottom"
-        app:tabIndicatorHeight="0dp"
         android:background="@color/light_background"
         >
+        <TextView
+            android:id="@+id/tv_bbfl"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="宝贝分类"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:textColor="@color/gray"
+            android:background="@drawable/background_rect_gray"/>
+        <TextView
+            android:id="@+id/tv_dkjj"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="档口简介"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:textColor="@color/gray"
+           android:background="@drawable/background_rect_gray"/>
+        <TextView
+            android:id="@+id/tv_lxdk"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="联系档口"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:textColor="@color/gray"
+            android:background="@drawable/background_rect_gray"/>
+    </LinearLayout>
 
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="宝贝分类"/>
 
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="档口简介"/>
-
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="联系档口"/>
-    </android.support.design.widget.TabLayout>
 
     </android.support.design.widget.CoordinatorLayout>
 

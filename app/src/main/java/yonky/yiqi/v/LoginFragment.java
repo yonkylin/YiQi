@@ -52,20 +52,28 @@ public class LoginFragment extends BaseFragment {
     }
    @OnClick(R.id.bt_login)
    void setLogin(){
-       Toast.makeText(mContext,"该功能还在开发中！",Toast.LENGTH_SHORT).show();
+       MyUtil.toast(mContext);
    }
 
-    @Override
-    public void onResume() {
-        Log.d("LoginFragment ","on Resume");
-        super.onResume();
+//    @Override
+//    public void onResume() {
+//        Log.d("LoginFragment ","on Resume");
+//        super.onResume();
+//        isResume=true;
+//
+//    }
+    //    viewPager加载的机制是缓存左右连个page的fragment.这样导致此fragment左右两边的page切换到此fragment
+    //    时，此fragment的onResume()方法不会被调用。（已经被缓存加载好了）
+    //     但，setUserVisibleHint()会被多次调用。在切换到此page时，也会被调用。所以动画放在此方法才能正常执行
+    //    关于viewpager中fragment的生命周期请参考 https://blog.csdn.net/jemenchen/article/details/52645380
 
-    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
+       Log.d("LoginFragment","setUserVisibleHint  "+isVisibleToUser);
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser){
+
             helper.start();
             animatorSet.start();
         }
@@ -77,6 +85,7 @@ public class LoginFragment extends BaseFragment {
     public void onPause() {
         super.onPause();
         helper.cancel();
+//        isResume=false;
     }
 
 //    @Override

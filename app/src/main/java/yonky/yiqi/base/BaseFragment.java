@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.squareup.leakcanary.RefWatcher;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -49,7 +51,8 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
-
+        RefWatcher refWatcher = App.getRefWatcher(getActivity());
+        refWatcher.watch(this);
     }
 
     protected  abstract int getLayoutId();

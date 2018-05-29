@@ -22,10 +22,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import yonky.yiqi.R;
 import yonky.yiqi.bean.GoodBean;
 import yonky.yiqi.bean.ShopBean;
 import yonky.yiqi.util.GlideUtil;
+import yonky.yiqi.util.MyUtil;
 import yonky.yiqi.v.GoodsActivity;
 
 public class DetaiAdapter extends RecyclerView.Adapter {
@@ -181,6 +183,10 @@ public class DetaiAdapter extends RecyclerView.Adapter {
         public BannerHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+        }
+        @OnClick({R.id.tv_img_search,R.id.tv_search_titile,R.id.tv_add_list})
+        void alarm(){
+            MyUtil.toast(mContext);
         }
     }
 

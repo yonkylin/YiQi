@@ -28,6 +28,16 @@
 
      <include layout="@layout/shop_dk"/>
         <include layout="@layout/shop_lianxi"/>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      >
+            <TextView
+                android:id="@+id/tv_idcard"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
 
     </ScrollView>
 

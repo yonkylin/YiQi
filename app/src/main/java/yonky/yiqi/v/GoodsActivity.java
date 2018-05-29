@@ -1,5 +1,6 @@
 package yonky.yiqi.v;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -26,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.ColorFilterTransformation;
 import jp.wasabeef.glide.transformations.MaskTransformation;
@@ -43,6 +46,8 @@ import yonky.yiqi.util.MyUtil;
 import yonky.yiqi.v.adapter.StyleAdapter;
 import yonky.yiqi.window.ConnectWindow;
 
+import static yonky.yiqi.base.Constants.IS_FROM_AREA;
+import static yonky.yiqi.base.Constants.IS_FROM_SHOP;
 import static yonky.yiqi.v.adapter.StyleAdapter.TYPE_NODATA;
 
 /**
@@ -51,6 +56,8 @@ import static yonky.yiqi.v.adapter.StyleAdapter.TYPE_NODATA;
 
 public class GoodsActivity extends BaseActivity implements GoodContract.View{
     public static final String TAG=GoodsActivity.class.getSimpleName();
+
+
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.titile)
@@ -69,8 +76,10 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
         FloatingActionButton fab;
     @BindView(R.id.ctl)
     CollapsingToolbarLayout mCollapsingToolbarLayout;
-    @BindView(R.id.tab_layout)
-    TabLayout tabLayout;
+    @BindView(R.id.ll)
+    LinearLayout linearLayout;
+//    @BindView(R.id.tab_layout)
+//    TabLayout tabLayout;
     boolean isLoadingMore;
     StyleAdapter mAdapter;
     List<GoodBean> mGoodList;
@@ -78,6 +87,7 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
     ShopFilterBean shopFilter;
     GoodPresenter mPresenter;
     ShopBean mShopBean;
+    int comeFrom;
 
     int mdy;
     @Override
@@ -102,12 +112,17 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
 
         AreaBean areaBean =(AreaBean) getIntent().getSerializableExtra("areabean");
         ShopBean shopBean=(ShopBean) getIntent().getSerializableExtra("shopbean");
+        if(shopBean!=null){
+            comeFrom=IS_FROM_SHOP;
+        }else {
+            comeFrom=IS_FROM_AREA;
+        }
 
         mGoodList = new ArrayList<>();
         goodFilter = new GoodFilterBean();
         shopFilter= new ShopFilterBean();
 
-        if(areaBean!=null){
+        if(comeFrom==IS_FROM_AREA){
 //            设置过滤条件
             goodFilter.setShop_id(areaBean.getShop_id());
             goodFilter.setSpm(areaBean.getSpm());
@@ -116,7 +131,7 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
             shopFilter.setSpm(areaBean.getSpm());
             shopFilter.setZdid(areaBean.getSite_id());
 
-        }else if(shopBean!=null){
+        }else{
             goodFilter.setShop_id(shopBean.getShop_id());
             goodFilter.setSpm(shopBean.getSpm());
             goodFilter.setZdid(shopBean.getSite_id());
@@ -184,61 +199,58 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
 
 
 
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                if(tab.getPosition()==2){
-                    pop();
-                }
-
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                if(tab.getPosition()==2){
-                    pop();
-                }
-            }
-        });
+//        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+//                doShow(tab.getPosition());
+//
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//                doShow(tab.getPosition());
+//            }
+//        });
     }
-    private void pop(){
+
+
+    @OnClick(R.id.tv_lxdk)
+    void pop(){
         if(mShopBean!=null){
             int[] positions=new int[2];
-            tabLayout.getLocationInWindow(positions);
+            linearLayout.getLocationInWindow(positions);
             PopupWindow popupWindow = new ConnectWindow(mContext,mShopBean).newWindow(positions[1]- MyUtil.dp2px(mContext,24));
 
-            popupWindow.showAtLocation(tabLayout, Gravity.NO_GRAVITY,0,0);
-
+            popupWindow.showAtLocation(linearLayout, Gravity.NO_GRAVITY,0,0);
         }
-
     }
+    @OnClick({R.id.tv_dkjj,R.id.tv_bbfl})
+    void alarm(){
+        MyUtil.toast(mContext);
+    }
+
+
+
+
+//关于改变背景透明度，view.getBackground().setAlpha()，设置时会改变背景设置的资源文件的透明度。
+//    这样导致使用到此资源文件的透明度都将会被改变。
+//    如果想改变具体的view的背景，可以使用mustate()方法
+//    即 view.getBackground().mustate().setAlpha()，这样就只是改变这个view的透明度
 
 
     private void setToolbarTansparent(int dy,int limit) {
         if (dy < limit && dy >= 0) {
             int fraction = dy * 255 / limit;
             int alpha=255*dy/limit;
-//
-//          String alpha=Integer.toHexString(255*dy/limit);
-//            if(alpha.length()==1){
-//                alpha="0"+alpha;
-//            }
 
-//            mToolbar.setBackgroundColor(Color.parseColor("#"+alpha+"ffffff"));
             mToolbar.getBackground().mutate().setAlpha(alpha);
             title.setAlpha(fraction);
-//            Log.d(TAG,"fraction"+fraction);
-//            if(fraction>100&&mShopBean!=null){
-//            if(mShopBean!=null){
-//                title.setText(mShopBean.getShop_name());
-//            }else{
-//                title.setText("");
-//            }
+
         }
     }
     @Override

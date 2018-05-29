@@ -8,6 +8,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import yonky.yiqi.R;
 import yonky.yiqi.base.BaseFragment;
+import yonky.yiqi.util.MyUtil;
 
 public class MyFragment extends BaseFragment {
     @BindView(R.id.cl)
@@ -23,7 +24,7 @@ public class MyFragment extends BaseFragment {
     @OnClick({R.id.iv_avatar,R.id.iv_gzdk,R.id.iv_gzbb,R.id.iv_wsp,R.id.iv_wtk,R.id.iv_cgd,R.id.iv_kdcx,R.id.iv_dkcz,
     R.id.iv_dftd,R.id.iv_qmsy,R.id.iv_lxkf})
     void ivToast(){
-        Toast.makeText(mContext, "该功能还在开发中！", Toast.LENGTH_SHORT).show();
+        MyUtil.toast(mContext);
     }
 
     @Override

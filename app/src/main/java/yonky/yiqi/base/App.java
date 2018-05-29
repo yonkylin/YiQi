@@ -2,6 +2,10 @@ package yonky.yiqi.base;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
+
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,12 +16,24 @@ public class App extends Application {
     public static synchronized App getInstance(){
         return instance;
     }
-
+    private RefWatcher refWatcher;
     @Override
     public void onCreate() {
         super.onCreate();
+        if(LeakCanary.isInAnalyzerProcess(this)){
+            return;
+        }
+        refWatcher=LeakCanary.install(this);
         instance=this;
     }
+
+    public static RefWatcher getRefWatcher(Context context) {
+
+        return getInstance().refWatcher;
+    }
+
+
+
     public void addActivity(Activity act){
         if(allActivities ==null){
             allActivities = new HashSet<>();

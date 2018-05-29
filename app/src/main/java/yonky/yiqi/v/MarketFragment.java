@@ -85,7 +85,7 @@ public class MarketFragment extends BaseFragment implements MarketContract.View{
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(mMarketAdapter);
-
+//        mPresenter.loadData(shopFilter,false);
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

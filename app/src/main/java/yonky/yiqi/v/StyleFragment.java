@@ -52,6 +52,7 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
     boolean isLoadingMore;
     String sort;
     String dtype;
+    boolean isResume;
 
 
      StyleAdapter styleAdapter;
@@ -103,7 +104,7 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
         filterBean.setZdid(preferences.getString("regionId","42"));
 
 
-//        mPresenter.getRegionData(preferences.getString("regionId","42"),"",FILTER_REGION);
+
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -138,7 +139,9 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
         });
         btRegion.setText(preferences.getString("region","广州"));
 
-
+//        mPresenter.loadDatas(filterBean,false);
+//        mPresenter.getGoodColor("get_colors");
+//        mPresenter.getGoodColor("get_sizes");
 
     }
 
@@ -151,6 +154,19 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
             mPresenter.getGoodColor("get_sizes");
         }
     }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        isResume=true;
+//
+//    }
+//
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        isResume=false;
+//    }
 
     //    逛商场 筛选按钮
     @OnClick(R.id.bt_filter)  void setBtFilter(){

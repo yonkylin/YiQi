@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.support.constraint.ConstraintLayout;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -66,5 +67,9 @@ public class MyUtil {
 
         return false;
 
+    }
+
+    public static void toast(Context mContext){
+        Toast.makeText(mContext,"该功能还在开发中！",Toast.LENGTH_SHORT).show();
     }
 }

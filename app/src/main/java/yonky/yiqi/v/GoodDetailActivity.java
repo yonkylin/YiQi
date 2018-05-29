@@ -1,6 +1,7 @@
 package yonky.yiqi.v;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -166,9 +167,19 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
 
             popupWindow.showAtLocation(mLinearLayout,Gravity.NO_GRAVITY,0,0);
         }
-
-
     }
+    @OnClick(R.id.shop) void setLlShop() {
+        if(mShopBean!=null){
+            Intent intent = new Intent(mContext, GoodsActivity.class);
+            intent.putExtra("shopbean",mShopBean);
+            mContext.startActivity(intent);
+        }
+    }
+    @OnClick({R.id.img_search,R.id.collect,R.id.upload})
+    void alarm(){
+        MyUtil.toast(mContext);
+    }
+
 
 
     @Override

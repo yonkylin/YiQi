@@ -10,4 +10,8 @@ public class Constants {
     public static final int FILTER_COLOR=0X002;
     public static final int FILTER_REGION=0X003;
 
+//判断是来自areaBean还是shopBean
+    public static final int IS_FROM_SHOP=0X01;
+    public static final int IS_FROM_AREA=0X02;
+
 }

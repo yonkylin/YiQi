@@ -41,7 +41,12 @@ public class MainActivity extends BaseActivity{
 //        设置离屏缓存个数，默认缓存左右的两个,
 //        如下缓存数如果小于等于1的话是无效的。
 //        mViewPager.setOffscreenPageLimit(0);
+//       关于viewpager中fragment的生命周期请参考 https://blog.csdn.net/jemenchen/article/details/52645380
+//      使用setUserVisibleHint()时，如果切换方式不是类似viewPager一样一页一页的切换，
+//      而是通过点击底下tab跳跃式切换，会导致setUserVisibleHint不会被调用
+//        设置缓存大小为全部缓存，然后使用了懒加载，可以避免此问题。（使每次切换都调用）
 
+        mViewPager.setOffscreenPageLimit(4);
         setTabs(mTabLayout,getLayoutInflater(),drawables,mTitles);
         ViewPagerAdaper pagerAdapter = new ViewPagerAdaper(getSupportFragmentManager(),fragments);
 
