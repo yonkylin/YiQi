@@ -1,4 +1,4 @@
-package yonky.yiqi.v.adapter;
+package yonky.yiqi.v.main.adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -17,11 +17,11 @@ import yonky.yiqi.listener.MyClickListener;
 import yonky.yiqi.util.GlideUtil;
 import yonky.yiqi.util.MyUtil;
 
-import static yonky.yiqi.v.adapter.MainAdapter.TYPE_GOODS;
-import static yonky.yiqi.v.adapter.MainAdapter.TYPE_ITEM_MRXK;
-import static yonky.yiqi.v.adapter.MainAdapter.TYPE_ITEM_MY;
-import static yonky.yiqi.v.adapter.MainAdapter.TYPE_ITEM_TJBB;
-import static yonky.yiqi.v.adapter.MainAdapter.TYPE_SERVICE;
+import static yonky.yiqi.v.main.adapter.MainAdapter.TYPE_GOODS;
+import static yonky.yiqi.v.main.adapter.MainAdapter.TYPE_ITEM_MRXK;
+import static yonky.yiqi.v.main.adapter.MainAdapter.TYPE_ITEM_MY;
+import static yonky.yiqi.v.main.adapter.MainAdapter.TYPE_ITEM_TJBB;
+import static yonky.yiqi.v.main.adapter.MainAdapter.TYPE_SERVICE;
 
 /**
  * Created by Administrator on 2018/5/10.

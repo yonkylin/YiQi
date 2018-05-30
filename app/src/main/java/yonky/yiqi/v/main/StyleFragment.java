@@ -1,4 +1,4 @@
-package yonky.yiqi.v;
+package yonky.yiqi.v.main;
 
 import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
@@ -24,7 +24,7 @@ import yonky.yiqi.bean.KVBean;
 import yonky.yiqi.bean.RegionBean;
 import yonky.yiqi.listener.MyListener;
 import yonky.yiqi.p.StylePresenter;
-import yonky.yiqi.v.adapter.StyleAdapter;
+import yonky.yiqi.v.main.adapter.StyleAdapter;
 import yonky.yiqi.window.WindowGoodFilter;
 
 import static yonky.yiqi.base.Constants.FILTER_REGION;
@@ -139,34 +139,23 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
         });
         btRegion.setText(preferences.getString("region","广州"));
 
-//        mPresenter.loadDatas(filterBean,false);
-//        mPresenter.getGoodColor("get_colors");
-//        mPresenter.getGoodColor("get_sizes");
+        mPresenter.loadDatas(filterBean,false);
+        mPresenter.getGoodColor("get_colors");
+        mPresenter.getGoodColor("get_sizes");
 
     }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if(isVisibleToUser){
-            mPresenter.loadDatas(filterBean,false);
-            mPresenter.getGoodColor("get_colors");
-            mPresenter.getGoodColor("get_sizes");
-        }
-    }
-
+//这个fragment不只在viewpager中使用，所以不使用懒加载
 //    @Override
-//    public void onResume() {
-//        super.onResume();
-//        isResume=true;
-//
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//        if(isVisibleToUser){
+//            mPresenter.loadDatas(filterBean,false);
+//            mPresenter.getGoodColor("get_colors");
+//            mPresenter.getGoodColor("get_sizes");
+//        }
 //    }
-//
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        isResume=false;
-//    }
+
+
 
     //    逛商场 筛选按钮
     @OnClick(R.id.bt_filter)  void setBtFilter(){

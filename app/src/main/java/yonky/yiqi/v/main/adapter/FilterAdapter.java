@@ -1,7 +1,6 @@
-package yonky.yiqi.v.adapter;
+package yonky.yiqi.v.main.adapter;
 
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,7 +16,6 @@ import butterknife.ButterKnife;
 import yonky.yiqi.R;
 import yonky.yiqi.bean.KVBean;
 import yonky.yiqi.bean.RegionBean;
-import yonky.yiqi.util.MyUtil;
 
 /**
  * Created by Administrator on 2018/5/19.

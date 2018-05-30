@@ -35,6 +35,7 @@ import yonky.yiqi.bean.ShopFilterBean;
 import yonky.yiqi.p.GoodDetailPresenter;
 import yonky.yiqi.util.MyUtil;
 import yonky.yiqi.v.adapter.DetaiAdapter;
+import yonky.yiqi.widget.TextViewBottomLine;
 import yonky.yiqi.window.ConnectWindow;
 
 /**
@@ -57,6 +58,8 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
     LinearLayout mLinearLayout;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.title)
+    TextView mTitle;
 //    @BindView(R.id.tab_layout)
 //    TabLayout tab;
     DetaiAdapter mAdapter;
@@ -118,10 +121,14 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
         mPresenter.loadImgs(goodFilter);
         mPresenter.loadGoodDetail(goodFilter);
         mPresenter.getShopDetail(shopFilter);
+//        mToolbar置于最顶层
+        mToolbar.bringToFront();
+//        setToolbarTansparent(0,250);
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+
                 super.onScrolled(recyclerView, dx, dy);
                 int firstItemPosition =((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
                 int lastItemPosition =((LinearLayoutManager)recyclerView.getLayoutManager()).findLastVisibleItemPosition();
@@ -131,8 +138,17 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
                 }else{
                     fab.show();
                 }
-                mdy+=dy;
-                setToolbarTansparent(mdy,MyUtil.dp2px(mContext,250));
+//      坑
+//      快速滑动时，会因为先滑到底部，然后图片再加载，导致recyclerview长度于滑动距离不一致。
+//          这里加上判断，只有在第一个item时计算滑动距离
+//                但是这样快速滑动也会出现mdy为负的现象
+//                所以在调用setToolbarTansparent时判断，如果mdy<0时，mdy归零；
+                if(firstItemPosition==0){
+                    mdy+=dy;
+                    setToolbarTansparent(mdy,MyUtil.dp2px(mContext,250));
+                    Log.e(TAG,"mdy:"+mdy);
+                }
+
             }
         });
         fab.setOnClickListener(new View.OnClickListener() {
@@ -144,10 +160,14 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
 
     }
 
-    private void setToolbarTansparent(int dy,int limit){
-        if(dy<limit&&dy>=0){
-            int fraction=dy*255/limit;
-//            int alpha=255*dy/limit;
+    private void setToolbarTansparent(int dy,float limit){
+        if(dy<0){
+            mdy=0;
+            dy=0;
+        }
+        if(dy<=limit&&dy>=0){
+            int fraction=(int)(dy*255/limit);
+            float alpha=dy/limit;
 //            String alpha=Integer.toHexString(255*dy/limit);
 //            if(alpha.length()==1){
 //                alpha="0"+alpha;
@@ -155,6 +175,9 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
 //            Log.e(TAG,"#"+alpha+"ffffff");
 //            mToolbar.setBackgroundColor(Color.parseColor("#"+Integer.toHexString(alpha)+"ffffff"));
             mToolbar.getBackground().mutate().setAlpha(fraction);
+            mTitle.setAlpha(alpha);
+        }else if(dy>limit){
+            mToolbar.getBackground().mutate().setAlpha(255);
         }
     }
 
@@ -184,7 +207,7 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
 
     @Override
     public void showResult(GoodBean goodBean) {
-
+        mTitle.setText(goodBean.getTitle());
         Log.d(TAG,"show result"+goodBean.getShop_name());
         mAdapter.setGoodBean(goodBean);
         mAdapter.notifyDataSetChanged();

@@ -1,4 +1,4 @@
-package yonky.yiqi.v;
+package yonky.yiqi.v.main;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;

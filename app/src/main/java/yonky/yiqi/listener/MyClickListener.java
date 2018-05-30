@@ -9,9 +9,9 @@ import yonky.yiqi.v.ActivityFragment;
 import yonky.yiqi.v.GoodDetailActivity;
 import yonky.yiqi.v.GoodsActivity;
 
-import static yonky.yiqi.v.adapter.MainAdapter.TYPE_GOODS;
-import static yonky.yiqi.v.adapter.MainAdapter.TYPE_GOOD_DETAIL;
-import static yonky.yiqi.v.adapter.MainAdapter.TYPE_SERVICE;
+import static yonky.yiqi.v.main.adapter.MainAdapter.TYPE_GOODS;
+import static yonky.yiqi.v.main.adapter.MainAdapter.TYPE_GOOD_DETAIL;
+import static yonky.yiqi.v.main.adapter.MainAdapter.TYPE_SERVICE;
 
 /**
  * Created by Administrator on 2018/5/15.

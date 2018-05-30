@@ -1,4 +1,4 @@
-package yonky.yiqi.v.adapter;
+package yonky.yiqi.v.main.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

@@ -3,42 +3,180 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <ScrollView
+    <RelativeLayout
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-            <ImageView
-                android:id="@+id/iv_avatar"
-                android:layout_margin="5dp"
-                android:layout_width="60dp"
-                android:layout_height="60dp" />
-            <TextView
-                android:id="@+id/tv_shop"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" />
-            <Button
-                android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-     <include layout="@layout/shop_dk"/>
-        <include layout="@layout/shop_lianxi"/>
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      >
-            <TextView
-                android:id="@+id/tv_idcard"
-                android:layout_margin="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
+        android:layout_height="wrap_content"/>
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="vertical">-->
+        <!--<LinearLayout android:layout_width="match_parent"-->
+                      <!--android:layout_height="wrap_content"-->
+                      <!--android:orientation="vertical">-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="10dp">-->
+                <!--<ImageView-->
+                    <!--android:id="@+id/iv_avatar"-->
+                    <!--android:layout_margin="5dp"-->
+                    <!--android:layout_width="60dp"-->
+                    <!--android:background="@drawable/default_icon"-->
+                    <!--android:layout_height="60dp" />-->
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_shop"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:text="text"-->
+                    <!--android:layout_height="wrap_content" />-->
+                <!--<Button-->
+                    <!--android:layout_gravity="center_vertical"-->
+                    <!--android:text="关注"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" />-->
+            <!--</LinearLayout>-->
 
 
-    </ScrollView>
+
+
+                <!--<TextView-->
+                    <!--android:id="@+id/textView18"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:text="地区"-->
+                    <!--android:textColor="@color/gray"-->
+                    <!--app:layout_constraintStart_toStartOf="@+id/textView17"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/view4" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_area"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="16dp"-->
+                    <!--android:layout_marginStart="16dp"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:textColor="@color/gray"-->
+                    <!--app:layout_constraintStart_toEndOf="@+id/textView18"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/view4" />-->
+
+                <!--<view-->
+                    <!--android:id="@+id/view5"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:background="@color/light"-->
+                    <!--app:layout_constraintStart_toStartOf="parent"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/textView18" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/textView19"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:text="商城"-->
+                    <!--android:textColor="@color/gray"-->
+                    <!--app:layout_constraintStart_toStartOf="@+id/textView17"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/view5" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_sc"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="16dp"-->
+                    <!--android:layout_marginStart="16dp"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:textColor="@color/gray"-->
+                    <!--app:layout_constraintStart_toEndOf="@+id/textView18"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/view5" />-->
+
+                <!--<view-->
+                    <!--android:id="@+id/view6"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:background="@color/light"-->
+                    <!--app:layout_constraintStart_toStartOf="parent"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/textView19" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/textView20"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:text="主营"-->
+                    <!--android:textColor="@color/gray"-->
+                    <!--app:layout_constraintStart_toStartOf="@+id/textView17"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/view6" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_major"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="16dp"-->
+                    <!--android:layout_marginStart="16dp"-->
+                    <!--android:textColor="@color/gray"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--app:layout_constraintStart_toEndOf="@+id/textView20"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/view6" />-->
+
+                <!--<view-->
+                    <!--android:id="@+id/view7"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:background="@color/light"-->
+                    <!--app:layout_constraintStart_toStartOf="parent"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/textView20" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/textView21"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:text="服务"-->
+                    <!--android:textColor="@color/gray"-->
+                    <!--app:layout_constraintStart_toStartOf="@+id/textView17"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/view7" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_service"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="16dp"-->
+                    <!--android:layout_marginStart="16dp"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:textColor="@color/gray"-->
+                    <!--app:layout_constraintStart_toEndOf="@+id/textView21"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/view7" />-->
+
+                <!--<view-->
+                    <!--android:id="@+id/view8"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:background="@color/light"-->
+                    <!--app:layout_constraintStart_toStartOf="parent"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/textView21" />-->
+
+
+
+
+            <!--<include layout="@layout/shop_dk"/>-->
+            <!--<include layout="@layout/shop_lianxi"/>-->
+            <!--<LinearLayout android:layout_width="match_parent"-->
+                          <!--android:layout_height="wrap_content"-->
+                <!--&gt;-->
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_idcard"-->
+                    <!--android:layout_margin="10dp"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"/>-->
+            <!--</LinearLayout>-->
+        <!--</LinearLayout>-->
+
+
+
+    <!--</ScrollView>-->
 
 </LinearLayout>

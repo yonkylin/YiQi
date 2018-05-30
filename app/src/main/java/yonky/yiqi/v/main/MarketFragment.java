@@ -1,19 +1,12 @@
-package yonky.yiqi.v;
+package yonky.yiqi.v.main;
 
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.ImageSpan;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +19,7 @@ import yonky.yiqi.base.contract.MarketContract;
 import yonky.yiqi.bean.ShopBean;
 import yonky.yiqi.bean.ShopFilterBean;
 import yonky.yiqi.p.MarketPresenter;
-import yonky.yiqi.v.adapter.MarketAdapter;
+import yonky.yiqi.v.main.adapter.MarketAdapter;
 
 /**
  * Created by Administrator on 2018/5/12.

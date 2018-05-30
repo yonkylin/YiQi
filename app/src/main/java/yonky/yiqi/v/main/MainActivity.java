@@ -1,4 +1,4 @@
-package yonky.yiqi.v;
+package yonky.yiqi.v.main;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -14,7 +14,7 @@ import java.util.List;
 import butterknife.BindView;
 import yonky.yiqi.R;
 import yonky.yiqi.base.BaseActivity;
-import yonky.yiqi.v.adapter.ViewPagerAdaper;
+import yonky.yiqi.v.main.adapter.ViewPagerAdaper;
 import yonky.yiqi.widget.MyViewPager;
 
 

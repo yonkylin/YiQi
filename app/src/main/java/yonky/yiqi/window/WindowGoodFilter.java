@@ -21,11 +21,11 @@ import yonky.yiqi.R;
 import yonky.yiqi.bean.KVBean;
 import yonky.yiqi.bean.RegionBean;
 import yonky.yiqi.listener.MyListener;
-import yonky.yiqi.v.adapter.FilterAdapter;
+import yonky.yiqi.v.main.adapter.FilterAdapter;
 
-import static yonky.yiqi.v.adapter.FilterAdapter.TYPE_ALL;
-import static yonky.yiqi.v.adapter.FilterAdapter.TYPE_KV;
-import static yonky.yiqi.v.adapter.FilterAdapter.TYPE_SELECTED_NONE;
+import static yonky.yiqi.v.main.adapter.FilterAdapter.TYPE_ALL;
+import static yonky.yiqi.v.main.adapter.FilterAdapter.TYPE_KV;
+import static yonky.yiqi.v.main.adapter.FilterAdapter.TYPE_SELECTED_NONE;
 
 /**
  * Created by Administrator on 2018/5/19.

@@ -1,4 +1,4 @@
-package yonky.yiqi.v.adapter;
+package yonky.yiqi.v.main.adapter;
 
 import android.content.Context;
 import android.content.Intent;

@@ -1,18 +1,12 @@
 package yonky.yiqi.v;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabItem;
-import android.support.design.widget.TabLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,7 +15,6 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
@@ -30,8 +23,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import jp.wasabeef.glide.transformations.BlurTransformation;
-import jp.wasabeef.glide.transformations.ColorFilterTransformation;
-import jp.wasabeef.glide.transformations.MaskTransformation;
 import yonky.yiqi.R;
 import yonky.yiqi.base.BaseActivity;
 import yonky.yiqi.base.contract.GoodContract;
@@ -43,12 +34,12 @@ import yonky.yiqi.bean.ShopFilterBean;
 import yonky.yiqi.p.GoodPresenter;
 import yonky.yiqi.util.GlideUtil;
 import yonky.yiqi.util.MyUtil;
-import yonky.yiqi.v.adapter.StyleAdapter;
+import yonky.yiqi.v.main.adapter.StyleAdapter;
 import yonky.yiqi.window.ConnectWindow;
 
 import static yonky.yiqi.base.Constants.IS_FROM_AREA;
 import static yonky.yiqi.base.Constants.IS_FROM_SHOP;
-import static yonky.yiqi.v.adapter.StyleAdapter.TYPE_NODATA;
+import static yonky.yiqi.v.main.adapter.StyleAdapter.TYPE_NODATA;
 
 /**
  * Created by Administrator on 2018/5/14.
@@ -229,7 +220,12 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
             popupWindow.showAtLocation(linearLayout, Gravity.NO_GRAVITY,0,0);
         }
     }
-    @OnClick({R.id.tv_dkjj,R.id.tv_bbfl})
+//    @OnClick(R.id.tv_dkjj)
+//    void dkjj(){
+//    Intent intent = new Intent(mContext,ActivityFragment.class);
+//    mContext.startActivity(intent);
+// }
+    @OnClick(R.id.tv_bbfl)
     void alarm(){
         MyUtil.toast(mContext);
     }

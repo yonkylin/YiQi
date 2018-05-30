@@ -1,4 +1,4 @@
-package yonky.yiqi.v;
+package yonky.yiqi.v.main;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -33,11 +33,11 @@ import yonky.yiqi.bean.AreaEBean;
 import yonky.yiqi.listener.MyListener;
 import yonky.yiqi.p.MainPresenter;
 import yonky.yiqi.util.MyUtil;
-import yonky.yiqi.v.adapter.MainAdapter;
-import yonky.yiqi.v.adapter.RegionAdapter;
+import yonky.yiqi.v.main.adapter.MainAdapter;
+import yonky.yiqi.v.main.adapter.RegionAdapter;
 
-import static yonky.yiqi.v.adapter.MainAdapter.TYPE_THREE;
-import static yonky.yiqi.v.adapter.MainAdapter.TYPE_TWO;
+import static yonky.yiqi.v.main.adapter.MainAdapter.TYPE_THREE;
+import static yonky.yiqi.v.main.adapter.MainAdapter.TYPE_TWO;
 
 public class MainFragment extends BaseFragment implements MainContract.View,MyListener {
     private static final String TAG = MainFragment.class.getSimpleName();
