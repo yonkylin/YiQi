@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:padding="10dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"/>
+    <TextView
+        android:id="@+id/tv_title"
+        android:textSize="16sp"
+        android:layout_marginLeft="16dp"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/bt_gz"
+        android:text="未关注"
+
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/corner_background_red"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"/>
+
+</LinearLayout>

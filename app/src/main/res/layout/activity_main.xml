@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     >
+    <include layout="@layout/topbar"/>
 
     <yonky.yiqi.widget.MyViewPager
         android:id="@+id/viewpager"
@@ -20,7 +21,7 @@
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/bottomtab_height"
         app:tabMode="fixed"
         app:tabIndicatorHeight="0dp"
         app:tabTextColor="@color/gray"

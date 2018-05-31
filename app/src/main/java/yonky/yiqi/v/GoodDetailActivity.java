@@ -184,11 +184,11 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
     @OnClick(R.id.connect) void setTvConnect(){
 //        新建窗口是有状态栏的，大概25dp
         if(mShopBean!=null){
-            int height =csLayout.getHeight()-mLinearLayout.getHeight()-MyUtil.dp2px(mContext,24);
+//            int height =csLayout.getHeight()-mLinearLayout.getHeight()-MyUtil.dp2px(mContext,24);
 
-            PopupWindow popupWindow = new ConnectWindow(mContext,mShopBean).newWindow(height);
+            PopupWindow popupWindow = new ConnectWindow(mContext,mShopBean).newWindow();
 
-            popupWindow.showAtLocation(mLinearLayout,Gravity.NO_GRAVITY,0,0);
+            popupWindow.showAtLocation(csLayout,Gravity.NO_GRAVITY,0,0);
         }
     }
     @OnClick(R.id.shop) void setLlShop() {
@@ -231,12 +231,7 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
     public void showError(){
        Log.d(TAG,"showError() is go");
          View contentView = LayoutInflater.from(mContext).inflate(R.layout.window_no_data,null);
-     final  PopupWindow popupWindow = new PopupWindow(contentView,ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT,true){
-         @Override
-         public void showAtLocation(View parent, int gravity, int x, int y) {
-             super.showAtLocation(parent, gravity, x, y);
-         }
-     };
+     final  PopupWindow popupWindow = new PopupWindow(contentView,ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT,true);
         popupWindow.setContentView(contentView);
         ImageView iv=contentView.findViewById(R.id.window_iv);
 //

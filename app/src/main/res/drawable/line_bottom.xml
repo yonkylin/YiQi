@@ -36,7 +36,7 @@
 
 
 
-    <item android:bottom="1dp" android:top="1dp">
+    <item android:bottom="1dp" >
         <shape>
         <solid android:color="@color/white" />
     </shape>

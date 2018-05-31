@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.constraint.ConstraintLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.zip.Inflater;
 
 import yonky.yiqi.R;
+import yonky.yiqi.base.App;
 import yonky.yiqi.bean.ShopBean;
 import yonky.yiqi.util.MyUtil;
 import yonky.yiqi.widget.TextViewBottomLine;
@@ -37,20 +39,25 @@ public class ConnectWindow {
     Context mContext;
     ShopBean shopBean;
     LinearLayout linearLayout;
-    RelativeLayout relativeLayout;
+    View v;
+    View bottomView;
     ClipboardManager clipboardManager;
     public ConnectWindow(Context context,ShopBean shopBean) {
         mContext = context;
         this.shopBean=shopBean;
-        clipboardManager =(ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+        clipboardManager =(ClipboardManager) App.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
     }
 
-    public PopupWindow newWindow(int height){
+    public PopupWindow newWindow(){
 
             View contentView= LayoutInflater.from(mContext).inflate(R.layout.window_connect,null);
-          final  PopupWindow window = new PopupWindow(contentView, MATCH_PARENT,height,true);
+          final  PopupWindow window = new PopupWindow(contentView, MATCH_PARENT,MATCH_PARENT,true);
+        //            设置可以超出屏幕范围，及到状态栏
+//            window.setClippingEnabled(false);
          linearLayout = contentView.findViewById(R.id.ll);
-         relativeLayout=contentView.findViewById(R.id.rl);
+         v=contentView.findViewById(R.id.rl);
+         bottomView=contentView.findViewById(R.id.tab_position);
+
 
         if(shopBean.getQq()!=null){
             TextViewBottomLine tvQ=newText("联系QQ",true);
@@ -106,7 +113,13 @@ public class ConnectWindow {
                 window.dismiss();
             }
         });
-//        relativeLayout.setOnClickListener(new View.OnClickListener() {
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                window.dismiss();
+            }
+        });
+//        bottomView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                window.dismiss();

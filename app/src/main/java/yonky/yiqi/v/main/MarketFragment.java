@@ -32,8 +32,8 @@ public class MarketFragment extends BaseFragment implements MarketContract.View{
     RecyclerView recyclerView;
     @BindView(R.id.fab)
     FloatingActionButton fab;
-    @BindView(R.id.button)
-    Button btRegion;
+//    @BindView(R.id.button)
+//    Button btRegion;
     @BindView(R.id.bt_default)
             Button btDefault;
     @BindView(R.id.bt_dk)
@@ -65,7 +65,7 @@ public class MarketFragment extends BaseFragment implements MarketContract.View{
 
         regionSelected=mPreferences.getString("region","广州");
         zdid =mPreferences.getString("regionId","42");
-        btRegion.setText(regionSelected);
+//        btRegion.setText(regionSelected);
 
             fab.hide();
         mPresenter =new MarketPresenter(mContext);

@@ -39,15 +39,16 @@ import yonky.yiqi.v.main.adapter.RegionAdapter;
 import static yonky.yiqi.v.main.adapter.MainAdapter.TYPE_THREE;
 import static yonky.yiqi.v.main.adapter.MainAdapter.TYPE_TWO;
 
-public class MainFragment extends BaseFragment implements MainContract.View,MyListener {
+//public class MainFragment extends BaseFragment implements MainContract.View,MyListener {
+public class MainFragment extends BaseFragment implements MainContract.View {
     private static final String TAG = MainFragment.class.getSimpleName();
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.rv_main)
     RecyclerView recyclerViewMain;
     MainAdapter mainAdapter;
-    @BindView(R.id.button)
-    Button btRegion;
+//    @BindView(R.id.button)
+//    Button btRegion;
     String regionSelected;
     String zdid;
     SharedPreferences preferences;
@@ -81,7 +82,7 @@ public class MainFragment extends BaseFragment implements MainContract.View,MyLi
          preferences= mContext.getSharedPreferences("data",0);
         regionSelected=preferences.getString("region","广州");
         zdid =preferences.getString("regionId","42");
-       btRegion.setText(regionSelected);
+//       btRegion.setText(regionSelected);
 
         mainAdapter = new MainAdapter(mContext);
 
@@ -172,47 +173,47 @@ public class MainFragment extends BaseFragment implements MainContract.View,MyLi
     }
 
 
-    @OnClick(R.id.button)void regionButton(){
-        showRegion();
-    }
-    private void showRegion(){
-        View contentView= LayoutInflater.from(mContext).inflate(R.layout.window_region,null);
-        mPopupWindow = new PopupWindow(contentView, FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT,true){
-            @Override
-            public void dismiss() {
-                super.dismiss();
-                updateButton();
-            }
-        };
-        mPopupWindow.setContentView(contentView);
+//    @OnClick(R.id.button)void regionButton(){
+//        showRegion();
+//    }
+//    private void showRegion(){
+//        View contentView= LayoutInflater.from(mContext).inflate(R.layout.window_region,null);
+//        mPopupWindow = new PopupWindow(contentView, FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT,true){
+//            @Override
+//            public void dismiss() {
+//                super.dismiss();
+//                updateButton();
+//            }
+//        };
+//        mPopupWindow.setContentView(contentView);
+//
+//        RecyclerView rvRegion=contentView.findViewById(R.id.rv_region1);
+//
+//        mRegionAdapter=new RegionAdapter(mContext,regionSelected);
+//        mRegionAdapter.setListener(this);
+//        FlexboxLayoutManager regionManager= new FlexboxLayoutManager();
+//        regionManager.setFlexDirection(FlexDirection.ROW);
+//        regionManager.setFlexWrap(FlexWrap.WRAP);
+//
+//        rvRegion.setLayoutManager(regionManager);
+//        rvRegion.setAdapter(mRegionAdapter);
+//        mPopupWindow.showAsDropDown(btRegion,0, -MyUtil.dp2px(mContext,5));
+//    }
+//    private void updateButton(){
+//        String s=preferences.getString("region","广州");
+//        if(!s.equals(regionSelected)){
+//            regionSelected=s;
+//            btRegion.setText(s);
+//            zdid=preferences.getString("regionId","42");
+//            loadData();
+//        }
+//
+//    }
 
-        RecyclerView rvRegion=contentView.findViewById(R.id.rv_region1);
-
-        mRegionAdapter=new RegionAdapter(mContext,regionSelected);
-        mRegionAdapter.setListener(this);
-        FlexboxLayoutManager regionManager= new FlexboxLayoutManager();
-        regionManager.setFlexDirection(FlexDirection.ROW);
-        regionManager.setFlexWrap(FlexWrap.WRAP);
-
-        rvRegion.setLayoutManager(regionManager);
-        rvRegion.setAdapter(mRegionAdapter);
-        mPopupWindow.showAsDropDown(btRegion,0, -MyUtil.dp2px(mContext,5));
-    }
-    private void updateButton(){
-        String s=preferences.getString("region","广州");
-        if(!s.equals(regionSelected)){
-            regionSelected=s;
-            btRegion.setText(s);
-            zdid=preferences.getString("regionId","42");
-            loadData();
-        }
-
-    }
-
-    @OnClick(R.id.imageView)
-    void alarm(){
-        MyUtil.toast(mContext);
-    }
+//    @OnClick(R.id.imageView)
+//    void alarm(){
+//        MyUtil.toast(mContext);
+//    }
 
     @Override
     public void onDestroyView() {
@@ -222,10 +223,10 @@ public class MainFragment extends BaseFragment implements MainContract.View,MyLi
         super.onDestroyView();
     }
 
-    @Override
-    public void onClick() {
-        mPopupWindow.dismiss();
-        updateButton();
-    }
+//    @Override
+//    public void onClick() {
+//        mPopupWindow.dismiss();
+//        updateButton();
+//    }
 
 }

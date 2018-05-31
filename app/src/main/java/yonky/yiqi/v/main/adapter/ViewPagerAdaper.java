@@ -6,9 +6,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
+import yonky.yiqi.base.BaseFragment;
+
 public class ViewPagerAdaper extends FragmentPagerAdapter {
-    private List<Fragment> fragments;
-    public ViewPagerAdaper(FragmentManager fm ,List<Fragment>fragments) {
+    private List<BaseFragment> fragments;
+    public ViewPagerAdaper(FragmentManager fm ,List<BaseFragment>fragments) {
         super(fm);
         this.fragments = fragments;
     }

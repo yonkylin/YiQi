@@ -1,5 +1,6 @@
 package yonky.yiqi.v;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -215,16 +216,18 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
         if(mShopBean!=null){
             int[] positions=new int[2];
             linearLayout.getLocationInWindow(positions);
-            PopupWindow popupWindow = new ConnectWindow(mContext,mShopBean).newWindow(positions[1]- MyUtil.dp2px(mContext,24));
+//            PopupWindow popupWindow = new ConnectWindow(mContext,mShopBean).newWindow(positions[1]- MyUtil.dp2px(mContext,24));
+            PopupWindow popupWindow = new ConnectWindow(mContext,mShopBean).newWindow();
 
-            popupWindow.showAtLocation(linearLayout, Gravity.NO_GRAVITY,0,0);
+            popupWindow.showAtLocation(mToolbar, Gravity.NO_GRAVITY,0,0);
         }
     }
-//    @OnClick(R.id.tv_dkjj)
-//    void dkjj(){
-//    Intent intent = new Intent(mContext,ActivityFragment.class);
-//    mContext.startActivity(intent);
-// }
+    @OnClick(R.id.tv_dkjj)
+    void dkjj(){
+    Intent intent = new Intent(mContext,ActivityFragment.class);
+    intent.putExtra("shopbean",mShopBean);
+    mContext.startActivity(intent);
+ }
     @OnClick(R.id.tv_bbfl)
     void alarm(){
         MyUtil.toast(mContext);

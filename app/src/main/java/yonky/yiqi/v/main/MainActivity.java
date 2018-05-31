@@ -1,31 +1,59 @@
 package yonky.yiqi.v.main;
 
+import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexWrap;
+import com.google.android.flexbox.FlexboxLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import yonky.yiqi.R;
 import yonky.yiqi.base.BaseActivity;
+import yonky.yiqi.base.BaseFragment;
+import yonky.yiqi.listener.MyListener;
+import yonky.yiqi.util.MyUtil;
+import yonky.yiqi.v.main.adapter.RegionAdapter;
 import yonky.yiqi.v.main.adapter.ViewPagerAdaper;
 import yonky.yiqi.widget.MyViewPager;
 
 
-public class MainActivity extends BaseActivity{
+public class MainActivity extends BaseActivity implements MyListener {
+//public class MainActivity extends BaseActivity  {
     @BindView(R.id.viewpager)
     MyViewPager mViewPager;
     @BindView(R.id.tab_layout)
     TabLayout mTabLayout;
+    @BindView(R.id.button)
+    Button btRegion;
 
+    int mCurrentPosition;
 
-    List<Fragment> fragments;
+    MainFragment mainFragment;
+    MarketFragment mainFragment2;
+    StyleFragment mainFragment3;
+    LoginFragment mainFragment4;
+    MyFragment mainFragment5;
+
+    List<BaseFragment> fragments;
+    SharedPreferences preferences;
+    PopupWindow mPopupWindow;
+    RegionAdapter mRegionAdapter;
+    String regionSelected;
 
 
     private String[] mTitles;
@@ -52,7 +80,13 @@ public class MainActivity extends BaseActivity{
 
 
         mViewPager.setAdapter(pagerAdapter);
-        mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+        mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager){
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                super.onTabSelected(tab);
+                mCurrentPosition=mTabLayout.getSelectedTabPosition();
+            }
+        });
 
 //        mPresenter.attachView(this);
 //        mPresenter.loadDatas();
@@ -87,12 +121,23 @@ public class MainActivity extends BaseActivity{
         mTitles = new String[]{"首页","逛市场","搜款式","采购单","我的"};
 
 
+        preferences= mContext.getSharedPreferences("data",0);
+        regionSelected=preferences.getString("region","广州");
+        btRegion.setText(regionSelected);
+
+
+
         fragments = new ArrayList<>();
-        MainFragment mainFragment = new MainFragment();
-        MarketFragment mainFragment2 = new MarketFragment();
-        StyleFragment mainFragment3 = new StyleFragment();
-        LoginFragment mainFragment4 = new LoginFragment();
-        MyFragment mainFragment5 = new MyFragment();
+        mainFragment = new MainFragment();
+        mainFragment2 = new MarketFragment();
+        mainFragment3 = new StyleFragment();
+         mainFragment4 = new LoginFragment();
+        mainFragment5 = new MyFragment();
+//        MyFragment mainFragment = new MyFragment();
+//        MyFragment mainFragment2 = new MyFragment();
+//        MyFragment mainFragment3 = new MyFragment();
+//        MyFragment mainFragment4 = new MyFragment();
+//        MyFragment mainFragment5 = new MyFragment();
         fragments.add(mainFragment);
         fragments.add(mainFragment2);
         fragments.add(mainFragment3);
@@ -100,7 +145,52 @@ public class MainActivity extends BaseActivity{
         fragments.add(mainFragment5);
     }
 
+    @OnClick(R.id.button)void regionButton(){
+        showRegion();
+    }
+    private void showRegion(){
+        View contentView= LayoutInflater.from(mContext).inflate(R.layout.window_region,null);
+        mPopupWindow = new PopupWindow(contentView, FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT,true){
+            @Override
+            public void dismiss() {
+                super.dismiss();
+                updateButton();
+            }
+        };
+        mPopupWindow.setContentView(contentView);
 
+        RecyclerView rvRegion=contentView.findViewById(R.id.rv_region1);
+
+        mRegionAdapter=new RegionAdapter(mContext,regionSelected);
+        mRegionAdapter.setListener(this);
+        FlexboxLayoutManager regionManager= new FlexboxLayoutManager();
+        regionManager.setFlexDirection(FlexDirection.ROW);
+        regionManager.setFlexWrap(FlexWrap.WRAP);
+
+        rvRegion.setLayoutManager(regionManager);
+        rvRegion.setAdapter(mRegionAdapter);
+        mPopupWindow.showAsDropDown(btRegion,0, -MyUtil.dp2px(mContext,5));
+    }
+    private void updateButton(){
+        String s=preferences.getString("region","广州");
+        if(!s.equals(regionSelected)){
+            regionSelected=s;
+            btRegion.setText(s);
+//            loadData();
+//             fragments[mCurrentPosition].loadData();
+        }
+
+    }
+
+    @Override
+    public void onClick() {
+        mPopupWindow.dismiss();
+        updateButton();
+    }
+        @OnClick(R.id.imageView)
+    void alarm(){
+        MyUtil.toast(mContext);
+    }
 
 //    @Override
 //    public void showResult(List<AreaBean> areaABeanList, int type) {

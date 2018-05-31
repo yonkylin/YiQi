@@ -46,8 +46,8 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
     Button btFilter;
     @BindView(R.id.fab)
     FloatingActionButton fab;
-    @BindView(R.id.button)
-            Button btRegion;
+//    @BindView(R.id.button)
+//            Button btRegion;
 
     boolean isLoadingMore;
     String sort;
@@ -137,7 +137,7 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
                 }
             }
         });
-        btRegion.setText(preferences.getString("region","广州"));
+//        btRegion.setText(preferences.getString("region","广州"));
 
         mPresenter.loadDatas(filterBean,false);
         mPresenter.getGoodColor("get_colors");
