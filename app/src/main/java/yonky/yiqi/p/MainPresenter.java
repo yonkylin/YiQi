@@ -42,7 +42,7 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void attachView(MainContract.View view) {
         this.mView = view;
-        mDataManager = new DataManager(mContext);
+        mDataManager = new DataManager();
     }
 
 //    public void add(CompositeDisposable compositeDisposable){

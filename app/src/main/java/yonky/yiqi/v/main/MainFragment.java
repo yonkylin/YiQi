@@ -80,8 +80,8 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     @Override
     protected void initEventAndData() {
          preferences= mContext.getSharedPreferences("data",0);
-        regionSelected=preferences.getString("region","广州");
-        zdid =preferences.getString("regionId","42");
+//        regionSelected=preferences.getString("region","广州");
+//        zdid =preferences.getString("regionId","42");
 //       btRegion.setText(regionSelected);
 
         mainAdapter = new MainAdapter(mContext);
@@ -125,14 +125,27 @@ public class MainFragment extends BaseFragment implements MainContract.View {
         });
 
     }
-    private void loadData(){
-        mPresenter.loadDatas("A",zdid);
-        mPresenter.loadDatas("B",zdid);
-        mPresenter.loadDatas("C",zdid);
-        mPresenter.loadDatas("D",zdid);
-        mPresenter.loadDatas("E",zdid);
+    @Override
+    public void loadData(){
+
+            zdid =preferences.getString("regionId","42");
+
+            mPresenter.loadDatas("A",zdid);
+            mPresenter.loadDatas("B",zdid);
+            mPresenter.loadDatas("C",zdid);
+            mPresenter.loadDatas("D",zdid);
+            mPresenter.loadDatas("E",zdid);
+
+
     }
 
+//    @Override
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//        if(isVisibleToUser &&!preferences.getString("regionId","42").equals(zdid)){
+//            loadData();
+//        }
+//    }
 
     @Override
     public void showResult(List<AreaBean> areaBeanList, String type) {

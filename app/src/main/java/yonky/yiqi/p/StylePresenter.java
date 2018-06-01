@@ -123,7 +123,7 @@ public class StylePresenter implements StyleContract.Presenter {
     @Override
     public void attachView(StyleContract.View view) {
         this.view = view;
-        dataManager = new DataManager(mContext);
+        dataManager = new DataManager();
     }
 
     @Override

@@ -60,6 +60,7 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
     List<GoodBean> goodBeans;
 
     GoodFilterBean filterBean;
+    String zdid;
 
 
 //   GoodAttributeBean.GoodsItemGetResponseBean goodAttrs;
@@ -101,7 +102,7 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
         recyclerView.setLayoutManager(new GridLayoutManager(mContext,2));
         recyclerView.setAdapter(styleAdapter);
 
-        filterBean.setZdid(preferences.getString("regionId","42"));
+//        filterBean.setZdid(preferences.getString("regionId","42"));
 
 
 
@@ -138,22 +139,28 @@ public class StyleFragment extends BaseFragment implements StyleContract.View ,M
             }
         });
 //        btRegion.setText(preferences.getString("region","广州"));
+        loadData();
 
+
+    }
+
+    @Override
+    public void loadData(){
+        zdid=preferences.getString("regionId","42");
+        filterBean.setZdid(zdid);
         mPresenter.loadDatas(filterBean,false);
         mPresenter.getGoodColor("get_colors");
         mPresenter.getGoodColor("get_sizes");
-
     }
 //这个fragment不只在viewpager中使用，所以不使用懒加载
-//    @Override
-//    public void setUserVisibleHint(boolean isVisibleToUser) {
-//        super.setUserVisibleHint(isVisibleToUser);
-//        if(isVisibleToUser){
-//            mPresenter.loadDatas(filterBean,false);
-//            mPresenter.getGoodColor("get_colors");
-//            mPresenter.getGoodColor("get_sizes");
-//        }
-//    }
+//    这个方法只在主页viewpager中使用，更改地区选项时需要刷新。
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser&&!preferences.getString("regionId","42").equals(zdid)){
+           loadData();
+        }
+    }
 
 
 

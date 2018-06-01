@@ -67,6 +67,7 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
     GoodFilterBean goodFilter;
     ShopFilterBean shopFilter;
     ShopBean mShopBean;
+    GoodBean mGoodBean;
 
     boolean isLoadingMore;
     int mdy;
@@ -198,15 +199,29 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
             mContext.startActivity(intent);
         }
     }
-    @OnClick({R.id.img_search,R.id.collect,R.id.upload})
+    @OnClick({R.id.collect,R.id.upload})
     void alarm(){
         MyUtil.toast(mContext);
+    }
+
+    @OnClick(R.id.img_search)
+    void imgsearch(){
+        if(mGoodBean!=null){
+            Intent intent = new Intent(mContext,ActivityFragment.class);
+//            不知道为什么这句会闪退,在stylefragment也可以传递过来
+//            intent.putExtra("goodbean",mGoodBean);
+            intent.putExtra("url",mGoodBean.getTb_img());
+            intent.putExtra("zdid",mGoodBean.getSite_id());
+            mContext.startActivity(intent);
+        }
+
     }
 
 
 
     @Override
     public void showResult(GoodBean goodBean) {
+        this.mGoodBean = goodBean;
         mTitle.setText(goodBean.getTitle());
         Log.d(TAG,"show result"+goodBean.getShop_name());
         mAdapter.setGoodBean(goodBean);

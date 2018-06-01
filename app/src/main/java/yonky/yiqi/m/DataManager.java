@@ -22,8 +22,8 @@ import yonky.yiqi.http.RetrofitService;
 
 public class DataManager {
     RetrofitService mRetrofitService;
-    public DataManager(Context context){
-        mRetrofitService=RetrofitHelper.getInstance(context).getServer();
+    public DataManager(){
+        mRetrofitService=RetrofitHelper.getInstance().getServer();
     }
     public Observable<MainPageBean> getMainPage(String platform, String zdid , String tag, String isDebug){
         return mRetrofitService.getMainPageData(platform,zdid,tag,isDebug);
@@ -78,5 +78,12 @@ public class DataManager {
 
     public Observable<RegionBean> getRegionData(String from,String shadow,String zdid,String fid){
         return mRetrofitService.getRegionData(from,shadow,zdid,fid);
+    }
+
+//    http://stu.17zwd.com/api/searchByUrl?pic_url=http://img.alicdn.com/bao/uploaded/i2/1656591777/TB2jD5bXmyEJuJjSspiXXX4IFXa_!!1656591777.jpg&shadow$_klass_=class+com.hanyun.onlineproject.entity.GetSearchImgBean&zdid=42
+    public Observable<StyleBean> getImgSearch(String url,String shadow,String zdid){
+        RetrofitService service=RetrofitHelper.getInstance().getServer2();
+        return service.getSearchGood(url,shadow,zdid);
+
     }
 }

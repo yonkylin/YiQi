@@ -5,6 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
 
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
@@ -40,6 +42,8 @@ public class MainActivity extends BaseActivity implements MyListener {
     TabLayout mTabLayout;
     @BindView(R.id.button)
     Button btRegion;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
     int mCurrentPosition;
 
@@ -85,6 +89,7 @@ public class MainActivity extends BaseActivity implements MyListener {
             public void onTabSelected(TabLayout.Tab tab) {
                 super.onTabSelected(tab);
                 mCurrentPosition=mTabLayout.getSelectedTabPosition();
+                setToolBar(mCurrentPosition);
             }
         });
 
@@ -177,10 +182,27 @@ public class MainActivity extends BaseActivity implements MyListener {
             regionSelected=s;
             btRegion.setText(s);
 //            loadData();
-//             fragments[mCurrentPosition].loadData();
+            if(mCurrentPosition==0){
+                mainFragment.loadData();
+            }else{
+//             第一个fragment无法设置serUserVisible();  所以如果当且页不是第一个的话也要刷新第一个fragment
+                fragments.get(mCurrentPosition).loadData();
+                mainFragment.loadData();
+            }
+
+//
         }
 
     }
+    private void setToolBar(int position){
+        if(position>=3){
+            mToolbar.setVisibility(View.GONE);
+        }else{
+            mToolbar.setVisibility(View.VISIBLE);
+        }
+
+    }
+
 
     @Override
     public void onClick() {

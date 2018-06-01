@@ -31,7 +31,7 @@ public class GoodPresenter implements GoodContract.Presenter {
 
     public GoodPresenter(Context context) {
         mContext = context;
-        mDataManager = new DataManager(mContext);
+        mDataManager = new DataManager();
     }
 
     @Override

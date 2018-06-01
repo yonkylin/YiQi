@@ -73,7 +73,8 @@ public class LoginFragment extends BaseFragment {
        Log.d("LoginFragment","setUserVisibleHint  "+isVisibleToUser);
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser){
-
+            ivLogo.setScaleX(0);
+            ivLogo.setScaleY(0);
             helper.start();
             animatorSet.start();
         }

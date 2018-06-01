@@ -46,6 +46,7 @@ public class MarketFragment extends BaseFragment implements MarketContract.View{
     List<ShopBean> shopBean;
     ShopFilterBean shopFilter;
 
+
     MarketPresenter mPresenter;
     boolean isLoadingMore;
 
@@ -63,8 +64,8 @@ public class MarketFragment extends BaseFragment implements MarketContract.View{
     protected void initEventAndData() {
             mPreferences= mContext.getSharedPreferences("data",0);
 
-        regionSelected=mPreferences.getString("region","广州");
-        zdid =mPreferences.getString("regionId","42");
+//        regionSelected=mPreferences.getString("region","广州");
+//        zdid =mPreferences.getString("regionId","42");
 //        btRegion.setText(regionSelected);
 
             fab.hide();
@@ -120,10 +121,20 @@ public class MarketFragment extends BaseFragment implements MarketContract.View{
     }
 
     @Override
+    public void loadData() {
+            zdid=mPreferences.getString("regionId","42");
+        shopFilter.setZdid(zdid);
+        mPresenter.loadData(shopFilter,false);
+    }
+
+    @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if(isVisibleToUser){
-            mPresenter.loadData(shopFilter,false);
+            if(!mPreferences.getString("regionId","42").equals(zdid)||mMarketAdapter.getBeanList()==null){
+                loadData();
+            }
+
         }
     }
 

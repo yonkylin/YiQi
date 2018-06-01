@@ -25,9 +25,10 @@ public class RetrofitHelper {
             .build();
 
     Retrofit mRetrofit;
+    Retrofit mRetrofit2;
 
     private static RetrofitHelper instance = null;
-    public static RetrofitHelper getInstance(Context context){
+    public static RetrofitHelper getInstance(){
         if(instance ==null){
             instance = new RetrofitHelper(App.getInstance());
         }
@@ -44,8 +45,18 @@ public class RetrofitHelper {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+        mRetrofit2 = new Retrofit.Builder()
+                .baseUrl(RetrofitService.SEARCH)
+                .client(client)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
     }
     public RetrofitService getServer(){
         return mRetrofit.create(RetrofitService.class);
+    }
+
+    public RetrofitService getServer2(){
+        return mRetrofit2.create(RetrofitService.class);
     }
 }

@@ -31,13 +31,13 @@ public class MarketPresenter implements MarketContract.Presenter {
 
     public MarketPresenter(Context context){
         this.mContext = context;
-        mDataManager = new DataManager(mContext);
+        mDataManager = new DataManager();
     }
 
     @Override
     public void attachView(MarketContract.View view) {
         this.mView = view;
-        mDataManager = new DataManager(mContext);
+
     }
 //    http://api2.17zwd.com/rest/shop/search_shops/?psize=10&orderby=mr&keyword=&bq=&service=&pindex=1&from=android&zdid=48  逛市场
 

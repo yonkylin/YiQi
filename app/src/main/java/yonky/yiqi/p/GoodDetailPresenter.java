@@ -28,7 +28,7 @@ public class GoodDetailPresenter implements GoodDetailContract.Presenter {
 
     public GoodDetailPresenter(Context mContext) {
         this.mContext = mContext;
-        dataManager = new DataManager(mContext);
+        dataManager = new DataManager();
     }
 
     @Override

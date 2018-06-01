@@ -2,9 +2,11 @@ package yonky.yiqi.http;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import yonky.yiqi.bean.GoodAttributeBean;
+import yonky.yiqi.bean.GoodBean;
 import yonky.yiqi.bean.GoodDetailBean;
 import yonky.yiqi.bean.MainPageBean;
 import yonky.yiqi.bean.MarketBean;
@@ -19,8 +21,9 @@ import yonky.yiqi.bean.StyleBean;
 public interface RetrofitService {
 //
 //  http://api2.17zwd.com/rest/popularize/get_home_data?from=android&zdid=48&tag=A&debug=false  首页
+//    http://stu.17zwd.com/api/searchByUrl?pic_url=http://img.alicdn.com/bao/uploaded/i2/1656591777/TB2jD5bXmyEJuJjSspiXXX4IFXa_!!1656591777.jpg&shadow$_klass_=class+com.hanyun.onlineproject.entity.GetSearchImgBean&zdid=42
      String HOST = "http://api2.17zwd.com/";
-
+    String SEARCH="http://stu.17zwd.com/api/";
     @GET("rest/popularize/get_home_data")
     Observable<MainPageBean> getMainPageData(@Query("from")String platform,
                                        @Query("zdid")String zdid,
@@ -128,6 +131,16 @@ public interface RetrofitService {
                                          @Query("shadow$_klass_")String shadow,
                                          @Query("zdid")String zdid,
                                          @Query("fid")String fid);
+
+//    http://stu.17zwd.com/api/searchByUrl?pic_url=http://img.alicdn.com/bao/uploaded/i2/1656591777/TB2jD5bXmyEJuJjSspiXXX4IFXa_!!1656591777.jpg
+// &shadow$_klass_=class+com.hanyun.onlineproject.entity.GetSearchImgBean&zdid=42
+
+    @POST("searchByUrl")
+    Observable<StyleBean> getSearchGood(@Query("pic_url")String url,
+                                        @Query("shadow$_klass_")String shadow,
+                                        @Query("zdid")String zdid);
+
+
 }
 
 

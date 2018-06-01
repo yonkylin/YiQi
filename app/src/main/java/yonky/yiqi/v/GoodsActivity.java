@@ -224,9 +224,12 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
     }
     @OnClick(R.id.tv_dkjj)
     void dkjj(){
-    Intent intent = new Intent(mContext,ActivityFragment.class);
-    intent.putExtra("shopbean",mShopBean);
-    mContext.startActivity(intent);
+        if(mShopBean!=null){
+            Intent intent = new Intent(mContext,ActivityFragment.class);
+            intent.putExtra("shopbean",mShopBean);
+            mContext.startActivity(intent);
+        }
+
  }
     @OnClick(R.id.tv_bbfl)
     void alarm(){

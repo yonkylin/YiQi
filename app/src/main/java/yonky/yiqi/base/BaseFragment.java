@@ -57,5 +57,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     protected  abstract int getLayoutId();
     protected abstract void initEventAndData();
+    public  void loadData(){
 
+    };
 }
