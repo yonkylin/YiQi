@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import yonky.yiqi.R;
+import yonky.yiqi.util.MyUtil;
 
 public abstract class BaseActivity extends AppCompatActivity  {
     protected Activity mContext;
@@ -54,6 +55,7 @@ public abstract class BaseActivity extends AppCompatActivity  {
 
     @Override
     protected void onDestroy() {
+        MyUtil.fixInputMethodManagerLeak(this);
         super.onDestroy();
         App.getInstance().removeActivity(this);
         mUnbinder.unbind();

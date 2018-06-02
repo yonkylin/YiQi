@@ -21,9 +21,10 @@ BaseFragment fragment;
 
     String dtype;
     ShopBean mShopBean;
-//    GoodBean mGoodBean;
-    String url;
-    String zdid;
+    GoodBean mGoodBean;
+    String searchtype;
+//    String url;
+//    String zdid;
     @BindView(R.id.tv_title)
     TextView title;
     @Override
@@ -36,9 +37,10 @@ BaseFragment fragment;
         Bundle bundle =new Bundle();
         dtype=getIntent().getStringExtra("dtype");
         mShopBean=(ShopBean)getIntent().getSerializableExtra("shopbean");
-//        mGoodBean=(GoodBean)getIntent().getSerializableExtra("goodbean");
-        url=getIntent().getStringExtra("url");
-        zdid=getIntent().getStringExtra("zdid");
+        mGoodBean=(GoodBean)getIntent().getSerializableExtra("goodbean");
+        searchtype=getIntent().getStringExtra("searchtype");
+//        url=getIntent().getStringExtra("url");
+//        zdid=getIntent().getStringExtra("zdid");
         if(dtype!=null){
             if("mrxk".equals(dtype)){
                 title.setText("每日新款");
@@ -59,10 +61,10 @@ BaseFragment fragment;
         }else {
             fragment =new SearchFragment();
             title.setText("同款宝贝");
-//            bundle.putSerializable("goodbean",mGoodBean);
+            bundle.putSerializable("goodbean",mGoodBean);
+            bundle.putString("searchtype",searchtype);
             fragment.setArguments(bundle);
         }
-        Log.e("ActivityFragment","do");
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame,fragment);
         transaction.commit();

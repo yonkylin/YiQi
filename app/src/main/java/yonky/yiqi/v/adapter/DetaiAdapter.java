@@ -28,6 +28,7 @@ import yonky.yiqi.bean.GoodBean;
 import yonky.yiqi.bean.ShopBean;
 import yonky.yiqi.util.GlideUtil;
 import yonky.yiqi.util.MyUtil;
+import yonky.yiqi.v.ActivityFragment;
 import yonky.yiqi.v.GoodsActivity;
 
 public class DetaiAdapter extends RecyclerView.Adapter {
@@ -184,9 +185,39 @@ public class DetaiAdapter extends RecyclerView.Adapter {
             super(itemView);
             ButterKnife.bind(this,itemView);
         }
-        @OnClick({R.id.tv_img_search,R.id.tv_search_titile,R.id.tv_add_list})
+        @OnClick(R.id.tv_add_list)
         void alarm(){
             MyUtil.toast(mContext);
+        }
+        @OnClick(R.id.tv_img_search)
+        void setImgSearch(){
+            if(goodBean!=null){
+                GoodBean bean=goodBean;
+                Intent intent = new Intent(mContext,ActivityFragment.class);
+//            不知道为什么这句会闪退,在stylefragment也可以传递过来
+//            原来是GoodBean里面含有非序列化的属性。置为null即可。
+                bean.setSku_attributes(null);
+                bean.setSkus(null);
+                intent.putExtra("goodbean",bean);
+                intent.putExtra("searchtype","img");
+
+                mContext.startActivity(intent);
+            }
+        }
+        @OnClick(R.id.tv_search_titile)
+        void setSearchTitle(){
+            if(goodBean!=null){
+                GoodBean bean=goodBean;
+                Intent intent = new Intent(mContext,ActivityFragment.class);
+//            不知道为什么这句会闪退,在stylefragment也可以传递过来
+//            原来是GoodBean里面含有非序列化的属性。置为null即可。
+                bean.setSku_attributes(null);
+                bean.setSkus(null);
+                intent.putExtra("goodbean",bean);
+                intent.putExtra("searchtype","title");
+
+                mContext.startActivity(intent);
+            }
         }
     }
 

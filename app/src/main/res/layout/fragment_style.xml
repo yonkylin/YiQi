@@ -15,11 +15,11 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:background="@drawable/line_bottom"
         android:orientation="horizontal"
-       android:background="@drawable/line_bottom"
         android:paddingBottom="2dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include">
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/bt_default"
@@ -27,36 +27,36 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/light_background"
-            android:textColor="@color/colorPrimary"
+            android:text="默认"
 
-            android:text="默认" />
+            android:textColor="@color/colorPrimary"/>
 
         <Button
             android:id="@+id/bt_price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/gray"
             android:background="@color/light_background"
-            android:text=" 价格" />
+            android:text=" 价格"
+            android:textColor="@color/gray"/>
 
         <Button
             android:id="@+id/bt_new"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/gray"
             android:background="@color/light_background"
-            android:text="上新" />
+            android:text="上新"
+            android:textColor="@color/gray"/>
 
         <Button
             android:id="@+id/bt_filter"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/gray"
             android:background="@color/light_background"
-            android:text="筛选" />
+            android:text="筛选"
+            android:textColor="@color/gray"/>
     </LinearLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout

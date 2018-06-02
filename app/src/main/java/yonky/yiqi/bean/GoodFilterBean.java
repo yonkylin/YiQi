@@ -22,6 +22,7 @@ public class GoodFilterBean {
     private String user_id="-1";
     private String mid="";
     private String fid="";
+    private String url="";
 
 
 
@@ -171,4 +172,11 @@ public class GoodFilterBean {
     }
 //    http://api2.17zwd.com/rest/goods/search?price1=0.0&psize=10&size=&seller_cid=&orderby=mr&color=&keyword=&pindex=1&from=android&price2=9999.0&dtype=sks&zdid=48
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }

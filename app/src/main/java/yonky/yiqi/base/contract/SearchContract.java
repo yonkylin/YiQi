@@ -13,9 +13,12 @@ import yonky.yiqi.bean.GoodFilterBean;
 
 public interface SearchContract {
     interface View extends BaseView {
-        void showResult(List<GoodBean> listBeans, Boolean loadingMore);
+        void showResult(List<GoodBean> listBeans);
+        void showNoData();
     }
     interface Presenter extends BasePresenter<View> {
-        void loadData(GoodFilterBean filterBean, Boolean loadingMore);
+        void imgSearchData(GoodFilterBean filterBean);
+        void titleSearchData(GoodFilterBean filterBean);
+
     }
 }

@@ -25,6 +25,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import yonky.yiqi.R;
+import yonky.yiqi.base.App;
 import yonky.yiqi.base.BaseActivity;
 import yonky.yiqi.base.contract.GoodDetailContract;
 import yonky.yiqi.bean.AreaBean;
@@ -78,12 +79,8 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
         return R.layout.activity_good_detail;
     }
 
-    @Override
-    protected void onDestroy() {
-        mPresenter.detachView();
-        super.onDestroy();
-    }
 
+    GoodBean goodBean;
     @Override
     protected void initEventAndData() {
         fab.hide();
@@ -92,7 +89,7 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
 //        setTabs(tab,LayoutInflater.from(mContext),drawables,titles);
 
            AreaBean areaBean = (AreaBean)getIntent().getSerializableExtra("areabean");
-      GoodBean goodBean =(GoodBean)getIntent().getSerializableExtra("goodbean");
+     goodBean =(GoodBean)getIntent().getSerializableExtra("goodbean");
 
         mPresenter = new GoodDetailPresenter(mContext);
         mPresenter.attachView(this);
@@ -209,9 +206,12 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
         if(mGoodBean!=null){
             Intent intent = new Intent(mContext,ActivityFragment.class);
 //            不知道为什么这句会闪退,在stylefragment也可以传递过来
-//            intent.putExtra("goodbean",mGoodBean);
-            intent.putExtra("url",mGoodBean.getTb_img());
-            intent.putExtra("zdid",mGoodBean.getSite_id());
+//            原来是GoodBean里面含有非序列化的属性。置为null即可。
+            mGoodBean.setSku_attributes(null);
+            mGoodBean.setSkus(null);
+            intent.putExtra("goodbean",mGoodBean);
+            intent.putExtra("searchtype","img");
+
             mContext.startActivity(intent);
         }
 
@@ -270,6 +270,11 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
     }
 
 
+    @Override
+    protected void onDestroy() {
+        mPresenter.detachView();
+        super.onDestroy();
 
+    }
 
 }

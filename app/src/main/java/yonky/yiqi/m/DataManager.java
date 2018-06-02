@@ -54,7 +54,7 @@ public class DataManager {
                                                String keyword,
                                                String mid,
                                                String fid){
-        return mRetrofitService.getStyleData(shop_id,size,seller_cid,pindex,from,price2,dtype,zdid, price1,psize,orderby,color ,spm,keyword,mid,fid);
+        return mRetrofitService.getStyleData("search",shop_id,size,seller_cid,pindex,from,price2,dtype,zdid, price1,psize,orderby,color ,spm,keyword,mid,fid,"");
     }
 
     //获取店铺详情
@@ -81,9 +81,13 @@ public class DataManager {
     }
 
 //    http://stu.17zwd.com/api/searchByUrl?pic_url=http://img.alicdn.com/bao/uploaded/i2/1656591777/TB2jD5bXmyEJuJjSspiXXX4IFXa_!!1656591777.jpg&shadow$_klass_=class+com.hanyun.onlineproject.entity.GetSearchImgBean&zdid=42
-    public Observable<StyleBean> getImgSearch(String url,String shadow,String zdid){
+    public Observable<StyleBean> getImgSearch(String url,String zdid){
         RetrofitService service=RetrofitHelper.getInstance().getServer2();
-        return service.getSearchGood(url,shadow,zdid);
-
+        return service.getSearchGood(url,"class+com.hanyun.onlineproject.entity.GetSearchImgBean",zdid);
+    }
+//搜标题
+//    http://api2.17zwd.com/rest/goods/title_search?psize=10&orderby=mr&keyword=2018%E6%97%B6%E5%B0%9A%E5%93%BA%E4%B9%B3%E5%A5%97%E8%A3%85%E4%B8%89%E4%BB%B6%E5%A5%97&pindex=1&from=web&shadow$_klass_=class+com.hanyun.onlineproject.entity.GetTitleSearchBean&zdid=42
+    public Observable<StyleBean> getTitleSearch(String psize,String orderby,String keyword,String pindex,String zdid){
+        return mRetrofitService.getStyleData("title_search","","","",pindex,"web","","",zdid, "",psize,orderby,"" ,"",keyword,"","","class+com.hanyun.onlineproject.entity.GetTitleSearchBean");
     }
 }

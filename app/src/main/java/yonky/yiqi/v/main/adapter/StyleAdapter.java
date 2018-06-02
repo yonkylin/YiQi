@@ -21,7 +21,7 @@ import yonky.yiqi.v.GoodDetailActivity;
 
 public class StyleAdapter extends RecyclerView.Adapter <RecyclerView.ViewHolder>{
     public static final int TYPE_NORMAL=0X01;
-    public static final int TYPE_NODATA=0X02;
+    public static final int TYPE_NODATA=0X10;
     private int emptyCount;
 
     List<GoodBean> beanList;

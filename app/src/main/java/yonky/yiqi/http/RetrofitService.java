@@ -47,8 +47,9 @@ public interface RetrofitService {
 
 
 
-    @GET("/rest/goods/search")
-    Observable<StyleBean> getStyleData(@Query("shop_id")String shop_id,
+    @GET("/rest/goods/{search}")
+    Observable<StyleBean> getStyleData(@Path("search")String type,
+                                        @Query("shop_id")String shop_id,
                                        @Query("size")String size,
                                        @Query("seller_cid") String seller_cid,
                                        @Query("pindex") String pindex,
@@ -63,7 +64,8 @@ public interface RetrofitService {
                                        @Query("spm")String spm,
                                        @Query("keyword") String keyword,
                                        @Query("mid")String mid,
-                                       @Query("fid")String fid);
+                                       @Query("fid")String fid,
+                                       @Query("shadow$_klass_")String shadow);
            /* @Query("price1") String price1,
                                        @Query("psize") String psize,
                                        @Query("size")String size,
@@ -80,21 +82,23 @@ public interface RetrofitService {
 
 // http://api2.17zwd.com/rest/goods/search?shop_id=26974&size=&seller_cid=&pindex=1&from=android&price2=9999.0&dtype=sks&zdid=48&price1=0.0&psize=10&orderby=mr&color=&spm=c5jEjVMzAhEqMknXPYkPU9EOVa4gg6EKJId8KFy3%2BVE%3D&keyword=
 
-    @GET("/rest/goods/search")
-    Observable<StyleBean> getGoods(@Query("shop_id")String shop_id,
-                                   @Query("size")String size,
-                                   @Query("seller_cid") String seller_cid,
-                                   @Query("pindex") String pindex,
-                                   @Query("from") String from,
-                                   @Query("price2") String price2,
-                                   @Query("dtype") String dtype,
-                                   @Query("zdid") String zdid,
-                                   @Query("price1") String price1,
-                                       @Query("psize") String psize,
-                                       @Query("orderby") String orderby,
-                                       @Query("color")  String color ,
-                                       @Query("spm")String spm,
-                                       @Query("keyword") String keyword);
+//    @GET("/rest/goods/search")
+//    Observable<StyleBean> getGoods(@Query("shop_id")String shop_id,
+//                                   @Query("size")String size,
+//                                   @Query("seller_cid") String seller_cid,
+//                                   @Query("pindex") String pindex,
+//                                   @Query("from") String from,
+//                                   @Query("price2") String price2,
+//                                   @Query("dtype") String dtype,
+//                                   @Query("zdid") String zdid,
+//                                   @Query("price1") String price1,
+//                                       @Query("psize") String psize,
+//                                       @Query("orderby") String orderby,
+//                                       @Query("color")  String color ,
+//                                       @Query("spm")String spm,
+//                                       @Query("keyword") String keyword,
+//                                   @Query("shadow$_klass_")String shadow
+//    );
 //获取店铺详情
 //    http://api2.17zwd.com/rest/shop/get_shop?shop_id=26974&from=android&user_id=-1&zdid=48&spm=c5jEjVMzAhEqMknXPYkPU9EOVa4gg6EKJId8KFy3%2BVE%3D
     @GET("/rest/shop/get_shop")

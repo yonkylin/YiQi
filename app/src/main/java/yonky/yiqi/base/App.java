@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -24,6 +26,7 @@ public class App extends Application {
             return;
         }
         refWatcher=LeakCanary.install(this);
+        Logger.addLogAdapter(new AndroidLogAdapter());
         instance=this;
     }
 
