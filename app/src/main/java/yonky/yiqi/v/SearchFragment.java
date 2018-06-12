@@ -102,7 +102,10 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
 
     @Override
     public void showResult(List<GoodBean> listBeans) {
+        if(mRefresh!=null){
             mRefresh.setRefreshing(false);
+        }
+
             mAdapter.setGoodBeanList(listBeans);
             mAdapter.notifyDataSetChanged();
 
