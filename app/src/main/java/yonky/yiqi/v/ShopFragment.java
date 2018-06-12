@@ -32,7 +32,7 @@ public class ShopFragment extends BaseFragment {
     @Override
     protected void initEventAndData() {
         if(getArguments()!=null){
-            mShopBean = (ShopBean)getArguments().getSerializable("shopbean");
+            mShopBean = (ShopBean)getArguments().getParcelable("shopbean");
 //            mShopBean = new ShopBean();
             mAdapter= new ShopAdapter(mShopBean,mContext);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));

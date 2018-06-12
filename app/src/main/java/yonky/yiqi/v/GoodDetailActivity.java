@@ -88,8 +88,8 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
 //        String regionId=preferences.getString("regionId","42");
 //        setTabs(tab,LayoutInflater.from(mContext),drawables,titles);
 
-           AreaBean areaBean = (AreaBean)getIntent().getSerializableExtra("areabean");
-     goodBean =(GoodBean)getIntent().getSerializableExtra("goodbean");
+           AreaBean areaBean = (AreaBean)getIntent().getParcelableExtra("areabean");
+     goodBean =(GoodBean)getIntent().getParcelableExtra("goodbean");
 
         mPresenter = new GoodDetailPresenter(mContext);
         mPresenter.attachView(this);

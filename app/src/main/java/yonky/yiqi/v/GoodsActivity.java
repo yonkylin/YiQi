@@ -102,8 +102,8 @@ public class GoodsActivity extends BaseActivity implements GoodContract.View{
 
 
 
-        AreaBean areaBean =(AreaBean) getIntent().getSerializableExtra("areabean");
-        ShopBean shopBean=(ShopBean) getIntent().getSerializableExtra("shopbean");
+        AreaBean areaBean =(AreaBean) getIntent().getParcelableExtra("areabean");
+        ShopBean shopBean=(ShopBean) getIntent().getParcelableExtra("shopbean");
         if(shopBean!=null){
             comeFrom=IS_FROM_SHOP;
         }else {

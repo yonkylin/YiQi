@@ -1,8 +1,11 @@
 package yonky.yiqi.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 
-public class AreaBean implements Serializable{
+public class AreaBean implements Parcelable{
 
     /**
      * site_id : 48
@@ -23,7 +26,7 @@ public class AreaBean implements Serializable{
      * seconds : 5
      */
 
-    private static final long serialVersionUID = 1234567890;
+//    private static final long serialVersionUID = 1234567890;
 
     private String site_id;
     private int ad_id;
@@ -178,4 +181,52 @@ public class AreaBean implements Serializable{
     public void setDtype(String dtype) {
         this.dtype = dtype;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.site_id);
+        dest.writeString(this.data_type);
+        dest.writeString(this.shop_id);
+        dest.writeString(this.goods_id);
+        dest.writeString(this.title);
+        dest.writeFloat(this.price);
+        dest.writeString(this.img_url);
+        dest.writeString(this.img_url2);
+        dest.writeString(this.spm);
+        dest.writeString(this.dtype);
+    }
+
+    public AreaBean() {
+    }
+
+    protected AreaBean(Parcel in) {
+        this.site_id = in.readString();
+        this.data_type = in.readString();
+        this.shop_id = in.readString();
+        this.goods_id = in.readString();
+        this.title = in.readString();
+        this.price = in.readFloat();
+        this.img_url = in.readString();
+        this.img_url2 = in.readString();
+        this.spm = in.readString();
+        this.dtype = in.readString();
+    }
+
+    public static final Creator<AreaBean> CREATOR = new Creator<AreaBean>() {
+        @Override
+        public AreaBean createFromParcel(Parcel source) {
+            return new AreaBean(source);
+        }
+
+        @Override
+        public AreaBean[] newArray(int size) {
+            return new AreaBean[size];
+        }
+    };
 }

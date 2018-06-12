@@ -36,8 +36,8 @@ BaseFragment fragment;
     protected void initEventAndData() {
         Bundle bundle =new Bundle();
         dtype=getIntent().getStringExtra("dtype");
-        mShopBean=(ShopBean)getIntent().getSerializableExtra("shopbean");
-        mGoodBean=(GoodBean)getIntent().getSerializableExtra("goodbean");
+        mShopBean=(ShopBean)getIntent().getParcelableExtra("shopbean");
+        mGoodBean=(GoodBean)getIntent().getParcelableExtra("goodbean");
         searchtype=getIntent().getStringExtra("searchtype");
 //        url=getIntent().getStringExtra("url");
 //        zdid=getIntent().getStringExtra("zdid");
@@ -56,12 +56,12 @@ BaseFragment fragment;
             fragment=new ShopFragment();
             title.setText("店铺简介");
 
-             bundle.putSerializable("shopbean",mShopBean);
+             bundle.putParcelable("shopbean",mShopBean);
              fragment.setArguments(bundle);
         }else {
             fragment =new SearchFragment();
             title.setText("同款宝贝");
-            bundle.putSerializable("goodbean",mGoodBean);
+            bundle.putParcelable("goodbean",mGoodBean);
             bundle.putString("searchtype",searchtype);
             fragment.setArguments(bundle);
         }

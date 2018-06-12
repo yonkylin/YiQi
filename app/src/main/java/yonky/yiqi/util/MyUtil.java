@@ -92,7 +92,7 @@ public static String getURLEncoderString(String str) {
             return;
         }
 
-        String [] viewArray = new String[]{"mCurRootView", "mServedView", "mNextServedView"};
+        String [] viewArray = new String[]{"mCurRootView", "mServedView", "mNextServedView","mLastSrvView"};
         Field filed;
         Object filedObject;
 

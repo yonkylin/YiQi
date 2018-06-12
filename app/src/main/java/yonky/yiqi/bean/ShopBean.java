@@ -1,12 +1,15 @@
 package yonky.yiqi.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 
 /**
  * Created by Administrator on 2018/5/12.
  */
 
-public class ShopBean implements Serializable{
+public class ShopBean implements Parcelable{
 
         /**
          * site_id : 48
@@ -44,10 +47,10 @@ public class ShopBean implements Serializable{
         private int vip;
         private String tb_nick;
         private String tb_url;
-        private Object tb_url_2;
+        private String tb_url_2;
         private String qq;
         private String phone;
-        private Object wechat;
+        private String wechat;
         private String major;
         private String address;
         private int market_id;
@@ -127,11 +130,11 @@ public class ShopBean implements Serializable{
             this.tb_url = tb_url;
         }
 
-        public Object getTb_url_2() {
+        public String getTb_url_2() {
             return tb_url_2;
         }
 
-        public void setTb_url_2(Object tb_url_2) {
+        public void setTb_url_2(String tb_url_2) {
             this.tb_url_2 = tb_url_2;
         }
 
@@ -151,11 +154,11 @@ public class ShopBean implements Serializable{
             this.phone = phone;
         }
 
-        public Object getWechat() {
+        public String getWechat() {
             return wechat;
         }
 
-        public void setWechat(Object wechat) {
+        public void setWechat(String wechat) {
             this.wechat = wechat;
         }
 
@@ -264,4 +267,80 @@ public class ShopBean implements Serializable{
         }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.site_id);
+        dest.writeString(this.site_tag);
+        dest.writeString(this.shop_id);
+        dest.writeString(this.shop_name);
+        dest.writeInt(this.is_reg);
+        dest.writeInt(this.vip);
+        dest.writeString(this.tb_nick);
+        dest.writeString(this.tb_url);
+        dest.writeString(this.tb_url_2);
+        dest.writeString(this.qq);
+        dest.writeString(this.phone);
+        dest.writeString(this.wechat);
+        dest.writeString(this.major);
+        dest.writeString(this.address);
+        dest.writeInt(this.market_id);
+        dest.writeString(this.market);
+        dest.writeInt(this.floor_id);
+        dest.writeString(this.floor);
+        dest.writeString(this.dangkou);
+        dest.writeString(this.s_service);
+        dest.writeString(this.seller_head);
+        dest.writeString(this.serller_head_original);
+        dest.writeString(this.discount);
+        dest.writeString(this.spm);
+        dest.writeString(this.wap_url);
+    }
+
+    public ShopBean() {
+    }
+
+    protected ShopBean(Parcel in) {
+        this.site_id = in.readString();
+        this.site_tag = in.readString();
+        this.shop_id = in.readString();
+        this.shop_name = in.readString();
+        this.is_reg = in.readInt();
+        this.vip = in.readInt();
+        this.tb_nick = in.readString();
+        this.tb_url = in.readString();
+        this.tb_url_2 = in.readString();
+        this.qq = in.readString();
+        this.phone = in.readString();
+        this.wechat = in.readString();
+        this.major = in.readString();
+        this.address = in.readString();
+        this.market_id = in.readInt();
+        this.market = in.readString();
+        this.floor_id = in.readInt();
+        this.floor = in.readString();
+        this.dangkou = in.readString();
+        this.s_service = in.readString();
+        this.seller_head = in.readString();
+        this.serller_head_original = in.readString();
+        this.discount = in.readString();
+        this.spm = in.readString();
+        this.wap_url = in.readString();
+    }
+
+    public static final Creator<ShopBean> CREATOR = new Creator<ShopBean>() {
+        @Override
+        public ShopBean createFromParcel(Parcel source) {
+            return new ShopBean(source);
+        }
+
+        @Override
+        public ShopBean[] newArray(int size) {
+            return new ShopBean[size];
+        }
+    };
 }

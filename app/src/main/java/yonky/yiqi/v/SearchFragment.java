@@ -41,7 +41,7 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
 
     @Override
     protected void initEventAndData() {
-        GoodBean goodBean = (GoodBean) getArguments().getSerializable("goodbean");
+        GoodBean goodBean = (GoodBean) getArguments().getParcelable("goodbean");
         searchtype=getArguments().getString("searchtype");
 
         mPresenter = new SearchPresenter(mContext);
