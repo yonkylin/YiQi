@@ -45,13 +45,22 @@ public class ConnectWindow {
     public ConnectWindow(Context context,ShopBean shopBean) {
         mContext = context;
         this.shopBean=shopBean;
-        clipboardManager =(ClipboardManager) App.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
+        if(clipboardManager==null){
+            clipboardManager =(ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+        }
+
     }
 
     public PopupWindow newWindow(){
 
             View contentView= LayoutInflater.from(mContext).inflate(R.layout.window_connect,null);
-          final  PopupWindow window = new PopupWindow(contentView, MATCH_PARENT,MATCH_PARENT,true);
+          final  PopupWindow window = new PopupWindow(contentView, MATCH_PARENT,MATCH_PARENT,true){
+              @Override
+              public void dismiss() {
+                  clipboardManager=null;
+                  super.dismiss();
+              }
+          };
         //            设置可以超出屏幕范围，及到状态栏
 //            window.setClippingEnabled(false);
          linearLayout = contentView.findViewById(R.id.ll);

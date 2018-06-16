@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;

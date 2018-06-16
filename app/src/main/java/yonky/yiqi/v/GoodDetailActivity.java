@@ -20,6 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -144,7 +146,7 @@ public class GoodDetailActivity extends BaseActivity implements GoodDetailContra
                 if(firstItemPosition==0){
                     mdy+=dy;
                     setToolbarTansparent(mdy,MyUtil.dp2px(mContext,250));
-                    Log.e(TAG,"mdy:"+mdy);
+//                    Log.e(TAG,"mdy:"+mdy);
                 }
 
             }

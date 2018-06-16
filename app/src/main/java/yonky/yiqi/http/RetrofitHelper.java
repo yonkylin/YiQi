@@ -28,9 +28,9 @@ public class RetrofitHelper {
             .connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(20,TimeUnit.SECONDS)
             .writeTimeout(20,TimeUnit.SECONDS)
-            .sslSocketFactory(SSLSocketClient.getSSLSocketFactory())
-            .hostnameVerifier(SSLSocketClient.getHostnameVerifier())
-            .addInterceptor(new RedirectInterceptor())
+//            .sslSocketFactory(SSLSocketClient.getSSLSocketFactory())全面更新为https
+//            .hostnameVerifier(SSLSocketClient.getHostnameVerifier())
+//            .addInterceptor(new RedirectInterceptor())
             .build();
 
     Retrofit mRetrofit;

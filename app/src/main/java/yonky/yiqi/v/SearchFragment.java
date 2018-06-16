@@ -103,7 +103,7 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
     @Override
     public void showResult(List<GoodBean> listBeans) {
         if(mRefresh!=null){
-            mRefresh.setRefreshing(false);
+            mRefresh.setRefreshing(false);  //荣耀8报空指向异常
         }
 
             mAdapter.setGoodBeanList(listBeans);

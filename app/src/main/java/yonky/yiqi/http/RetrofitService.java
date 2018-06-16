@@ -22,8 +22,8 @@ public interface RetrofitService {
 //
 //  http://api2.17zwd.com/rest/popularize/get_home_data?from=android&zdid=48&tag=A&debug=false  首页
 //    http://stu.17zwd.com/api/searchByUrl?pic_url=http://img.alicdn.com/bao/uploaded/i2/1656591777/TB2jD5bXmyEJuJjSspiXXX4IFXa_!!1656591777.jpg&shadow$_klass_=class+com.hanyun.onlineproject.entity.GetSearchImgBean&zdid=42
-     String HOST = "http://api2.17zwd.com/";
-    String SEARCH="http://stu.17zwd.com/api/";
+     String HOST = "https://api2.17zwd.com/";
+    String SEARCH="https://stu.17zwd.com/api/";
     @GET("rest/popularize/get_home_data")
     Observable<MainPageBean> getMainPageData(@Query("from")String platform,
                                        @Query("zdid")String zdid,
